@@ -11,8 +11,8 @@ export const theme = extendTheme({
   },
 
   fonts: {
-    heading: 'Baloo 2, sans-serif',
-    body: 'Roboto, sans-serif',
+    heading: `'Baloo 2', sans-serif`,
+    body: `'Roboto', sans-serif`,
   },
 
   sizes: {
@@ -26,7 +26,7 @@ export const theme = extendTheme({
       300: '#EDEDED',
       400: '#E6E5E5',
       500: '#D7D5D5',
-      600: '#8D8686',
+      600: '#52525b',
       700: '#574F4D',
       800: '#403937',
       900: '#272221',
@@ -35,6 +35,7 @@ export const theme = extendTheme({
       200: '#F1E9C9',
       500: '#DBAC2C',
       700: '#C47F17',
+      750: '#975A16',
     },
     purple: {
       200: '#EBE5F9',
