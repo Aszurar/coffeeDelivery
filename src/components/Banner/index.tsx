@@ -15,8 +15,8 @@ import { Tag } from '@/components/Tag'
 export function Banner() {
   return (
     <Grid
-      w="100%"
       gap="14"
+      w="100%"
       mx="auto"
       mt="5.75rem"
       maxWidth="5xl.5"
@@ -62,7 +62,13 @@ export function Banner() {
 
       <GridItem>
         <Box>
-          <Image src={BannerIMG} alt="Banner" w="29.75rem" h="22.5rem" />
+          <Image
+            src={BannerIMG}
+            alt="Banner"
+            w="29.75rem"
+            h="22.5rem"
+            fit="contain"
+          />
         </Box>
       </GridItem>
     </Grid>

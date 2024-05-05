@@ -4,16 +4,14 @@ import { MapPin, ShoppingCart } from '@phosphor-icons/react'
 import Logo from '@/assets/icons/logo.svg'
 
 export function Header() {
-  const [purple500, yellow700] = useToken('colors', [
-    'purple.500',
-    'yellow.700',
-  ])
+  const [purple500] = useToken('colors', ['purple.500'])
 
   return (
     <Flex
       as="header"
       h="6.625rem"
       w="100%"
+      py="2rem"
       px="4"
       mx="auto"
       align="center"
@@ -28,9 +26,9 @@ export function Header() {
           h="fit-content"
           rounded="md"
           fontSize="sm"
+          fontWeight={400}
           bg="purple.200"
           color="purple.700"
-          fontWeight={400}
           leftIcon={
             <MapPin weight="fill" color={purple500} width={22} height={22} />
           }
@@ -45,25 +43,20 @@ export function Header() {
         </Button>
 
         <IconButton
-          p="2"
-          h="fit-content"
+          w="2.375rem"
+          h="2.375rem"
+          minW="2.375rem"
           rounded="md"
-          aria-label="Carrinho de compras"
           bg="yellow.200"
+          color="yellow.700"
+          aria-label="Carrinho de compras"
           _hover={{
             bg: 'yellow.300',
           }}
           _active={{
             bg: 'yellow.200',
           }}
-          icon={
-            <ShoppingCart
-              width={22}
-              height={22}
-              weight="fill"
-              color={yellow700}
-            />
-          }
+          icon={<ShoppingCart width={22} height={22} weight="fill" />}
         />
       </HStack>
     </Flex>
