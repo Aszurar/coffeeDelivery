@@ -1,12 +1,4 @@
-import {
-  Box,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  Image,
-  Text,
-} from '@chakra-ui/react'
+import { Flex, Grid, GridItem, Heading, Image, Text } from '@chakra-ui/react'
 
 import BannerIMG from '@/assets/images/banner.png'
 import { Coffee, Package, ShoppingCart, Timer } from '@phosphor-icons/react'
@@ -19,19 +11,31 @@ export function Banner() {
       w="100%"
       mx="auto"
       mt="5.75rem"
+      px="6"
       maxWidth="5xl.5"
-      templateColumns="52.5% 1fr"
+      templateColumns={{
+        base: '1fr',
+        lg: '52.5% 1fr',
+      }}
     >
       <GridItem>
         <Flex flexDirection="column" gap="4">
-          <Heading fontSize="3rem" color="gray.900" fontWeight="800">
+          <Heading fontSize="5xl" color="gray.900" fontWeight="800">
             Encontre o café perfeito para qualquer hora do dia
           </Heading>
-          <Text fontSize="1.25rem" color="gray.800">
+          <Text fontSize="xl" color="gray.800">
             Com o Coffee Delivery você recebe seu café onde estiver, a qualquer
             hora
           </Text>
-          <Flex gap="5" mt="3.125rem">
+          <Flex
+            gap="5"
+            mt="3.125rem"
+            flexDir={{
+              base: 'column',
+              md: 'row',
+            }}
+            justifyContent="space-between"
+          >
             <Flex flexDirection="column" gap="5">
               <Tag
                 icon={ShoppingCart}
@@ -61,7 +65,7 @@ export function Banner() {
       </GridItem>
 
       <GridItem>
-        <Box>
+        <Flex alignItems="center" justifyContent="center">
           <Image
             src={BannerIMG}
             alt="Banner"
@@ -69,7 +73,7 @@ export function Banner() {
             h="22.5rem"
             fit="contain"
           />
-        </Box>
+        </Flex>
       </GridItem>
     </Grid>
   )
