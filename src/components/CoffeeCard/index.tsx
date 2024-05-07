@@ -8,11 +8,22 @@ import {
   Text,
 } from '@chakra-ui/react'
 
-import TradicionalExpressPNG from '@/assets/images/coffees/expresso-tradicional.png'
 import { ShoppingCart } from '@phosphor-icons/react'
 import { Counter } from '../Counter'
+import { CoffeeTagsType } from '@/dto/coffee'
+import { priceFormatter } from '@/utils/number'
 
-export function CoffeeCard() {
+type CoffeeCardProps = {
+  id: number
+  name: string
+  description: string
+  tag: CoffeeTagsType[]
+  price: number
+  image: string
+}
+
+export function CoffeeCard(coffee: CoffeeCardProps) {
+  const price = priceFormatter.format(coffee.price)
   return (
     <Flex
       w="16rem"
@@ -27,7 +38,7 @@ export function CoffeeCard() {
       borderBottomLeftRadius="36px"
     >
       <Image
-        src={TradicionalExpressPNG}
+        src={coffee.image}
         alt="Café Expresso Tradicional"
         w="7.5rem"
         h="7.5rem"
@@ -36,32 +47,37 @@ export function CoffeeCard() {
         mt="-1.25rem"
       />
       <Center mt="0.75rem" flexDir="column">
-        <Badge
-          px="0.5rem"
-          py="0.25rem"
-          bg="yellow.200"
-          color="yellow.750"
-          variant="subtle"
-          rounded="full"
-          fontSize="x-small"
-        >
-          Tradicional
-        </Badge>
+        <Flex gap="0.25rem">
+          {coffee.tag.map((tag) => (
+            <Badge
+              key={tag}
+              px="0.5rem"
+              py="0.25rem"
+              bg="yellow.200"
+              color="yellow.750"
+              variant="subtle"
+              rounded="full"
+              fontSize="x-small"
+            >
+              {tag}
+            </Badge>
+          ))}
+        </Flex>
 
         <Center flexDir="column" mt="1rem" gap="0.5rem">
           <Heading fontSize="xl" color="gray.800">
-            Expresso Tradicional
+            {coffee.name}
           </Heading>
           <Text fontSize="sm" textAlign="center" color="gray.600">
-            O tradicional café feito com água quente e grãos moídos
+            {coffee.description}
           </Text>
         </Center>
 
         <Center mt="2rem">
-          <Flex alignItems="flex-end" gap="2px" mr="1.5rem">
+          <Flex alignItems="flex-end" gap="4px" mr="1.5rem">
             <Text fontSize="sm">R$</Text>
             <Heading fontSize="2xl" fontWeight="800" color="gray.800">
-              9,90
+              {price}
             </Heading>
           </Flex>
 
