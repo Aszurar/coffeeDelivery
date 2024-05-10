@@ -26,15 +26,15 @@ export function CoffeeCard(coffee: CoffeeCardProps) {
   const price = priceFormatter.format(coffee.price)
   return (
     <Flex
-      w="16rem"
+      w="64"
       h="19.375rem"
-      px="1.25rem"
-      pb="1.25rem"
+      px="5"
+      pb="5"
       bg="gray.200"
       flexDir="column"
-      borderTopLeftRadius="6px"
+      borderTopLeftRadius="md"
       borderTopRightRadius="36px"
-      borderBottomRightRadius="6px"
+      borderBottomRightRadius="md"
       borderBottomLeftRadius="36px"
     >
       <Image
@@ -44,15 +44,15 @@ export function CoffeeCard(coffee: CoffeeCardProps) {
         h="7.5rem"
         fit="contain"
         alignSelf="center"
-        mt="-1.25rem"
+        mt="-5"
       />
-      <Center mt="0.75rem" flexDir="column">
-        <Flex gap="0.25rem">
+      <Center mt="3" flexDir="column">
+        <Flex gap="1">
           {coffee.tag.map((tag) => (
             <Badge
               key={tag}
-              px="0.5rem"
-              py="0.25rem"
+              px="2"
+              py="1"
               bg="yellow.200"
               color="yellow.750"
               variant="subtle"
@@ -64,7 +64,7 @@ export function CoffeeCard(coffee: CoffeeCardProps) {
           ))}
         </Flex>
 
-        <Center flexDir="column" mt="1rem" gap="0.5rem">
+        <Center flexDir="column" mt="4" gap="2">
           <Heading fontSize="xl" color="gray.800">
             {coffee.name}
           </Heading>
@@ -73,8 +73,8 @@ export function CoffeeCard(coffee: CoffeeCardProps) {
           </Text>
         </Center>
 
-        <Center mt="2rem">
-          <Flex alignItems="flex-end" gap="4px" mr="1.5rem">
+        <Center mt="8">
+          <Flex alignItems="flex-end" gap="1" mr="1.5rem">
             <Text fontSize="sm">R$</Text>
             <Heading fontSize="2xl" fontWeight="800" color="gray.800">
               {price}
@@ -87,7 +87,7 @@ export function CoffeeCard(coffee: CoffeeCardProps) {
             w="2.375rem"
             minW="2.375rem"
             h="2.375rem"
-            ml="0.5rem"
+            ml="2"
             rounded="md"
             color="white"
             bg="purple.700"

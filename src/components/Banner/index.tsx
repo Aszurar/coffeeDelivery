@@ -7,12 +7,10 @@ import { Tag } from '@/components/Tag'
 export function Banner() {
   return (
     <Grid
+      as="section"
       gap="14"
       w="100%"
-      mx="auto"
       mt="5.75rem"
-      px="6"
-      maxWidth="5xl.5"
       templateColumns={{
         base: '1fr',
         lg: '52.5% 1fr',

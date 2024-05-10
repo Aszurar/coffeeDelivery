@@ -22,12 +22,12 @@ export function Counter() {
   }
 
   return (
-    <Flex gap="0.5rem" bg="gray.400" alignItems="center" rounded="md">
+    <Flex gap="2" bg="gray.400" alignItems="center" rounded="md">
       <IconButton
-        w="1.25rem"
-        minW="1.25rem"
+        w="5"
+        minW="5"
         h="2.375rem"
-        borderLeftRadius="6px"
+        borderLeftRadius="md"
         borderRightRadius={0}
         color="purple.500"
         bg="gray.400"
@@ -47,12 +47,12 @@ export function Counter() {
       </Box>
 
       <IconButton
-        w="1.25rem"
-        minW="1.25rem"
+        w="5"
+        minW="5"
         h="2.375rem"
         bg="gray.400"
         color="purple.500"
-        borderRightRadius="6px"
+        borderRightRadius="md"
         borderLeftRadius={0}
         _hover={{
           bg: 'gray.500',

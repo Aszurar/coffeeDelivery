@@ -12,10 +12,7 @@ export function Header() {
       h="6.625rem"
       w="100%"
       py="8"
-      px="6"
-      mx="auto"
       align="center"
-      maxWidth="5xl.5"
       justify="space-between"
     >
       <img src={Logo} alt="Coffee Delivery" />
