@@ -1,0 +1,3 @@
+const DELIVERY_PRICE = 10
+
+export { DELIVERY_PRICE }
