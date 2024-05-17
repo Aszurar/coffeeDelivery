@@ -1,5 +1,5 @@
 export const ROUTES = {
   HOME: '/',
   CHECKOUT: '/checkout',
-  CONCLUDED: '/concluded',
+  ORDER_CONFIRMED: '/pedido-confirmado',
 } as const

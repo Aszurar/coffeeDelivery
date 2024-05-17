@@ -4,4 +4,10 @@ const priceFormatter = new Intl.NumberFormat('pt-BR', {
   minimumFractionDigits: 2,
 })
 
-export { priceFormatter }
+const priceFormatterWithCurrency = new Intl.NumberFormat('pt-BR', {
+  currency: 'BRL',
+  style: 'currency',
+  minimumFractionDigits: 2,
+})
+
+export { priceFormatter, priceFormatterWithCurrency }
