@@ -15,6 +15,9 @@ export const theme = extendTheme({
     body: `'Roboto', sans-serif`,
   },
 
+  fontSizes: {
+    '4xl.5': '2rem',
+  },
   sizes: {
     '5xl.5': '70rem',
   },
@@ -26,12 +29,14 @@ export const theme = extendTheme({
       300: '#EDEDED',
       400: '#E6E5E5',
       500: '#D7D5D5',
+      550: '#8D8686',
       600: '#52525b',
       700: '#574F4D',
       800: '#403937',
       900: '#272221',
     },
     yellow: {
+      50: 'rgba(219, 172, 44, 0)',
       200: '#F1E9C9',
       500: '#DBAC2C',
       700: '#C47F17',
