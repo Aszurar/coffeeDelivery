@@ -1,7 +1,10 @@
-import { Button, Flex, HStack, IconButton, useToken } from '@chakra-ui/react'
-import { MapPin, ShoppingCart } from '@phosphor-icons/react'
+import { Button, Flex, HStack, useToken } from '@chakra-ui/react'
+import { MapPin } from '@phosphor-icons/react'
+import { Link } from 'react-router-dom'
 
 import Logo from '@/assets/icons/logo.svg'
+
+import { CartButton } from './CartButton'
 
 export function Header() {
   const [purple500] = useToken('colors', ['purple.500'])
@@ -15,7 +18,9 @@ export function Header() {
       align="center"
       justify="space-between"
     >
-      <img src={Logo} alt="Coffee Delivery" />
+      <Link to="/">
+        <img src={Logo} alt="Coffee Delivery" />
+      </Link>
 
       <HStack spacing="3">
         <Button
@@ -39,22 +44,7 @@ export function Header() {
           João Pessoa, PB
         </Button>
 
-        <IconButton
-          w="2.375rem"
-          h="2.375rem"
-          minW="2.375rem"
-          rounded="md"
-          bg="yellow.200"
-          color="yellow.700"
-          aria-label="Carrinho de compras"
-          _hover={{
-            bg: 'yellow.300',
-          }}
-          _active={{
-            bg: 'yellow.200',
-          }}
-          icon={<ShoppingCart width={22} height={22} weight="fill" />}
-        />
+        <CartButton />
       </HStack>
     </Flex>
   )

@@ -1,7 +1,7 @@
 import { Flex, Grid, GridItem, Heading, Image, Text } from '@chakra-ui/react'
+import { Coffee, Package, ShoppingCart, Timer } from '@phosphor-icons/react'
 
 import BannerIMG from '@/assets/images/banner.png'
-import { Coffee, Package, ShoppingCart, Timer } from '@phosphor-icons/react'
 import { Tag } from '@/components/Tag'
 
 export function Banner() {
@@ -18,7 +18,7 @@ export function Banner() {
     >
       <GridItem>
         <Flex flexDirection="column" gap="4">
-          <Heading fontSize="5xl" color="gray.900" fontWeight="800">
+          <Heading as="h1" fontSize="5xl" color="gray.900" fontWeight="800">
             Encontre o café perfeito para qualquer hora do dia
           </Heading>
           <Text fontSize="xl" color="gray.800">
