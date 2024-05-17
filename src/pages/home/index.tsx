@@ -1,14 +1,14 @@
+import { Flex, Grid, GridItem, Heading } from '@chakra-ui/react'
+import { Helmet } from 'react-helmet-async'
+
 import { Banner } from '@/components/Banner'
 import { CoffeeCard } from '@/components/CoffeeCard'
-import { Header } from '@/components/Header'
 import { COFFEE_TYPES } from '@/dto/coffee'
-
-import { Flex, Grid, GridItem, Heading } from '@chakra-ui/react'
 
 export default function Home() {
   return (
     <>
-      <Header />
+      <Helmet title="Home" />
       <Banner />
       <Flex
         as="main"
@@ -34,14 +34,7 @@ export default function Home() {
           {COFFEE_TYPES.map((coffee) => (
             <GridItem key={coffee.id}>
               <Flex alignItems="center" justifyContent="center">
-                <CoffeeCard
-                  id={coffee.id}
-                  name={coffee.name}
-                  description={coffee.description}
-                  tag={coffee.tag}
-                  price={coffee.price}
-                  image={coffee.image}
-                />
+                <CoffeeCard coffee={coffee} />
               </Flex>
             </GridItem>
           ))}
