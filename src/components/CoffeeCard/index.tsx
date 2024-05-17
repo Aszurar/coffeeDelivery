@@ -1,29 +1,17 @@
-import {
-  Badge,
-  Center,
-  Flex,
-  Heading,
-  IconButton,
-  Image,
-  Text,
-} from '@chakra-ui/react'
+import { Badge, Center, Flex, Heading, Image, Text } from '@chakra-ui/react'
 
-import { ShoppingCart } from '@phosphor-icons/react'
-import { Counter } from '../Counter'
-import { CoffeeTagsType } from '@/dto/coffee'
+import { CoffeeTypesProps } from '@/dto/coffee'
 import { priceFormatter } from '@/utils/number'
 
+import { CoffeeCardControl } from './CoffeeCardControl'
+
 type CoffeeCardProps = {
-  id: number
-  name: string
-  description: string
-  tag: CoffeeTagsType[]
-  price: number
-  image: string
+  coffee: CoffeeTypesProps
 }
 
-export function CoffeeCard(coffee: CoffeeCardProps) {
+export function CoffeeCard({ coffee }: CoffeeCardProps) {
   const price = priceFormatter.format(coffee.price)
+
   return (
     <Flex
       w="64"
@@ -81,25 +69,7 @@ export function CoffeeCard(coffee: CoffeeCardProps) {
             </Heading>
           </Flex>
 
-          <Counter />
-
-          <IconButton
-            w="2.375rem"
-            minW="2.375rem"
-            h="2.375rem"
-            ml="2"
-            rounded="md"
-            color="white"
-            bg="purple.700"
-            _hover={{
-              bg: 'purple.500',
-            }}
-            _active={{
-              bg: 'purple.700',
-            }}
-            aria-label="Adicionar ao carrinho de compras"
-            icon={<ShoppingCart width={22} height={22} weight="fill" />}
-          />
+          <CoffeeCardControl id={coffee.id} />
         </Center>
       </Center>
     </Flex>
