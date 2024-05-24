@@ -11,11 +11,11 @@ import {
 import { Trash } from '@phosphor-icons/react'
 
 import { CoffeeTypesProps } from '@/dto/coffee'
+import { useStore } from '@/store'
 import { priceFormatterWithCurrency } from '@/utils/number'
 
 import { Counter } from '../Counter'
 import { SelectButton } from '../SelectButton'
-import { useStore } from '../store'
 
 type CartCardProps = {
   coffee: Omit<CoffeeTypesProps, 'description' | 'tag'>

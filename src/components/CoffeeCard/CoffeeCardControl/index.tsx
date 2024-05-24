@@ -3,7 +3,7 @@ import { ShoppingCart } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 import { Counter } from '@/components/Counter'
-import { useStore } from '@/components/store'
+import { useStore } from '@/store'
 
 const COUNTER_INITIAL_VALUE = 1
 
