@@ -5,16 +5,14 @@ import {
   GridItem,
   Heading,
   Icon,
-  InputGroup,
-  InputRightElement,
   Text,
 } from '@chakra-ui/react'
 import { Bank, CreditCard, MapPinLine, Money } from '@phosphor-icons/react'
 import { Helmet } from 'react-helmet-async'
 
-import { Input } from '@/components/Input'
 import { SelectButton } from '@/components/SelectButton'
 
+import { AddressesTabs } from './AddressesTabs'
 import { CheckoutSubmit } from './CheckoutSubmit'
 
 export function Checkout() {
@@ -63,65 +61,7 @@ export function Checkout() {
               </Flex>
             </Flex>
 
-            <Flex as="form" flexDir="column" gap="4">
-              <Input w="12.5rem" placeholder="CEP" />
-              <Input placeholder="Rua" />
-
-              <FormControl
-                display="flex"
-                as="fieldset"
-                flexDir={{
-                  base: 'column',
-                  md: 'row',
-                }}
-                gap="3"
-              >
-                <Input w="12.5rem" minW="12.5rem" placeholder="Número" />
-                <InputGroup
-                  rounded="base"
-                  borderWidth="1px"
-                  borderColor="gray.400"
-                  _active={{ borderColor: 'yellow.700' }}
-                  _focusWithin={{
-                    borderWidth: '1px',
-                    borderColor: 'yellow.700',
-                    boxShadow: '0 0 0 1px yellow.700',
-                  }}
-                >
-                  <Input
-                    placeholder="Complemento"
-                    _focusVisible={{
-                      borderWidth: '0',
-                    }}
-                  />
-                  <InputRightElement
-                    fontSize="xs"
-                    fontStyle="italic"
-                    bg="gray.300"
-                    p="3"
-                    w="min-content"
-                    rounded="base"
-                    color="gray.550"
-                  >
-                    Opcional
-                  </InputRightElement>
-                </InputGroup>
-              </FormControl>
-
-              <FormControl
-                display="flex"
-                as="fieldset"
-                flexDir={{
-                  base: 'column',
-                  md: 'row',
-                }}
-                gap="3"
-              >
-                <Input w="12.5rem" minW="12.5rem" placeholder="Bairro" />
-                <Input placeholder="Cidade" />
-                <Input w="3.75rem" minW="3.75rem" placeholder="UF" />
-              </FormControl>
-            </Flex>
+            <AddressesTabs />
           </Flex>
 
           <Flex

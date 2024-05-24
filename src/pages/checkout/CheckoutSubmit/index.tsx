@@ -11,10 +11,10 @@ import { ShoppingCart, Trash } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 
 import { CartCard } from '@/components/CartCard'
-import { useStore } from '@/components/store'
 import { COFFEE_TYPES } from '@/dto/coffee'
 import { DELIVERY_PRICE } from '@/dto/delivery'
 import { ROUTES } from '@/router/routes'
+import { useStore } from '@/store'
 import { priceFormatterWithCurrency } from '@/utils/number'
 
 export function CheckoutSubmit() {
@@ -111,7 +111,6 @@ export function CheckoutSubmit() {
               h="2.875rem"
               w="100%"
               bg="yellow.500"
-              isDisabled={cartIsEmpty}
               _hover={{
                 bg: 'yellow.700',
                 _disabled: {
@@ -124,6 +123,7 @@ export function CheckoutSubmit() {
               color="white"
               fontSize="sm"
               fontWeight="700"
+              isDisabled={cartIsEmpty}
               textTransform="uppercase"
             >
               Fechar Pedido
