@@ -3,11 +3,50 @@ import { MapPin } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 
 import Logo from '@/assets/icons/logo.svg'
+import { useStore } from '@/store'
 
 import { CartButton } from './CartButton'
 
 export function Header() {
-  const [purple500] = useToken('colors', ['purple.500'])
+  const [purple500, gray600] = useToken('colors', ['purple.500', 'gray.600'])
+
+  const { getTheSelectedAddress } = useStore((state) => {
+    return {
+      getTheSelectedAddress: state.getTheSelectedAddress,
+    }
+  })
+
+  const selectedAddress2 = getTheSelectedAddress()
+
+  const localizationEmpty = {
+    bg: 'gray.300',
+    color: 'gray.600',
+    hover: {
+      bg: 'gray.400',
+    },
+    active: {
+      bg: 'gray.500',
+    },
+    iconColor: gray600,
+    label: 'Selecione sua localização',
+  }
+
+  const localizationFilled = {
+    bg: 'purple.200',
+    color: 'purple.700',
+    hover: {
+      bg: 'purple.100',
+    },
+    active: {
+      bg: 'purple.200',
+    },
+    iconColor: purple500,
+    label: `${selectedAddress2?.city}, ${selectedAddress2?.uf}`,
+  }
+
+  const localizationButtonLabel = selectedAddress2
+    ? localizationFilled
+    : localizationEmpty
 
   return (
     <Flex
@@ -29,19 +68,24 @@ export function Header() {
           rounded="md"
           fontSize="sm"
           fontWeight={400}
-          bg="purple.200"
-          color="purple.700"
+          bg={localizationButtonLabel.bg}
+          color={localizationButtonLabel.color}
           leftIcon={
-            <MapPin weight="fill" color={purple500} width={22} height={22} />
+            <MapPin
+              weight="fill"
+              color={localizationButtonLabel.iconColor}
+              width={22}
+              height={22}
+            />
           }
           _hover={{
-            bg: 'purple.100',
+            bg: localizationButtonLabel.hover.bg,
           }}
           _active={{
-            bg: 'purple.200',
+            bg: localizationButtonLabel.active.bg,
           }}
         >
-          João Pessoa, PB
+          {localizationButtonLabel.label}
         </Button>
 
         <CartButton />

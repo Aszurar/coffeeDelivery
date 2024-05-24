@@ -10,9 +10,9 @@ import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
-import { CartDrawer } from '@/components/CartDrawer'
-import { useStore } from '@/components/store'
+import { CartDrawer } from '@/components/ModalDialogAndDrawer/CartDrawer'
 import { ROUTES } from '@/router/routes'
+import { useStore } from '@/store'
 
 export function CartButton() {
   const MotionBadge = motion(Badge)
@@ -68,6 +68,7 @@ export function CartButton() {
             position="absolute"
             top="-2"
             right="-2"
+            shadow="md"
             animate={{
               boxShadow: [`0 0 0 0 ${yellow500}`, `0 0 0 10px ${yellow50}`],
             }}
