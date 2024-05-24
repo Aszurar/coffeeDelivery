@@ -17,13 +17,12 @@ import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { CheckFat, ShoppingCart, Trash } from '@phosphor-icons/react'
 import { useNavigate } from 'react-router-dom'
 
+import { CartCard } from '@/components/CartCard'
 import { COFFEE_TYPES } from '@/dto/coffee'
 import { DELIVERY_PRICE } from '@/dto/delivery'
 import { ROUTES } from '@/router/routes'
+import { useStore } from '@/store'
 import { priceFormatterWithCurrency } from '@/utils/number'
-
-import { CartCard } from '../CartCard'
-import { useStore } from '../store'
 
 type CartDrawerProps = {
   isOpen: boolean
@@ -77,7 +76,10 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
       placement="right"
       onClose={onClose}
       isOpen={isOpen}
-      size="sm"
+      size={{
+        base: 'sm',
+        md: 'sm',
+      }}
       colorScheme="gray"
     >
       <DrawerOverlay />
