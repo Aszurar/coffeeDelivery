@@ -21,7 +21,7 @@ import { REGISTER_ADDRESS_FORM_DEFAULT_VALUES } from '@/dto/address'
 import { AppError } from '@/errors'
 import { getAddressByCep } from '@/services/api/get-address-by-cep'
 import { queryClient } from '@/services/react-query'
-import { useStore } from '@/store'
+import { useAddressSelectors } from '@/store'
 import { AddressProps } from '@/store/slices/address'
 import { getStringAndRemoveCharacters } from '@/utils/string'
 
@@ -41,27 +41,19 @@ export function RegisterAddressForm({
   isEditable,
   onSelectFirstTab,
   onCancelEditAddress,
-}: RegisterAddressProps) {
+}: Readonly<RegisterAddressProps>) {
   const [parent] = useAutoAnimate()
   const toast = useToast()
+
   const {
     addNewAddress,
-    maxAddresses,
-    updateAddress,
     totalAddresses,
-    getTheSelectedAddress,
-  } = useStore((state) => {
-    return {
-      addNewAddress: state.addNewAddress,
-      totalAddresses: state.totalAddresses,
-      maxAddresses: state.maxAddresses,
-      updateAddress: state.updateAddress,
-      getTheSelectedAddress: state.getTheSelectedAddress,
-    }
-  })
+    updateAddress,
+    maxAddresses,
+    selectedAddress: currentAddressSelectedToEdit,
+  } = useAddressSelectors()
 
   const isNotPossibleAddNewAddress = totalAddresses === maxAddresses
-  const currentAddressSelectedToEdit = getTheSelectedAddress()
 
   const {
     watch,
@@ -144,7 +136,6 @@ export function RegisterAddressForm({
     const address: AddressProps = {
       ...data,
       id: crypto.randomUUID(),
-      isSelected: true,
     }
     try {
       addNewAddress(address)
@@ -210,7 +201,6 @@ export function RegisterAddressForm({
     const address: AddressProps = {
       ...data,
       id: currentAddressSelectedToEdit.id,
-      isSelected: currentAddressSelectedToEdit.isSelected,
     }
 
     updateAddress(address)
@@ -298,7 +288,8 @@ export function RegisterAddressForm({
         gap="3"
       >
         <Input.Control
-          w="12.5rem"
+          maxW="12.5rem"
+          controlWidth="12.5rem"
           minW="12.5rem"
           placeholder="Número"
           type="number"

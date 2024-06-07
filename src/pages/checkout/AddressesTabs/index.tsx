@@ -17,7 +17,7 @@ import { AddressSelected } from '@/components/AddressSelected'
 import { RegisterAddressForm } from '@/components/Form/RegisterAddressForm'
 import { DeleteSelectedAddressDialog } from '@/components/ModalDialogAndDrawer/DeleteSelectedAddressDialog'
 import { SelectAddressModal } from '@/components/ModalDialogAndDrawer/SelectAddressModal'
-import { useStore } from '@/store'
+import { useAddressSelectors } from '@/store'
 
 const tabs = {
   FIRST: 0,
@@ -34,18 +34,10 @@ export function AddressesTabs() {
     onClose: onDeleteSelectedAddressDialogClose,
   } = useDisclosure()
 
-  const { totalAddresses, maxAddresses, getTheSelectedAddress, removeAddress } =
-    useStore((state) => {
-      return {
-        totalAddresses: state.totalAddresses,
-        maxAddresses: state.maxAddresses,
-        removeAddress: state.removeAddress,
-        getTheSelectedAddress: state.getTheSelectedAddress,
-      }
-    })
+  const { totalAddresses, maxAddresses, selectedAddress, removeAddress } =
+    useAddressSelectors()
 
   function handleRemoveAddress() {
-    const selectedAddress = getTheSelectedAddress()
     if (selectedAddress) {
       removeAddress(selectedAddress.id)
     }

@@ -14,7 +14,7 @@ import { useRef } from 'react'
 
 import { DeleteSelectedAddressDialog } from '@/components/ModalDialogAndDrawer/DeleteSelectedAddressDialog'
 import { SelectButton } from '@/components/SelectButton'
-import { useStore } from '@/store'
+import { useAddressSelectors } from '@/store'
 import { AddressProps } from '@/store/slices/address'
 import { formatCEP } from '@/utils/string'
 
@@ -44,7 +44,7 @@ export function AddressCard({ address, isChecked, onCheck }: AddressCardProps) {
   const deleteAllAddressDialogCancelRef = useRef<HTMLButtonElement>(null)
 
   const [parent] = useAutoAnimate()
-  const removeAddress = useStore((state) => state.removeAddress)
+  const { removeAddress } = useAddressSelectors()
 
   function handleRemoveAddress(id: string) {
     if (isChecked) {

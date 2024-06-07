@@ -1,3 +1,4 @@
+import { produce } from 'immer'
 import { StateCreator } from 'zustand'
 
 import { RegisterAddressFormProps } from '@/components/Form/RegisterAddressForm/validation'
@@ -5,25 +6,25 @@ import { AppError } from '@/errors'
 
 export type AddressProps = RegisterAddressFormProps & {
   id: string
-  isSelected: boolean
 }
 
 type AddressSliceProps = {
   addresses: AddressProps[]
   totalAddresses: number
   maxAddresses: number
+  selectedAddress: AddressProps | undefined
   addNewAddress: (address: AddressProps) => void
-  getTheSelectedAddress: () => AddressProps | undefined
   selectAddress: (id: string) => void
   updateAddress: (address: AddressProps) => void
   removeAddress: (id: string) => void
-  deleteAllAddress: () => void
+  deleteAllAddresses: () => void
 }
 
 const createAddressSlice: StateCreator<AddressSliceProps> = (set, get) => ({
   addresses: [],
   totalAddresses: 0,
   maxAddresses: 10,
+  selectedAddress: undefined,
   addNewAddress: (address) => {
     const { addresses: currentAddresses, maxAddresses } = get()
 
@@ -34,66 +35,66 @@ const createAddressSlice: StateCreator<AddressSliceProps> = (set, get) => ({
       )
     }
 
-    const unSelectOlderAddresses = currentAddresses.map((currentAddress) => ({
-      ...currentAddress,
-      isSelected: false,
-    }))
+    const addressesListWithNewAddress = [...currentAddresses, address]
 
-    set({ addresses: [...unSelectOlderAddresses, address] })
-    set({ totalAddresses: ++currentAddresses.length })
-  },
-  getTheSelectedAddress: () => {
-    const { addresses } = get()
-
-    if (addresses.length > 0) {
-      const selectedAddress = addresses.find((address) => address.isSelected)
-
-      if (!selectedAddress) {
-        const lastIndexAddresses = addresses.length - 1
-
-        const updatedAddresses = addresses.map((address, index) => ({
-          ...address,
-          isSelected: index === lastIndexAddresses,
-        }))
-
-        set({ addresses: updatedAddresses })
-
-        const lastAddress = updatedAddresses[lastIndexAddresses]
-
-        return lastAddress
-      }
-
-      return selectedAddress
-    }
-
-    return undefined
+    set({
+      addresses: addressesListWithNewAddress,
+      totalAddresses: addressesListWithNewAddress.length,
+      selectedAddress: address,
+    })
   },
   selectAddress: (id) => {
-    const { addresses: currentAddresses } = get()
-    const updatedAddresses = currentAddresses.map((currentAddress) => ({
-      ...currentAddress,
-      isSelected: currentAddress.id === id,
-    }))
-    set({ addresses: updatedAddresses })
+    set(
+      produce((state: AddressSliceProps) => {
+        const selectedAddress = state.addresses.find(
+          (address) => address.id === id,
+        )
+
+        state.selectedAddress = selectedAddress
+      }),
+    )
   },
   updateAddress: (address) => {
-    const { addresses: currentAddress } = get()
-    const updatedAddress = currentAddress.map((currentAddress) =>
-      currentAddress.id === address.id ? address : currentAddress,
+    set(
+      produce((state: AddressSliceProps) => {
+        let selectedAddress
+
+        const updatedAddressesList = state.addresses.map((currentAddress) =>
+          currentAddress.id === address.id ? address : currentAddress,
+        )
+
+        if (state.selectedAddress?.id === address.id) {
+          selectedAddress = address
+        }
+
+        state.addresses = updatedAddressesList
+        state.selectedAddress = selectedAddress
+      }),
     )
-    set({ addresses: updatedAddress })
   },
   removeAddress: (id) => {
-    const { addresses: currentAddresses } = get()
-    const updatedAddress = currentAddresses.filter(
-      (address) => address.id !== id,
+    set(
+      produce((state: AddressSliceProps) => {
+        let selectedAddress
+
+        const addressAfterRemove = state.addresses.filter(
+          (address) => address.id !== id,
+        )
+        // Select the last address if there is no address selected
+        if (state.selectedAddress?.id === id) {
+          if (addressAfterRemove.length > 0) {
+            selectedAddress = addressAfterRemove[addressAfterRemove.length - 1]
+          }
+        }
+
+        state.addresses = addressAfterRemove
+        state.totalAddresses = addressAfterRemove.length
+        state.selectedAddress = selectedAddress
+      }),
     )
-    set({ addresses: updatedAddress })
-    set({ totalAddresses: --currentAddresses.length })
   },
-  deleteAllAddress: () => {
-    set({ addresses: [] })
-    set({ totalAddresses: 0 })
+  deleteAllAddresses: () => {
+    set({ addresses: [], totalAddresses: 0, selectedAddress: undefined })
   },
 })
 

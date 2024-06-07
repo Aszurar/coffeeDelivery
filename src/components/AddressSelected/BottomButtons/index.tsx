@@ -2,7 +2,7 @@ import { Badge, Box, Button, Icon } from '@chakra-ui/react'
 import { AddressBook, PencilSimpleLine, Trash } from '@phosphor-icons/react'
 
 import { SelectButton } from '@/components/SelectButton'
-import { useStore } from '@/store'
+import { useAddressSelectors } from '@/store'
 
 type BottomButtonsProps = {
   isEditable: boolean
@@ -21,7 +21,7 @@ export function BottomButtons({
   onSelectAddressModalOpen,
   onDeleteSelectedAddressDialogOpen,
 }: BottomButtonsProps) {
-  const totalAddresses = useStore((state) => state.totalAddresses)
+  const { totalAddresses } = useAddressSelectors()
   const hasOnlyOneAddress = totalAddresses === 1
   const badgeDisabledStyle = hasOnlyOneAddress ? '0.5' : '1'
 

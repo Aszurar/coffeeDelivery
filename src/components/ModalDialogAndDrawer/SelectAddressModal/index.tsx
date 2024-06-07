@@ -20,7 +20,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { AddressCard } from '@/components/AddressSelected/AddressCard'
 import { AddressesEmptyCard } from '@/components/AddressSelected/AddressEmptyCard'
-import { useStore } from '@/store'
+import { useAddressSelectors } from '@/store'
 
 import { DeleteAllAddressDialog } from '../DeleteAllAddressDialog'
 
@@ -32,35 +32,26 @@ type SelectAddressModalProps = {
 export function SelectAddressModal({
   isOpen,
   onClose,
-}: SelectAddressModalProps) {
+}: Readonly<SelectAddressModalProps>) {
   const toast = useToast()
   const [parent] = useAutoAnimate()
 
+  const deleteAllAddressDialogCancelRef = useRef<HTMLButtonElement>(null)
   const {
     isOpen: isDeleteAllAddressDialogOpen,
     onOpen: onDeleteAllAddressDialogOpen,
     onClose: onDeleteAllAddressDialogClose,
   } = useDisclosure()
-  const deleteAllAddressDialogCancelRef = useRef<HTMLButtonElement>(null)
 
   const {
     addresses,
-    getTheSelectedAddress,
-    maxAddress,
+    maxAddresses,
     selectAddress,
     totalAddresses,
-  } = useStore((state) => {
-    return {
-      addresses: state.addresses,
-      totalAddresses: state.totalAddresses,
-      getTheSelectedAddress: state.getTheSelectedAddress,
-      selectAddress: state.selectAddress,
-      maxAddress: state.maxAddresses,
-    }
-  })
+    selectedAddress,
+  } = useAddressSelectors()
 
   const [addressSelectedId, setAddressSelectedId] = useState('')
-  const selectedAddress = getTheSelectedAddress()
 
   const listOfAddressesIsEmpty = totalAddresses === 0
 
@@ -96,72 +87,69 @@ export function SelectAddressModal({
   }
 
   useEffect(() => {
-    const selectedAddressUpdated = getTheSelectedAddress()
-    if (selectedAddressUpdated) {
-      setAddressSelectedId(selectedAddressUpdated.id)
+    if (selectedAddress) {
+      setAddressSelectedId(selectedAddress.id)
     }
-  }, [addresses, getTheSelectedAddress])
+  }, [addresses, selectedAddress])
 
   return (
-    <>
-      <Modal
-        onClose={handleOnClose}
-        size="xl"
-        isOpen={isOpen}
-        scrollBehavior="inside"
-      >
-        <ModalOverlay backdropFilter="blur(10px) hue-rotate(15deg)" />
-        <ModalContent maxH="46rem">
-          <ModalHeader display="flex" justifyContent="space-between">
-            <Heading fontSize="x-large"> Selecione um endereço</Heading>
-            <Flex fontSize="lg" mr="8">
-              <Text>{totalAddresses}/</Text>
-              <Text color="purple.500">{maxAddress}</Text>
-            </Flex>
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody ref={parent} display="flex" flexDir="column" gap="3">
-            {addresses.map((address) => (
-              <AddressCard
-                key={address.id}
-                address={address}
-                isChecked={addressSelectedId === address.id}
-                onCheck={() => handleChangeAddress(address.id)}
-              />
-            ))}
-            {listOfAddressesIsEmpty && (
-              <AddressesEmptyCard
-                icon={AddressBook}
-                title="Não há endereços cadastrados"
-              />
-            )}
-          </ModalBody>
-          <ModalFooter gap="4">
-            <Button
-              leftIcon={<Icon as={WarningCircle} w="5" h="5" />}
-              colorScheme="red"
-              isDisabled={listOfAddressesIsEmpty}
-              onClick={onDeleteAllAddressDialogOpen}
-            >
-              Excluir todos os endereços
-            </Button>
-            <Button onClick={handleOnClose}>Cancelar</Button>
-            <Button
-              colorScheme="yellow"
-              isDisabled={isDisabled}
-              onClick={handleSubmitChangeAddress}
-            >
-              Confirmar
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-        <DeleteAllAddressDialog
-          cancelRef={deleteAllAddressDialogCancelRef}
-          isOpen={isDeleteAllAddressDialogOpen}
-          onClose={onDeleteAllAddressDialogClose}
-          onCloseSelectAddressModal={onClose}
-        />
-      </Modal>
-    </>
+    <Modal
+      onClose={handleOnClose}
+      size="xl"
+      isOpen={isOpen}
+      scrollBehavior="inside"
+    >
+      <ModalOverlay backdropFilter="blur(10px) hue-rotate(15deg)" />
+      <ModalContent maxH="46rem">
+        <ModalHeader display="flex" justifyContent="space-between">
+          <Heading fontSize="x-large"> Selecione um endereço</Heading>
+          <Flex fontSize="lg" mr="8">
+            <Text>{totalAddresses}/</Text>
+            <Text color="purple.500">{maxAddresses}</Text>
+          </Flex>
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody ref={parent} display="flex" flexDir="column" gap="3">
+          {addresses.map((address) => (
+            <AddressCard
+              key={address.id}
+              address={address}
+              isChecked={addressSelectedId === address.id}
+              onCheck={() => handleChangeAddress(address.id)}
+            />
+          ))}
+          {listOfAddressesIsEmpty && (
+            <AddressesEmptyCard
+              icon={AddressBook}
+              title="Não há endereços cadastrados"
+            />
+          )}
+        </ModalBody>
+        <ModalFooter gap="4">
+          <Button
+            leftIcon={<Icon as={WarningCircle} w="5" h="5" />}
+            colorScheme="red"
+            isDisabled={listOfAddressesIsEmpty}
+            onClick={onDeleteAllAddressDialogOpen}
+          >
+            Excluir todos os endereços
+          </Button>
+          <Button onClick={handleOnClose}>Cancelar</Button>
+          <Button
+            colorScheme="yellow"
+            isDisabled={isDisabled}
+            onClick={handleSubmitChangeAddress}
+          >
+            Confirmar
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+      <DeleteAllAddressDialog
+        cancelRef={deleteAllAddressDialogCancelRef}
+        isOpen={isDeleteAllAddressDialogOpen}
+        onClose={onDeleteAllAddressDialogClose}
+        onCloseSelectAddressModal={onClose}
+      />
+    </Modal>
   )
 }

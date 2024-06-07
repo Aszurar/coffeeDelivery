@@ -3,20 +3,14 @@ import { MapPin } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 
 import Logo from '@/assets/icons/logo.svg'
-import { useStore } from '@/store'
+import { useAddressSelectors } from '@/store'
 
 import { CartButton } from './CartButton'
 
 export function Header() {
   const [purple500, gray600] = useToken('colors', ['purple.500', 'gray.600'])
 
-  const { getTheSelectedAddress } = useStore((state) => {
-    return {
-      getTheSelectedAddress: state.getTheSelectedAddress,
-    }
-  })
-
-  const selectedAddress2 = getTheSelectedAddress()
+  const { selectedAddress } = useAddressSelectors()
 
   const localizationEmpty = {
     bg: 'gray.300',
@@ -41,10 +35,10 @@ export function Header() {
       bg: 'purple.200',
     },
     iconColor: purple500,
-    label: `${selectedAddress2?.city}, ${selectedAddress2?.uf}`,
+    label: `${selectedAddress?.city}, ${selectedAddress?.uf}`,
   }
 
-  const localizationButtonLabel = selectedAddress2
+  const localizationButtonLabel = selectedAddress
     ? localizationFilled
     : localizationEmpty
 
