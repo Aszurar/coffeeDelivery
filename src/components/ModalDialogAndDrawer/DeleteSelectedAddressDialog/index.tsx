@@ -23,7 +23,7 @@ export function DeleteSelectedAddressDialog({
   onClose,
   cancelRef,
   onRemoveSelectedAddress,
-}: DeleteSelectedAddressDialogProps) {
+}: Readonly<DeleteSelectedAddressDialogProps>) {
   const toast = useToast()
 
   function handleDeleteAllAddresses() {

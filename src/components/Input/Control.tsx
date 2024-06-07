@@ -27,7 +27,7 @@ export const Control = forwardRef<HTMLInputElement, InputUIProps>(
         startColor="yellow.200"
         endColor="yellow.500"
         rounded="base"
-        w="100%"
+        w={controlWidth ?? '100%'}
       >
         <FormControl w={controlWidth} isInvalid={!!errorMessage}>
           <InputUI

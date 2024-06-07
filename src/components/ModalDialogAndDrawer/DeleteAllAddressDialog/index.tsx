@@ -7,10 +7,11 @@ import {
   AlertDialogHeader,
   AlertDialogOverlay,
   Button,
+  Highlight,
   useToast,
 } from '@chakra-ui/react'
 
-import { useStore } from '@/store'
+import { useAddressSelectors } from '@/store'
 
 type DeleteAllAddressDialogProps = {
   isOpen: boolean
@@ -24,8 +25,8 @@ export function DeleteAllAddressDialog({
   onClose,
   cancelRef,
   onCloseSelectAddressModal,
-}: DeleteAllAddressDialogProps) {
-  const deleteAllAddresses = useStore((state) => state.deleteAllAddress)
+}: Readonly<DeleteAllAddressDialogProps>) {
+  const { deleteAllAddresses } = useAddressSelectors()
 
   const toast = useToast()
 
@@ -52,11 +53,26 @@ export function DeleteAllAddressDialog({
 
       <AlertDialogContent>
         <AlertDialogHeader>
-          Tem certeza que deseja excluir todos os endereços?
+          <Highlight
+            query={['excluir todos']}
+            styles={{
+              fontWeight: '700',
+              color: 'red.600',
+            }}
+          >
+            Tem certeza que deseja excluir todos os endereços?
+          </Highlight>
         </AlertDialogHeader>
         <AlertDialogCloseButton />
         <AlertDialogBody>
-          Ao excluir todos os endereços, você não poderá desfazer essa ação.
+          <Highlight
+            query={['não poderá desfazer']}
+            styles={{
+              fontWeight: '700',
+            }}
+          >
+            Ao excluir todos os endereços, você não poderá desfazer essa ação.
+          </Highlight>
         </AlertDialogBody>
         <AlertDialogFooter>
           <Button ref={cancelRef} onClick={onClose}>
