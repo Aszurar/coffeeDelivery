@@ -7,30 +7,15 @@ import {
 } from '@chakra-ui/react'
 import { ShoppingCart } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
-import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 
 import { CartDrawer } from '@/components/ModalDialogAndDrawer/CartDrawer'
-import { ROUTES } from '@/router/routes'
-import { useStore } from '@/store'
+import { useCartSelectors } from '@/store'
 
 export function CartButton() {
   const MotionBadge = motion(Badge)
-  const { pathname } = useLocation()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const totalItemsOnCart = useStore((state) => state.totalItemsOnCart)
+  const { totalItemsOnCart } = useCartSelectors()
   const [yellow500, yellow50] = useToken('colors', ['yellow.500', 'yellow.50'])
-
-  useEffect(() => {
-    if (isOpen && pathname !== ROUTES.CHECKOUT) {
-      onClose()
-    }
-
-    if (pathname === ROUTES.HOME && totalItemsOnCart > 0) {
-      onOpen()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalItemsOnCart])
 
   return (
     <>
