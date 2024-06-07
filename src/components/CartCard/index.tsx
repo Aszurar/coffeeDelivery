@@ -11,7 +11,7 @@ import {
 import { Trash } from '@phosphor-icons/react'
 
 import { CoffeeTypesProps } from '@/dto/coffee'
-import { useStore } from '@/store'
+import { useCartSelectors } from '@/store'
 import { priceFormatterWithCurrency } from '@/utils/number'
 
 import { Counter } from '../Counter'
@@ -21,20 +21,13 @@ type CartCardProps = {
   coffee: Omit<CoffeeTypesProps, 'description' | 'tag'>
 }
 
-export function CartCard({ coffee }: CartCardProps) {
+export function CartCard({ coffee }: Readonly<CartCardProps>) {
   const {
-    handleRemoveItem,
-    handleDecrementQuantityItemOnCart,
-    handleIncrementQuantityItemOnCart,
-    onGetTotalCurrentItem,
-  } = useStore((state) => {
-    return {
-      handleRemoveItem: state.removeItemFromCart,
-      onGetTotalCurrentItem: state.getTotalCurrentItem,
-      handleDecrementQuantityItemOnCart: state.decrementQuantityItemOnCart,
-      handleIncrementQuantityItemOnCart: state.incrementQuantityItemOnCart,
-    }
-  })
+    removeItemFromCart: handleRemoveItem,
+    getTotalCurrentItem: onGetTotalCurrentItem,
+    decrementQuantityItemOnCart: handleDecrementQuantityItemOnCart,
+    incrementQuantityItemOnCart: handleIncrementQuantityItemOnCart,
+  } = useCartSelectors()
 
   const totalCurrentItem = onGetTotalCurrentItem({ id: coffee.id })
   const totalPrice = totalCurrentItem * coffee.price

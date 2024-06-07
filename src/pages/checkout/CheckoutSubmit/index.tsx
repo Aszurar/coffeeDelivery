@@ -6,27 +6,29 @@ import {
   Heading,
   Icon,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { ShoppingCart, Trash } from '@phosphor-icons/react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import { CartCard } from '@/components/CartCard'
+import { DeleteAllItemsOnCartDialog } from '@/components/ModalDialogAndDrawer/DeleteAllItemsOnCartDialog'
 import { COFFEE_TYPES } from '@/dto/coffee'
 import { DELIVERY_PRICE } from '@/dto/delivery'
 import { ROUTES } from '@/router/routes'
-import { useStore } from '@/store'
+import { useCartSelectors } from '@/store'
 import { priceFormatterWithCurrency } from '@/utils/number'
 
 export function CheckoutSubmit() {
-  const { cart, totalCoffeePrice, handleRemoveAllItemsFromCart } = useStore(
-    (state) => {
-      return {
-        cart: state.cart,
-        totalCoffeePrice: state.totalPriceOfItemsOnCart,
-        handleRemoveAllItemsFromCart: state.removeAllItemsFromCart,
-      }
-    },
-  )
+  const deleteAllItemsOnCartDialogCancelRef = useRef<HTMLButtonElement>(null)
+  const {
+    isOpen: isDeleteAllItemsOnCartDialogOpen,
+    onOpen: onDeleteAllItemsOnCartDialogOpen,
+    onClose: onDeleteAllItemsOnCartDialogClose,
+  } = useDisclosure()
+
+  const { cart, totalPriceOfItemsOnCart: totalCoffeePrice } = useCartSelectors()
 
   const cartIsEmpty = cart.length === 0
 
@@ -45,10 +47,6 @@ export function CheckoutSubmit() {
   )
 
   const cartOpacity = cartIsEmpty ? 0.5 : 1
-
-  function handleClearCart() {
-    handleRemoveAllItemsFromCart()
-  }
 
   return (
     <>
@@ -70,10 +68,10 @@ export function CheckoutSubmit() {
       >
         <Flex as="section" flexDir="column" gap="6" opacity={cartOpacity}>
           {coffeesSelected.map((coffee) => (
-            <>
-              <CartCard key={coffee.id} coffee={coffee} />
+            <Flex key={coffee.id} flexDir="column">
+              <CartCard coffee={coffee} />
               <Divider h="1px" bg="gray.400" />
-            </>
+            </Flex>
           ))}
           {cartIsEmpty && (
             <Center color="gray.550" flexDir="column">
@@ -138,13 +136,20 @@ export function CheckoutSubmit() {
             fontWeight="700"
             textTransform="uppercase"
             isDisabled={cartIsEmpty}
-            onClick={handleClearCart}
+            onClick={onDeleteAllItemsOnCartDialogOpen}
             leftIcon={<Trash width={20} height={20} weight="fill" />}
           >
             Limpar Carrinho
           </Button>
         </Flex>
       </Flex>
+
+      <DeleteAllItemsOnCartDialog
+        cancelRef={deleteAllItemsOnCartDialogCancelRef}
+        isOpen={isDeleteAllItemsOnCartDialogOpen}
+        onClose={onDeleteAllItemsOnCartDialogClose}
+        onCloseCarDrawer={() => {}}
+      />
     </>
   )
 }

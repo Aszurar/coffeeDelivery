@@ -12,35 +12,39 @@ import {
   Flex,
   Icon,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { CheckFat, ShoppingCart, Trash } from '@phosphor-icons/react'
+import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { CartCard } from '@/components/CartCard'
 import { COFFEE_TYPES } from '@/dto/coffee'
 import { DELIVERY_PRICE } from '@/dto/delivery'
 import { ROUTES } from '@/router/routes'
-import { useStore } from '@/store'
+import { useCartSelectors } from '@/store'
 import { priceFormatterWithCurrency } from '@/utils/number'
+
+import { DeleteAllItemsOnCartDialog } from '../DeleteAllItemsOnCartDialog'
 
 type CartDrawerProps = {
   isOpen: boolean
   onClose: () => void
 }
 
-export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
+export function CartDrawer({ isOpen, onClose }: Readonly<CartDrawerProps>) {
   const navigate = useNavigate()
   const [parent] = useAutoAnimate()
-  const { cart, totalCoffeePrice, handleRemoveAllItemsFromCart } = useStore(
-    (state) => {
-      return {
-        cart: state.cart,
-        totalCoffeePrice: state.totalPriceOfItemsOnCart,
-        handleRemoveAllItemsFromCart: state.removeAllItemsFromCart,
-      }
-    },
-  )
+
+  const deleteAllItemsOnCartDialogCancelRef = useRef<HTMLButtonElement>(null)
+  const {
+    isOpen: isDeleteAllItemsOnCartDialogOpen,
+    onOpen: onDeleteAllItemsOnCartDialogOpen,
+    onClose: onDeleteAllItemsOnCartDialogClose,
+  } = useDisclosure()
+
+  const { cart, totalPriceOfItemsOnCart: totalCoffeePrice } = useCartSelectors()
 
   const cartIsEmpty = cart.length === 0
   const footerOpacity = cartIsEmpty ? 0.5 : 1
@@ -63,14 +67,6 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
     navigate(ROUTES.CHECKOUT)
   }
 
-  function handleClearCart() {
-    handleRemoveAllItemsFromCart()
-
-    setTimeout(() => {
-      onClose()
-    }, 750)
-  }
-
   return (
     <Drawer
       placement="right"
@@ -89,12 +85,12 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           <DrawerCloseButton color="purple.500" />
         </DrawerHeader>
         <DrawerBody display="flex" flexDir="column" gap="6">
-          <Flex as="section" flexDir="column" gap="6" ref={parent}>
+          <Flex as="section" flexDir="column" ref={parent} gap="4">
             {coffeesSelected.map((coffee) => (
-              <>
-                <CartCard key={coffee.id} coffee={coffee} />
+              <Flex key={coffee.id} flexDir="column" gap="4">
+                <CartCard coffee={coffee} />
                 <Divider h="1px" bg="purple.500" />
-              </>
+              </Flex>
             ))}
             {cartIsEmpty && (
               <Center color="gray.550" flexDir="column">
@@ -158,7 +154,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               fontWeight="700"
               textTransform="uppercase"
               isDisabled={cartIsEmpty}
-              onClick={handleClearCart}
+              onClick={onDeleteAllItemsOnCartDialogOpen}
               leftIcon={<Trash width={20} height={20} weight="fill" />}
             >
               Limpar Carrinho
@@ -166,6 +162,13 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           </DrawerFooter>
         </DrawerBody>
       </DrawerContent>
+
+      <DeleteAllItemsOnCartDialog
+        cancelRef={deleteAllItemsOnCartDialogCancelRef}
+        isOpen={isDeleteAllItemsOnCartDialogOpen}
+        onClose={onDeleteAllItemsOnCartDialogClose}
+        onCloseCarDrawer={onClose}
+      />
     </Drawer>
   )
 }

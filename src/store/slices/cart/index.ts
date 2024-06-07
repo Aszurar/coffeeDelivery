@@ -1,35 +1,30 @@
+import { produce } from 'immer'
 import { StateCreator } from 'zustand'
 
-import { COFFEE_TYPES } from '@/dto/coffee'
-
-import { addQuantity, updateQuantity } from './utils'
+import {
+  addQuantity,
+  calculateTotalPriceOfItemsOnCart,
+  updateQuantity,
+  updateTotalItemsOnCart,
+} from './utils'
 
 export type CartProps = {
   id: string
   quantity: number
 }
 
-type GetTotalCurrentItemProps = Pick<CartProps, 'id'>
-type DecrementQuantityItemOnCartProps = GetTotalCurrentItemProps
-type IncrementQuantityItemOnCartProps = GetTotalCurrentItemProps
-type RemoveItemFromCartProps = GetTotalCurrentItemProps
+type CartItemIdentifierProps = Pick<CartProps, 'id'>
 
 type CartSliceProps = {
   cart: CartProps[]
   totalItemsOnCart: number
   totalPriceOfItemsOnCart: number
-  updateTotalItemsOnCart: () => void
-  getTotalCurrentItem: ({ id }: GetTotalCurrentItemProps) => number
-  calculateTotalPriceOfItemsOnCart: () => void
+  getTotalCurrentItem: ({ id }: CartItemIdentifierProps) => number
   addItemToCart: ({ id, quantity }: CartProps) => void
   updateItemOnCart: ({ id, quantity }: CartProps) => void
-  decrementQuantityItemOnCart: ({
-    id,
-  }: DecrementQuantityItemOnCartProps) => void
-  incrementQuantityItemOnCart: ({
-    id,
-  }: IncrementQuantityItemOnCartProps) => void
-  removeItemFromCart: ({ id }: RemoveItemFromCartProps) => void
+  decrementQuantityItemOnCart: ({ id }: CartItemIdentifierProps) => void
+  incrementQuantityItemOnCart: ({ id }: CartItemIdentifierProps) => void
+  removeItemFromCart: ({ id }: CartItemIdentifierProps) => void
   removeAllItemsFromCart: () => void
 }
 
@@ -37,84 +32,72 @@ const createCartSlice: StateCreator<CartSliceProps> = (set, get) => ({
   cart: [],
   totalItemsOnCart: 0,
   totalPriceOfItemsOnCart: 0,
-  updateTotalItemsOnCart: () => {
-    // checked
-    const { cart } = get()
-    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0)
-    set({ totalItemsOnCart: totalItems })
-  },
-  getTotalCurrentItem: ({ id }: GetTotalCurrentItemProps) => {
+  getTotalCurrentItem: ({ id }: CartItemIdentifierProps) => {
     // checked
     const { cart } = get()
     const item = cart.find((item) => item.id === id)
-    return item?.quantity || 0
-  },
-  calculateTotalPriceOfItemsOnCart: () => {
-    // checked
-    const { cart } = get()
-    const totalPrice = cart.reduce((acc, item) => {
-      const coffee = COFFEE_TYPES.find((coffee) => coffee.id === item.id) ?? {
-        price: 0,
-      }
-      return acc + coffee.price * item.quantity
-    }, 0)
-    set({ totalPriceOfItemsOnCart: totalPrice })
-  },
-  removeItemFromCart: ({ id }) => {
-    // checked
-    const { updateTotalItemsOnCart, calculateTotalPriceOfItemsOnCart } = get()
-
-    set((state) => ({
-      cart: state.cart.filter((item) => item.id !== id),
-    }))
-
-    updateTotalItemsOnCart()
-    calculateTotalPriceOfItemsOnCart()
+    return item?.quantity ?? 0
   },
   addItemToCart: ({ id, quantity }) => {
     // checked
-    const { cart, updateTotalItemsOnCart, calculateTotalPriceOfItemsOnCart } =
-      get()
-    const item = cart.find((item) => item.id === id)
+    set(
+      produce((state: CartSliceProps) => {
+        let cartAfterAdded = state.cart
+        const item = state.cart.find((item) => item.id === id)
 
-    if (item) {
-      set((state) => ({
-        cart: state.cart.map((item) =>
-          addQuantity({
-            item,
-            newItem: { id, quantity },
-          }),
-        ),
-      }))
-    } else {
-      set((state) => ({
-        cart: [...state.cart, { id, quantity }],
-      }))
-    }
+        if (item) {
+          cartAfterAdded = state.cart.map((item) =>
+            addQuantity({
+              item,
+              newItem: { id, quantity },
+            }),
+          )
+        } else {
+          cartAfterAdded.push({ id, quantity })
+        }
 
-    updateTotalItemsOnCart()
-    calculateTotalPriceOfItemsOnCart()
+        const totalItems = updateTotalItemsOnCart({
+          updatedCart: cartAfterAdded,
+        })
+        const totalPriceOfAllItems = calculateTotalPriceOfItemsOnCart({
+          updatedCart: cartAfterAdded,
+        })
+
+        state.cart = cartAfterAdded
+        state.totalItemsOnCart = totalItems
+        state.totalPriceOfItemsOnCart = totalPriceOfAllItems
+      }),
+    )
   },
   updateItemOnCart: ({ id, quantity }) => {
-    const { cart, updateTotalItemsOnCart, calculateTotalPriceOfItemsOnCart } =
-      get()
-    const newItem = { id, quantity }
-    const item = cart.find((item) => item.id === id)
+    set(
+      produce((state: CartSliceProps) => {
+        let cartAfterUpdate = state.cart
+        const newItem = { id, quantity }
+        const item = state.cart.find((item) => item.id === id)
 
-    if (item) {
-      set((state) => ({
-        cart: state.cart.map((item) => updateQuantity({ item, newItem })),
-      }))
-    } else {
-      set((state) => ({
-        cart: [...state.cart, newItem],
-      }))
-    }
+        if (item) {
+          cartAfterUpdate = state.cart.map((item) =>
+            updateQuantity({ item, newItem }),
+          )
+        } else {
+          cartAfterUpdate.push(newItem)
+        }
 
-    updateTotalItemsOnCart()
-    calculateTotalPriceOfItemsOnCart()
+        const totalItems = updateTotalItemsOnCart({
+          updatedCart: cartAfterUpdate,
+        })
+        const totalPriceOfAllItems = calculateTotalPriceOfItemsOnCart({
+          updatedCart: cartAfterUpdate,
+        })
+
+        state.cart = cartAfterUpdate
+        state.totalItemsOnCart = totalItems
+        state.totalPriceOfItemsOnCart = totalPriceOfAllItems
+      }),
+    )
   },
-  decrementQuantityItemOnCart: ({ id }: DecrementQuantityItemOnCartProps) => {
+  decrementQuantityItemOnCart: ({ id }: CartItemIdentifierProps) => {
     const { getTotalCurrentItem, updateItemOnCart, removeItemFromCart } = get()
     const totalCurrentItem = getTotalCurrentItem({ id })
 
@@ -125,16 +108,37 @@ const createCartSlice: StateCreator<CartSliceProps> = (set, get) => ({
       removeItemFromCart({ id })
     }
   },
-  incrementQuantityItemOnCart: ({ id }: IncrementQuantityItemOnCartProps) => {
+  incrementQuantityItemOnCart: ({ id }: CartItemIdentifierProps) => {
     const { getTotalCurrentItem, updateItemOnCart } = get()
     const totalCurrentItem = getTotalCurrentItem({ id })
 
     updateItemOnCart({ id, quantity: totalCurrentItem + 1 })
   },
+  removeItemFromCart: ({ id }) => {
+    // checked
+    set(
+      produce((state: CartSliceProps) => {
+        const cartListAfterRemove = state.cart.filter((item) => item.id !== id)
+
+        const totalItems = updateTotalItemsOnCart({
+          updatedCart: cartListAfterRemove,
+        })
+        const totalPriceOfAllItems = calculateTotalPriceOfItemsOnCart({
+          updatedCart: cartListAfterRemove,
+        })
+
+        state.cart = cartListAfterRemove
+        state.totalItemsOnCart = totalItems
+        state.totalPriceOfItemsOnCart = totalPriceOfAllItems
+      }),
+    )
+  },
   removeAllItemsFromCart: () => {
-    set({ cart: [] })
-    set({ totalItemsOnCart: 0 })
-    set({ totalPriceOfItemsOnCart: 0 })
+    set({
+      cart: [],
+      totalItemsOnCart: 0,
+      totalPriceOfItemsOnCart: 0,
+    })
   },
 })
 

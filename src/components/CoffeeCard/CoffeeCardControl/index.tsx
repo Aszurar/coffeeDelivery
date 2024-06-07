@@ -1,9 +1,9 @@
-import { IconButton } from '@chakra-ui/react'
+import { IconButton, useToast } from '@chakra-ui/react'
 import { ShoppingCart } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 import { Counter } from '@/components/Counter'
-import { useStore } from '@/store'
+import { useCartSelectors } from '@/store'
 
 const COUNTER_INITIAL_VALUE = 1
 
@@ -11,11 +11,12 @@ type CoffeeCardControlProps = {
   id: string
 }
 
-export function CoffeeCardControl({ id }: CoffeeCardControlProps) {
-  const addItemToCart = useStore((state) => state.addItemToCart)
+export function CoffeeCardControl({ id }: Readonly<CoffeeCardControlProps>) {
+  const { addItemToCart } = useCartSelectors()
 
   const [counter, setCounter] = useState(COUNTER_INITIAL_VALUE)
   const counterIsZero = counter === 0
+  const toast = useToast()
 
   function handleIncrement() {
     setCounter(counter + 1)
@@ -26,6 +27,17 @@ export function CoffeeCardControl({ id }: CoffeeCardControlProps) {
       setCounter(counter - 1)
     }
   }
+
+  function handleAddItem() {
+    addItemToCart({ id, quantity: counter })
+    setCounter(COUNTER_INITIAL_VALUE)
+    toast({
+      title: 'Item adicionado ao carrinho.',
+      status: 'success',
+      duration: 4000,
+    })
+  }
+
   return (
     <>
       <Counter
@@ -54,7 +66,7 @@ export function CoffeeCardControl({ id }: CoffeeCardControlProps) {
         }}
         aria-label="Adicionar ao carrinho de compras"
         icon={<ShoppingCart width={22} height={22} weight="fill" />}
-        onClick={() => addItemToCart({ id, quantity: counter })}
+        onClick={handleAddItem}
       />
     </>
   )
