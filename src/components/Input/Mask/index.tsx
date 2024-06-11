@@ -4,6 +4,7 @@ import {
   FormErrorMessage,
   InputGroup,
   Skeleton,
+  useTheme,
 } from '@chakra-ui/react'
 import { ComponentPropsWithoutRef } from 'react'
 import InputMask from 'react-input-mask'
@@ -11,6 +12,7 @@ import InputMask from 'react-input-mask'
 import styles from './styles.module.css'
 
 type MaskProps = ComponentPropsWithoutRef<'input'> & {
+  isBold?: boolean
   mask: string
   isLoading?: boolean
   errorMessage?: string
@@ -20,12 +22,27 @@ type MaskProps = ComponentPropsWithoutRef<'input'> & {
 
 export function Mask({
   mask,
+  isBold = false,
   isLoading = false,
   controlWidth = 'fit-content',
   errorMessage,
   onChangeValue,
   ...props
 }: MaskProps) {
+  const theme = useTheme()
+
+  const boldStyle = {
+    fontWeight: theme.fontWeights.bold,
+    fontFamily: theme.fonts.heading,
+  }
+
+  const defaultStyle = {
+    fontWeight: theme.fontWeights.normal,
+    fontFamily: theme.fonts.body,
+  }
+
+  const fontStyle = isBold ? boldStyle : defaultStyle
+
   return (
     <Skeleton
       isLoaded={!isLoading}
@@ -49,8 +66,12 @@ export function Mask({
             <InputMask
               mask={mask}
               className={styles['input-mask']}
-              {...props}
+              style={{
+                fontWeight: fontStyle.fontWeight,
+                fontFamily: fontStyle.fontFamily,
+              }}
               onChange={(e) => onChangeValue(e.target.value)}
+              {...props}
             />
           </InputGroup>
           <FormErrorMessage>{errorMessage}</FormErrorMessage>
