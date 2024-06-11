@@ -17,6 +17,8 @@ const useAddressSelectors = () =>
     updateAddress: state.updateAddress,
     removeAddress: state.removeAddress,
     deleteAllAddresses: state.deleteAllAddresses,
+    addIncompleteAddressOnSelectedAddress:
+      state.addIncompleteAddressOnSelectedAddress,
   }))
 
 // Hook para selecionar partes específicas do estado do cart com shallow

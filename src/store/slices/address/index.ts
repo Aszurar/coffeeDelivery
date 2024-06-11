@@ -8,6 +8,8 @@ export type AddressProps = RegisterAddressFormProps & {
   id: string
 }
 
+type IncompleteAddress = Omit<AddressProps, 'id' | 'complement' | 'number'>
+
 type AddressSliceProps = {
   addresses: AddressProps[]
   totalAddresses: number
@@ -17,6 +19,7 @@ type AddressSliceProps = {
   selectAddress: (id: string) => void
   updateAddress: (address: AddressProps) => void
   removeAddress: (id: string) => void
+  addIncompleteAddressOnSelectedAddress: (address: IncompleteAddress) => void
   deleteAllAddresses: () => void
 }
 
@@ -51,6 +54,15 @@ const createAddressSlice: StateCreator<AddressSliceProps> = (set, get) => ({
         )
 
         state.selectedAddress = selectedAddress
+      }),
+    )
+  },
+  addIncompleteAddressOnSelectedAddress: (address: IncompleteAddress) => {
+    set(
+      produce((state: AddressSliceProps) => {
+        state.selectedAddress = {
+          ...address,
+        } as AddressProps
       }),
     )
   },
