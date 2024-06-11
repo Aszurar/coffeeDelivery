@@ -1,7 +1,6 @@
 import { Card, CardBody, Flex, Text } from '@chakra-ui/react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { MapPinArea } from '@phosphor-icons/react'
-import { useEffect } from 'react'
 
 import { useAddressSelectors } from '@/store'
 import { formatCEP } from '@/utils/string'
@@ -29,10 +28,6 @@ export function AddressSelected({
   const { totalAddresses, selectedAddress } = useAddressSelectors()
 
   const listOfAddressesIsEmpty = totalAddresses === 0
-
-  useEffect(() => {
-    console.log('selectedAddress', selectedAddress)
-  }, [selectedAddress])
 
   if (listOfAddressesIsEmpty) {
     return (
