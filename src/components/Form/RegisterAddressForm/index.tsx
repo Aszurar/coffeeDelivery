@@ -23,10 +23,9 @@ import { getAddressByCep } from '@/services/api/get-address-by-cep'
 import { queryClient } from '@/services/react-query'
 import { useAddressSelectors } from '@/store'
 import { AddressProps } from '@/store/slices/address'
-import { getStringAndRemoveCharacters } from '@/utils/string'
+import { cepValidation, getStringAndRemoveCharacters } from '@/utils/string'
 
 import {
-  cepValidation,
   RegisterAddressFormProps,
   registerAddressFormValidation,
 } from './validation'
@@ -50,7 +49,7 @@ export function RegisterAddressForm({
     totalAddresses,
     updateAddress,
     maxAddresses,
-    selectedAddress: currentAddressSelectedToEdit,
+    selectedAddress,
   } = useAddressSelectors()
 
   const isNotPossibleAddNewAddress = totalAddresses === maxAddresses
@@ -80,16 +79,9 @@ export function RegisterAddressForm({
 
   const isLoading = isPending || isSubmitting
 
-  function cepValidate(cepValue: string) {
-    const cepOnlyNumbers = getStringAndRemoveCharacters(cepValue)
-    const isCepValid = cepValidation(cepOnlyNumbers)
-
-    return isCepValid
-  }
-
   async function handleSearchAddressByCep(cepValue: string) {
     clearErrors('cep')
-    const isCepValid = cepValidate(cepValue)
+    const isCepValid = cepValidation(cepValue)
     if (isCepValid.isValid) {
       try {
         const response = await getAddressByCepFn({ cep: cepValue })
@@ -188,7 +180,7 @@ export function RegisterAddressForm({
   }
 
   function handleEditAddress(data: RegisterAddressFormProps) {
-    if (!currentAddressSelectedToEdit) {
+    if (!selectedAddress) {
       toast({
         title: 'Não há endereço selecionado para editar.',
         status: 'info',
@@ -200,7 +192,7 @@ export function RegisterAddressForm({
 
     const address: AddressProps = {
       ...data,
-      id: currentAddressSelectedToEdit.id,
+      id: selectedAddress.id,
     }
 
     updateAddress(address)
@@ -215,17 +207,21 @@ export function RegisterAddressForm({
 
   useEffect(() => {
     if (isEditable) {
-      if (currentAddressSelectedToEdit) {
+      if (selectedAddress) {
         reset({
-          cep: currentAddressSelectedToEdit.cep,
-          street: currentAddressSelectedToEdit.street,
-          number: currentAddressSelectedToEdit.number,
-          complement: currentAddressSelectedToEdit.complement,
-          neighborhood: currentAddressSelectedToEdit.neighborhood,
-          city: currentAddressSelectedToEdit.city,
-          uf: currentAddressSelectedToEdit.uf,
+          cep: selectedAddress.cep,
+          street: selectedAddress.street,
+          number: selectedAddress.number,
+          complement: selectedAddress.complement,
+          neighborhood: selectedAddress.neighborhood,
+          city: selectedAddress.city,
+          uf: selectedAddress.uf,
         })
       }
+    } else if (!!selectedAddress && !totalAddresses) {
+      reset({
+        ...selectedAddress,
+      })
     } else {
       reset({
         ...REGISTER_ADDRESS_FORM_DEFAULT_VALUES,
@@ -233,7 +229,7 @@ export function RegisterAddressForm({
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEditable, currentAddressSelectedToEdit])
+  }, [isEditable, selectedAddress, totalAddresses])
 
   return (
     <Flex

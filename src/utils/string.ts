@@ -1,3 +1,13 @@
+const STRING_LENGTH = {
+  CEP: 8,
+  UF: 2,
+  REQUIRED: 1,
+} as const
+
+const regex = {
+  ONLY_NUMBERS: /^\d+$/,
+  ONLY_CHARACTERS: /^[a-zA-Z]+$/,
+}
 /**
  * Remove caracteres não numéricos de uma string.
  *
@@ -39,4 +49,45 @@ function formatCEP(cep: string) {
   return cep.replace(/(\d{5})(\d{3})/, '$1-$2')
 }
 
-export { formatCEP, getStringAndRemoveCharacters }
+/**
+ * Valida um CEP.
+ *
+ * Essa função recebe uma string de CEP e verifica se ela é válida.
+ *
+ * @param {string} cep - A string de CEP a ser formatada.
+ * @returns {object} Retorna um objeto que possui 2 atributos:
+ * - usValid: boolean que indica se o CEP é válido ou não.
+ * - message: string que contém a mensagem de erro caso o CEP seja inválido.
+ *
+ * @example
+ * // retorna '12345-678'
+ * formatCEP('12345678')
+ *
+ * **/
+function cepValidation(cep: string) {
+  const cepOnlyNumbers = getStringAndRemoveCharacters(cep)
+
+  if (cepOnlyNumbers.length !== STRING_LENGTH.CEP)
+    return {
+      isValid: false,
+      message: 'O CEP deve conter 8 dígitos',
+    }
+  if (!regex.ONLY_NUMBERS.test(cepOnlyNumbers))
+    return {
+      isValid: false,
+      message: 'O CEP deve conter apenas números',
+    }
+
+  return {
+    isValid: true,
+    message: '',
+  }
+}
+
+export {
+  cepValidation,
+  formatCEP,
+  getStringAndRemoveCharacters,
+  regex,
+  STRING_LENGTH,
+}

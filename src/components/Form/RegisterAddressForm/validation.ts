@@ -1,15 +1,6 @@
 import * as zod from 'zod'
 
-const regex = {
-  ONLY_NUMBERS: /^\d+$/,
-  ONLY_CHARACTERS: /^[a-zA-Z]+$/,
-}
-
-export const STRING_LENGTH = {
-  CEP: 8,
-  UF: 2,
-  REQUIRED: 1,
-} as const
+import { regex, STRING_LENGTH } from '@/utils/string'
 
 const registerAddressFormValidation = zod.object({
   cep: zod
@@ -48,23 +39,5 @@ const registerAddressFormValidation = zod.object({
 
 type RegisterAddressFormProps = zod.infer<typeof registerAddressFormValidation>
 
-function cepValidation(cep: string) {
-  if (cep.length !== STRING_LENGTH.CEP)
-    return {
-      isValid: false,
-      message: 'O CEP deve conter 8 dígitos',
-    }
-  if (!regex.ONLY_NUMBERS.test(cep))
-    return {
-      isValid: false,
-      message: 'O CEP deve conter apenas números',
-    }
-
-  return {
-    isValid: true,
-    message: '',
-  }
-}
-
 export type { RegisterAddressFormProps }
-export { cepValidation, registerAddressFormValidation }
+export { registerAddressFormValidation }
