@@ -11,11 +11,15 @@ import { Bank, CreditCard, MapPinLine, Money } from '@phosphor-icons/react'
 import { Helmet } from 'react-helmet-async'
 
 import { SelectButton } from '@/components/SelectButton'
+import { PAYMENT_TYPE } from '@/dto/payment'
+import { usePaymentSelectors } from '@/store'
 
 import { AddressesTabs } from './AddressesTabs'
 import { CheckoutSubmit } from './CheckoutSubmit'
 
 export function Checkout() {
+  const { updatePaymentType, paymentType } = usePaymentSelectors()
+
   return (
     <>
       <Helmet title="Checkout" />
@@ -108,29 +112,38 @@ export function Checkout() {
               }}
             >
               <SelectButton
+                variant="outline"
                 w={{
                   base: '100%',
                   md: 'auto',
                 }}
                 icon={CreditCard}
+                isActive={paymentType === PAYMENT_TYPE.CREDIT_CARD}
+                onClick={() => updatePaymentType(PAYMENT_TYPE.CREDIT_CARD)}
               >
                 Cartão de crédito
               </SelectButton>
               <SelectButton
+                variant="outline"
                 w={{
                   base: '100%',
                   md: 'auto',
                 }}
                 icon={Money}
+                isActive={paymentType === PAYMENT_TYPE.MONEY}
+                onClick={() => updatePaymentType(PAYMENT_TYPE.MONEY)}
               >
                 dinheiro
               </SelectButton>
               <SelectButton
+                variant="outline"
                 w={{
                   base: '100%',
                   md: 'auto',
                 }}
                 icon={Bank}
+                isActive={paymentType === PAYMENT_TYPE.DEBIT_CARD}
+                onClick={() => updatePaymentType(PAYMENT_TYPE.DEBIT_CARD)}
               >
                 Cartão de débito
               </SelectButton>

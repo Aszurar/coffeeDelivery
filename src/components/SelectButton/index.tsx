@@ -5,7 +5,11 @@ type SelectButtonProps = ButtonProps & {
   icon: ElementType
 }
 
-export function SelectButton({ icon: Icon, ...rest }: SelectButtonProps) {
+export function SelectButton({
+  icon: Icon,
+  variant,
+  ...rest
+}: SelectButtonProps) {
   const [purple500] = useToken('colors', ['purple.500'])
 
   return (
@@ -19,11 +23,14 @@ export function SelectButton({ icon: Icon, ...rest }: SelectButtonProps) {
       fontSize="xs"
       color="gray.700"
       justifyContent="start"
+      borderWidth={1}
+      borderColor="transparent"
       _hover={{
         bg: 'gray.500',
       }}
       _active={{
         bg: 'purple.200',
+        borderColor: variant === 'outline' ? 'purple.500' : 'transparent',
       }}
       leftIcon={<Icon color={purple500} width={16} height={16} />}
       {...rest}
