@@ -15,7 +15,7 @@ export type CartProps = {
 
 type CartItemIdentifierProps = Pick<CartProps, 'id'>
 
-type CartSliceProps = {
+type CartStoreProps = {
   cart: CartProps[]
   totalItemsOnCart: number
   totalPriceOfItemsOnCart: number
@@ -28,7 +28,7 @@ type CartSliceProps = {
   removeAllItemsFromCart: () => void
 }
 
-const createCartSlice: StateCreator<CartSliceProps> = (set, get) => ({
+const createCartStore: StateCreator<CartStoreProps> = (set, get) => ({
   cart: [],
   totalItemsOnCart: 0,
   totalPriceOfItemsOnCart: 0,
@@ -41,7 +41,7 @@ const createCartSlice: StateCreator<CartSliceProps> = (set, get) => ({
   addItemToCart: ({ id, quantity }) => {
     // checked
     set(
-      produce((state: CartSliceProps) => {
+      produce((state: CartStoreProps) => {
         let cartAfterAdded = state.cart
         const item = state.cart.find((item) => item.id === id)
 
@@ -71,7 +71,7 @@ const createCartSlice: StateCreator<CartSliceProps> = (set, get) => ({
   },
   updateItemOnCart: ({ id, quantity }) => {
     set(
-      produce((state: CartSliceProps) => {
+      produce((state: CartStoreProps) => {
         let cartAfterUpdate = state.cart
         const newItem = { id, quantity }
         const item = state.cart.find((item) => item.id === id)
@@ -117,7 +117,7 @@ const createCartSlice: StateCreator<CartSliceProps> = (set, get) => ({
   removeItemFromCart: ({ id }) => {
     // checked
     set(
-      produce((state: CartSliceProps) => {
+      produce((state: CartStoreProps) => {
         const cartListAfterRemove = state.cart.filter((item) => item.id !== id)
 
         const totalItems = updateTotalItemsOnCart({
@@ -142,5 +142,5 @@ const createCartSlice: StateCreator<CartSliceProps> = (set, get) => ({
   },
 })
 
-export type { CartSliceProps }
-export { createCartSlice }
+export type { CartStoreProps }
+export { createCartStore }

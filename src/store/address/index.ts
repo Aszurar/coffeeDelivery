@@ -10,7 +10,7 @@ export type AddressProps = RegisterAddressFormProps & {
 
 type IncompleteAddress = Omit<AddressProps, 'id' | 'complement' | 'number'>
 
-type AddressSliceProps = {
+type AddressStoreProps = {
   addresses: AddressProps[]
   totalAddresses: number
   maxAddresses: number
@@ -23,7 +23,7 @@ type AddressSliceProps = {
   deleteAllAddresses: () => void
 }
 
-const createAddressSlice: StateCreator<AddressSliceProps> = (set, get) => ({
+const createAddressStore: StateCreator<AddressStoreProps> = (set, get) => ({
   addresses: [],
   totalAddresses: 0,
   maxAddresses: 10,
@@ -48,7 +48,7 @@ const createAddressSlice: StateCreator<AddressSliceProps> = (set, get) => ({
   },
   selectAddress: (id) => {
     set(
-      produce((state: AddressSliceProps) => {
+      produce((state: AddressStoreProps) => {
         const selectedAddress = state.addresses.find(
           (address) => address.id === id,
         )
@@ -59,7 +59,7 @@ const createAddressSlice: StateCreator<AddressSliceProps> = (set, get) => ({
   },
   addIncompleteAddressOnSelectedAddress: (address: IncompleteAddress) => {
     set(
-      produce((state: AddressSliceProps) => {
+      produce((state: AddressStoreProps) => {
         state.selectedAddress = {
           ...address,
         } as AddressProps
@@ -68,7 +68,7 @@ const createAddressSlice: StateCreator<AddressSliceProps> = (set, get) => ({
   },
   updateAddress: (address) => {
     set(
-      produce((state: AddressSliceProps) => {
+      produce((state: AddressStoreProps) => {
         let selectedAddress
 
         const updatedAddressesList = state.addresses.map((currentAddress) =>
@@ -86,7 +86,7 @@ const createAddressSlice: StateCreator<AddressSliceProps> = (set, get) => ({
   },
   removeAddress: (id) => {
     set(
-      produce((state: AddressSliceProps) => {
+      produce((state: AddressStoreProps) => {
         let selectedAddress
 
         const addressAfterRemove = state.addresses.filter(
@@ -110,5 +110,5 @@ const createAddressSlice: StateCreator<AddressSliceProps> = (set, get) => ({
   },
 })
 
-export type { AddressSliceProps }
-export { createAddressSlice }
+export type { AddressStoreProps }
+export { createAddressStore }

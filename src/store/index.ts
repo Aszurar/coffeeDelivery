@@ -1,10 +1,26 @@
 import { create } from 'zustand'
 
-import { AddressSliceProps, createAddressSlice } from './slices/address'
-import { CartSliceProps, createCartSlice } from './slices/cart'
+import { AddressStoreProps, createAddressStore } from './address'
+import { CartStoreProps, createCartStore } from './cart'
+import { createOrderStore, OrderStoreProps } from './order'
+import { createPaymentStore, PaymentStoreProps } from './payment'
 
-const useCartStore = create<CartSliceProps>(createCartSlice)
-const useAddressStore = create<AddressSliceProps>(createAddressSlice)
+const useCartStore = create<CartStoreProps>(createCartStore)
+const useOrderStore = create<OrderStoreProps>(createOrderStore)
+const useAddressStore = create<AddressStoreProps>(createAddressStore)
+const usePaymentStore = create<PaymentStoreProps>(createPaymentStore)
+
+const usePaymentSelectors = () =>
+  usePaymentStore((state) => ({
+    paymentType: state.paymentType,
+    updatePaymentType: state.updatePaymentType,
+  }))
+
+const useOrderSelectors = () =>
+  useOrderStore((state) => ({
+    currentOrder: state.currentOrder,
+    updateCurrentOrder: state.updateCurrentOrder,
+  }))
 
 const useAddressSelectors = () =>
   useAddressStore((state) => ({
@@ -21,7 +37,6 @@ const useAddressSelectors = () =>
       state.addIncompleteAddressOnSelectedAddress,
   }))
 
-// Hook para selecionar partes específicas do estado do cart com shallow
 const useCartSelectors = () =>
   useCartStore((state) => ({
     cart: state.cart,
@@ -36,4 +51,9 @@ const useCartSelectors = () =>
     removeAllItemsFromCart: state.removeAllItemsFromCart,
   }))
 
-export { useAddressSelectors, useCartSelectors }
+export {
+  useAddressSelectors,
+  useCartSelectors,
+  useOrderSelectors,
+  usePaymentSelectors,
+}
