@@ -22,7 +22,7 @@ import { AppError } from '@/errors'
 import { getAddressByCep } from '@/services/api/get-address-by-cep'
 import { queryClient } from '@/services/react-query'
 import { useAddressSelectors } from '@/store'
-import { AddressProps } from '@/store/slices/address'
+import { AddressProps } from '@/store/address'
 import { cepValidation, getStringAndRemoveCharacters } from '@/utils/string'
 
 import {

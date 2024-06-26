@@ -15,7 +15,7 @@ import { useRef } from 'react'
 import { DeleteSelectedAddressDialog } from '@/components/ModalDialogAndDrawer/DeleteSelectedAddressDialog'
 import { SelectButton } from '@/components/SelectButton'
 import { useAddressSelectors } from '@/store'
-import { AddressProps } from '@/store/slices/address'
+import { AddressProps } from '@/store/address'
 import { formatCEP } from '@/utils/string'
 
 type AddressCardProps = {
