@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertIcon,
   Button,
   Center,
   Divider,
@@ -7,20 +9,33 @@ import {
   Icon,
   Text,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { ShoppingCart, Trash } from '@phosphor-icons/react'
 import { useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { CartCard } from '@/components/CartCard'
 import { DeleteAllItemsOnCartDialog } from '@/components/ModalDialogAndDrawer/DeleteAllItemsOnCartDialog'
 import { COFFEE_TYPES } from '@/dto/coffee'
 import { DELIVERY_PRICE } from '@/dto/delivery'
+import { IOrder } from '@/dto/order'
+import { PAYMENT_TYPE } from '@/dto/payment'
 import { ROUTES } from '@/router/routes'
-import { useCartSelectors } from '@/store'
+import { saveOrder } from '@/storage/orders/save-order'
+import {
+  useAddressSelectors,
+  useCartSelectors,
+  useOrderSelectors,
+  usePaymentSelectors,
+} from '@/store'
 import { priceFormatterWithCurrency } from '@/utils/number'
 
 export function CheckoutSubmit() {
+  const toast = useToast()
+  const navigate = useNavigate()
+  const [parent] = useAutoAnimate()
   const deleteAllItemsOnCartDialogCancelRef = useRef<HTMLButtonElement>(null)
   const {
     isOpen: isDeleteAllItemsOnCartDialogOpen,
@@ -28,9 +43,18 @@ export function CheckoutSubmit() {
     onClose: onDeleteAllItemsOnCartDialogClose,
   } = useDisclosure()
 
-  const { cart, totalPriceOfItemsOnCart: totalCoffeePrice } = useCartSelectors()
+  const { paymentType } = usePaymentSelectors()
+  const { updateCurrentOrder } = useOrderSelectors()
+  const { selectedAddress, totalAddresses } = useAddressSelectors()
+  const {
+    cart,
+    totalPriceOfItemsOnCart: totalCoffeePrice,
+    removeAllItemsFromCart,
+  } = useCartSelectors()
 
-  const cartIsEmpty = cart.length === 0
+  const isAddressesEmpty = totalAddresses === 0
+  const IsCartEmpty = cart.length === 0
+  const isPaymentTypeEmpty = paymentType === PAYMENT_TYPE.EMPTY
 
   const totalPriceWithDelivery = totalCoffeePrice + DELIVERY_PRICE
 
@@ -46,7 +70,56 @@ export function CheckoutSubmit() {
     cart.some((item) => item.id === coffee.id),
   )
 
-  const cartOpacity = cartIsEmpty ? 0.5 : 1
+  const cartOpacity = IsCartEmpty ? 0.5 : 1
+
+  function handleSubmitOrder() {
+    if (!selectedAddress || !selectedAddress.number) {
+      toast({
+        title: 'Endereço de entrega inválido',
+        description: 'Preencha o endereço de entrega para finalizar o pedido.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+      return
+    }
+
+    if (isPaymentTypeEmpty) {
+      toast({
+        title: 'Método de pagamento inválido',
+        description: 'Selecione o método de pagamento para finalizar o pedido.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+      return
+    }
+
+    if (IsCartEmpty) {
+      toast({
+        title: 'Carrinho vazio',
+        description:
+          'Adicione pelo menos 1 item ao carrinho para finalizar o pedido.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+      return
+    }
+
+    const order: IOrder = {
+      id: crypto.randomUUID(),
+      createdAt: new Date(),
+      price: totalPriceWithDelivery,
+      address: selectedAddress,
+      paymentType,
+      cart,
+    }
+    saveOrder(order)
+    updateCurrentOrder(order)
+    navigate(ROUTES.ORDER_CONFIRMED)
+    removeAllItemsFromCart()
+  }
 
   return (
     <>
@@ -73,7 +146,7 @@ export function CheckoutSubmit() {
               <Divider h="1px" bg="gray.400" />
             </Flex>
           ))}
-          {cartIsEmpty && (
+          {IsCartEmpty && (
             <Center color="gray.550" flexDir="column">
               <Icon as={ShoppingCart} w="16" h="16" color="purple.300" />
               <Text fontSize="lg" fontWeight="700">
@@ -103,30 +176,50 @@ export function CheckoutSubmit() {
           </Flex>
         </Flex>
 
-        <Flex flexDir="column" gap="4">
-          <Link style={{ display: 'flex' }} to={ROUTES.ORDER_CONFIRMED}>
-            <Button
-              h="2.875rem"
-              w="100%"
-              bg="yellow.500"
-              _hover={{
-                bg: 'yellow.700',
-                _disabled: {
-                  bg: 'yellow.500',
-                },
-              }}
-              _active={{
+        <Flex ref={parent} flexDir="column" gap="4">
+          {IsCartEmpty && (
+            <Alert status="warning">
+              <AlertIcon />
+              Adicione pelo menos 1 item ao carrinho para finalizar o pedido.
+            </Alert>
+          )}
+
+          {isAddressesEmpty && (
+            <Alert status="warning">
+              <AlertIcon />
+              Preencha o endereço de entrega para finalizar o pedido.
+            </Alert>
+          )}
+
+          {isPaymentTypeEmpty && (
+            <Alert status="warning">
+              <AlertIcon />
+              Selecione o método de pagamento para finalizar o pedido.
+            </Alert>
+          )}
+
+          <Button
+            h="2.875rem"
+            w="100%"
+            bg="yellow.500"
+            _hover={{
+              bg: 'yellow.700',
+              _disabled: {
                 bg: 'yellow.500',
-              }}
-              color="white"
-              fontSize="sm"
-              fontWeight="700"
-              isDisabled={cartIsEmpty}
-              textTransform="uppercase"
-            >
-              Fechar Pedido
-            </Button>
-          </Link>
+              },
+            }}
+            _active={{
+              bg: 'yellow.500',
+            }}
+            color="white"
+            fontSize="sm"
+            fontWeight="700"
+            isDisabled={IsCartEmpty || isAddressesEmpty || isPaymentTypeEmpty}
+            textTransform="uppercase"
+            onClick={handleSubmitOrder}
+          >
+            Fechar Pedido
+          </Button>
 
           <Button
             h="2.875rem"
@@ -135,7 +228,7 @@ export function CheckoutSubmit() {
             fontSize="sm"
             fontWeight="700"
             textTransform="uppercase"
-            isDisabled={cartIsEmpty}
+            isDisabled={IsCartEmpty}
             onClick={onDeleteAllItemsOnCartDialogOpen}
             leftIcon={<Trash width={20} height={20} weight="fill" />}
           >

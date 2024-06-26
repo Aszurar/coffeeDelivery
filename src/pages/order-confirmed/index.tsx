@@ -11,8 +11,12 @@ import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
 
 import DeliveryPNG from '@/assets/images/delivery.png'
 import { IconBadge } from '@/components/IconBadge'
+import { PAYMENT_TYPE_VALUES } from '@/dto/payment'
+import { useOrderSelectors } from '@/store'
 
 export function OrderConfirmed() {
+  const { currentOrder } = useOrderSelectors()
+
   return (
     <>
       <Box
@@ -52,10 +56,17 @@ export function OrderConfirmed() {
               <Flex flexDir="column">
                 <Flex gap="1">
                   <Text>
-                    Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                    Entrega em{' '}
+                    <strong>
+                      {currentOrder?.address.street},{' '}
+                      {currentOrder?.address.number}
+                    </strong>
                   </Text>
                 </Flex>
-                <Text>Farrapos - Porto Alegre, RS</Text>
+                <Text>
+                  {currentOrder?.address.neighborhood} -{' '}
+                  {currentOrder?.address.city}, {currentOrder?.address.uf}
+                </Text>
               </Flex>
             </Flex>
 
@@ -71,7 +82,9 @@ export function OrderConfirmed() {
               <IconBadge color="yellow.700" icon={CurrencyDollar} />
               <Flex flexDir="column">
                 <Text>Pagamento na entrega</Text>
-                <Text fontWeight="700">Cartão de Crédito</Text>
+                <Text fontWeight="700">
+                  {PAYMENT_TYPE_VALUES[currentOrder?.paymentType ?? 0]}
+                </Text>
               </Flex>
             </Flex>
           </Flex>
