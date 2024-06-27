@@ -4,8 +4,16 @@
   outline: none;
   padding: 0;
   background-color: transparent;
+} 
 
+.placeholder-light {
   &::placeholder {
     color: #8D8686;
+  }
+}
+
+.placeholder-dark {
+  &::placeholder {
+    color: #D7D5D5;
   }
 }

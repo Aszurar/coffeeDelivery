@@ -4,6 +4,7 @@ import {
   FormErrorMessage,
   InputGroup,
   Skeleton,
+  useColorMode,
   useTheme,
 } from '@chakra-ui/react'
 import { ComponentPropsWithoutRef } from 'react'
@@ -30,6 +31,7 @@ export function Mask({
   ...props
 }: MaskProps) {
   const theme = useTheme()
+  const { colorMode } = useColorMode()
 
   const boldStyle = {
     fontWeight: theme.fontWeights.bold,
@@ -41,7 +43,18 @@ export function Mask({
     fontFamily: theme.fonts.body,
   }
 
+  const THEME_MODE = {
+    light: {
+      placeholderColor: styles['placeholder-light'],
+    },
+    dark: {
+      placeholderColor: styles['placeholder-dark'],
+    },
+  }
+
   const fontStyle = isBold ? boldStyle : defaultStyle
+
+  const placeholderStyle = THEME_MODE[colorMode]
 
   return (
     <Skeleton
@@ -62,10 +75,17 @@ export function Mask({
             fontFamily="body"
             fontSize="sm"
             borderColor={errorMessage ? 'red.500' : 'gray.400'}
+            _dark={{
+              bg: 'gray.700',
+              color: 'gray.100',
+            }}
           >
             <InputMask
               mask={mask}
-              className={styles['input-mask']}
+              className={[
+                styles['input-mask'],
+                placeholderStyle.placeholderColor,
+              ].join(' ')}
               style={{
                 fontWeight: fontStyle.fontWeight,
                 fontFamily: fontStyle.fontFamily,

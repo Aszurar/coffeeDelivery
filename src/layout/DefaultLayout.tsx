@@ -5,7 +5,16 @@ import { Header } from '@/components/Header'
 
 export default function DefaultLayout() {
   return (
-    <Flex w="100vw" h="100vh" flexDir="column">
+    <Flex
+      w="100vw"
+      minH="100vh"
+      flexDir="column"
+      bg="gray.100"
+      _dark={{
+        bg: 'gray.900',
+        color: 'gray.300',
+      }}
+    >
       <Flex w="100%" px="6" mx="auto" maxWidth="5xl.5" flexDir="column">
         <Header />
 

@@ -199,8 +199,23 @@ export function AddressButton() {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent bg="white" borderColor="purple.500">
-        <PopoverHeader color="purple.500" pt="4" fontWeight="bold" border="0">
+      <PopoverContent
+        bg="white"
+        borderColor="purple.500"
+        _dark={{
+          bg: 'gray.800',
+          borderColor: 'purple.300',
+        }}
+      >
+        <PopoverHeader
+          color="purple.500"
+          pt="4"
+          fontWeight="bold"
+          border="0"
+          _dark={{
+            color: 'purple.200',
+          }}
+        >
           Consulte o Frete
         </PopoverHeader>
         <PopoverArrow
@@ -208,6 +223,10 @@ export function AddressButton() {
           borderColor="purple.500"
           borderTopWidth={1}
           borderLeftWidth={1}
+          _dark={{
+            bg: 'gray.900',
+            borderColor: 'purple.300',
+          }}
         />
         <PopoverCloseButton />
         <PopoverBody>
