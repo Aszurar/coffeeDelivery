@@ -13,12 +13,15 @@ import {
   Text,
   UnorderedList,
 } from '@chakra-ui/react'
-import { ShoppingCart } from '@phosphor-icons/react'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { CaretDown, CaretUp, ShoppingCart } from '@phosphor-icons/react'
 import Lottie from 'lottie-react'
+import { useState } from 'react'
 
 import coffeeAnimation from '@/assets/animations/coffee.json'
 import { COFFEE_TYPES } from '@/dto/coffee'
 import { IOrder } from '@/dto/order'
+import { PAYMENT_TYPE_VALUES } from '@/dto/payment'
 import { priceFormatter, priceFormatterWithCurrency } from '@/utils/number'
 
 type OrderProps = Omit<IOrder, 'id'>
@@ -31,6 +34,23 @@ type OrderCardProps = {
 export function OrderCard({ number, order }: OrderCardProps) {
   const totalPriceFormatted = priceFormatterWithCurrency.format(order.price)
   const orderNumber = number
+  const hasMoreThanOneItem = order.cart?.length > 1
+  const [isShowAllItens, setIsShowAllItens] = useState(false)
+  const [parent] = useAutoAnimate()
+
+  const showItensButtonInfo = isShowAllItens
+    ? { label: 'Ver menos itens', icon: <CaretUp weight="bold" /> }
+    : {
+        label: `...Ver todos itens(mais ${order.cart?.length})`,
+        icon: <CaretDown weight="bold" />,
+      }
+
+  const paymentTypeSelected = PAYMENT_TYPE_VALUES[order.paymentType]
+
+  function handleToggleShowAllItens() {
+    setIsShowAllItens((prevState) => !prevState)
+  }
+
   return (
     <Card maxW="md" borderColor="purple.200" borderWidth="1px">
       <CardHeader>
@@ -45,6 +65,9 @@ export function OrderCard({ number, order }: OrderCardProps) {
               <Heading size="sm" color="gray.550">
                 Total: {totalPriceFormatted}
               </Heading>
+              <Text fontSize="sm" fontWeight="700" color="gray.550">
+                {paymentTypeSelected}
+              </Text>
               <Text color="gray.550">Pedido concluído • Nº {orderNumber}</Text>
             </Box>
           </Flex>
@@ -54,45 +77,72 @@ export function OrderCard({ number, order }: OrderCardProps) {
       <Divider borderColor="purple.300" />
 
       <CardBody>
-        <UnorderedList styleType="" flexDir="column">
-          <ListItem display="flex" flexDir="column">
-            {order.cart?.map((coffee) => {
-              const coffeeData = COFFEE_TYPES.find(
-                (type) => type.id === coffee.id,
-              )
-              const coffeePrice = coffeeData?.price ?? 0
-              const coffeePriceFormatted = priceFormatter.format(coffeePrice)
-              const totalCoffeePrice = coffee.quantity * coffeePrice
-              const totalCoffeePriceFormatted =
-                priceFormatterWithCurrency.format(totalCoffeePrice)
-              return (
-                <Flex key={crypto.randomUUID()} alignItems="center" gap="2">
-                  <Badge
-                    px="2"
-                    py="0.5"
-                    rounded="full"
-                    fontWeight="700"
-                    alignItems="center"
-                    colorScheme="purple"
-                    justifyContent="center"
-                  >
-                    {coffee.quantity}
-                  </Badge>
-                  <Flex flexDir="column">
-                    <Text fontSize="sm">{coffeeData?.name}</Text>
-                    <Flex gap="1" fontFamily="heading">
-                      <Text>
-                        {coffee.quantity}x{coffeePriceFormatted} =
-                      </Text>
-                      <Text color="purple.700">
-                        {totalCoffeePriceFormatted}
-                      </Text>
-                    </Flex>
+        <UnorderedList ref={parent} styleType="" flexDir="column">
+          {order.cart?.map((coffee, index) => {
+            const coffeeData = COFFEE_TYPES.find(
+              (type) => type.id === coffee.id,
+            )
+            const coffeePrice = coffeeData?.price ?? 0
+            const coffeePriceFormatted = priceFormatter.format(coffeePrice)
+            const totalCoffeePrice = coffee.quantity * coffeePrice
+            const totalCoffeePriceFormatted =
+              priceFormatterWithCurrency.format(totalCoffeePrice)
+            const itemsAfterFirst = index > 0
+
+            if (itemsAfterFirst && !isShowAllItens) {
+              return null
+            }
+
+            return (
+              <ListItem
+                key={crypto.randomUUID()}
+                display="flex"
+                alignItems="center"
+                gap="2"
+              >
+                <Badge
+                  px="2"
+                  py="0.5"
+                  rounded="full"
+                  fontWeight="700"
+                  alignItems="center"
+                  colorScheme="purple"
+                  justifyContent="center"
+                >
+                  {coffee.quantity}
+                </Badge>
+                <Flex flexDir="column">
+                  <Text fontSize="sm">{coffeeData?.name}</Text>
+                  <Flex gap="1" fontFamily="heading">
+                    <Text>
+                      {coffee.quantity}x{coffeePriceFormatted} =
+                    </Text>
+                    <Text color="purple.700">{totalCoffeePriceFormatted}</Text>
                   </Flex>
                 </Flex>
-              )
-            })}
-          </ListItem>
+              </ListItem>
+            )
+          })}
+          {}
+          {hasMoreThanOneItem && (
+            <Flex flexDir="column">
+              <Button
+                variant="ghost"
+                color="purple.500"
+                w="fit-content"
+                h="fit-content"
+                py="1"
+                px="2"
+                _active={{
+                  color: 'purple.700',
+                }}
+                onClick={handleToggleShowAllItens}
+                rightIcon={showItensButtonInfo.icon}
+              >
+                {showItensButtonInfo.label}
+              </Button>
+            </Flex>
+          )}
 
           <Flex gap="1" fontFamily="heading">
             <Text>+ Frete: </Text>
