@@ -139,7 +139,13 @@ export function CheckoutSubmit() {
         bg="gray.200"
         rounded="md"
       >
-        <Flex as="section" flexDir="column" gap="6" opacity={cartOpacity}>
+        <Flex
+          ref={parent}
+          as="section"
+          flexDir="column"
+          gap="6"
+          opacity={cartOpacity}
+        >
           {coffeesSelected.map((coffee) => (
             <Flex key={coffee.id} flexDir="column">
               <CartCard coffee={coffee} />

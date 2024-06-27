@@ -28,14 +28,20 @@ export function OrderHistoric() {
         ref={parent}
         gap="8"
         w="100%"
+        justifyContent="center"
         templateColumns={{
           base: 'repeat(1, 1fr)',
-          lg: 'repeat(2, 1fr)',
+          md: 'repeat(2, 1fr)',
           xl: 'repeat(3, 1fr)',
         }}
       >
         {orders?.map((order, index) => (
-          <GridItem key={order.id}>
+          <GridItem
+            key={order.id}
+            justifyContent="space-between"
+            alignItems="center"
+            w="fit-content"
+          >
             <OrderCard number={index + 1} order={order} />
           </GridItem>
         ))}
