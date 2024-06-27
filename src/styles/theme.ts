@@ -1,6 +1,8 @@
-import { extendTheme, Theme } from '@chakra-ui/react'
+import { extendTheme, type ThemeConfig } from '@chakra-ui/react'
 
 export const theme = extendTheme({
+  initialColorMode: 'system',
+  useSystemColorMode: true,
   styles: {
     global: {
       body: {
@@ -29,6 +31,7 @@ export const theme = extendTheme({
       300: '#EDEDED',
       400: '#E6E5E5',
       500: '#D7D5D5',
+      525: '#8D8686',
       550: '#6d747a',
       600: '#52525b',
       700: '#574F4D',
@@ -51,4 +54,4 @@ export const theme = extendTheme({
   },
 
   // eslint-disable-next-line @typescript-eslint/ban-types
-} as Theme | {})
+} as ThemeConfig | {})
