@@ -68,6 +68,11 @@ export function AddressCard({ address, isChecked, onCheck }: AddressCardProps) {
       _focusWithin={{
         borderColor: 'yellow.500',
       }}
+      _dark={{
+        _focusWithin: {
+          borderColor: 'yellow.400',
+        },
+      }}
     >
       <Button
         display="flex"
@@ -77,6 +82,7 @@ export function AddressCard({ address, isChecked, onCheck }: AddressCardProps) {
         height="fit-content"
         bg={checkStyle.buttonBackgroundColor}
         roundedBottom="0"
+        isActive={isChecked}
         _hover={{
           bg: 'white',
           _disabled: {
@@ -87,6 +93,18 @@ export function AddressCard({ address, isChecked, onCheck }: AddressCardProps) {
           bg: 'gray.200',
         }}
         onClick={onCheck}
+        _dark={{
+          bg: 'gray.700',
+          _hover: {
+            bg: 'gray.800',
+            _disabled: {
+              bg: 'gray.900',
+            },
+          },
+          _active: {
+            bg: 'gray.800',
+          },
+        }}
       >
         <Card
           ref={parent}
@@ -113,7 +131,12 @@ export function AddressCard({ address, isChecked, onCheck }: AddressCardProps) {
               textWrap: 'wrap',
             }}
           >
-            <Text color="gray.600">
+            <Text
+              color="gray.600"
+              _dark={{
+                color: 'gray.300',
+              }}
+            >
               {address.street}, {address.neighborhood}
             </Text>
             <Text>
@@ -131,6 +154,9 @@ export function AddressCard({ address, isChecked, onCheck }: AddressCardProps) {
               mr="4"
               weight="fill"
               color="yellow.500"
+              _dark={{
+                color: 'yellow.400',
+              }}
             />
           )}
         </Card>

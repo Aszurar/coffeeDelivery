@@ -76,9 +76,21 @@ export function AddressSelected({
         }}
         borderWidth="1px"
         borderColor="yellow.500"
+        _dark={{
+          bg: 'gray.700',
+          borderColor: 'yellow.400',
+        }}
       >
         <CardBody fontWeight="500">
-          <Text as="h3" fontSize="md" fontFamily="body" color="gray.800">
+          <Text
+            as="h3"
+            fontSize="md"
+            fontFamily="body"
+            color="gray.800"
+            _dark={{
+              color: 'gray.200',
+            }}
+          >
             {selectedAddress.street}, {selectedAddress.neighborhood}
           </Text>
           <Text>

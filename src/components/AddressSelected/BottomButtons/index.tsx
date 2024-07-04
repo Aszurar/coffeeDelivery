@@ -69,6 +69,14 @@ export function BottomButtons({
           bg: 'yellow.300',
         }}
         onClick={onCancelEditAddress}
+        _dark={{
+          _hover: {
+            bg: 'yellow.800',
+          },
+          _active: {
+            bg: 'yellow.700',
+          },
+        }}
       >
         Cancelar Edição
       </Button>
@@ -98,6 +106,9 @@ export function BottomButtons({
           isDisabled={hasOnlyOneAddress}
           onClick={onSelectAddressModalOpen}
           leftIcon={<Icon as={AddressBook} w="5" h="5" />}
+          _dark={{
+            color: 'gray.800',
+          }}
         >
           Selecionar outro endereço
         </Button>
@@ -143,6 +154,13 @@ export function BottomButtons({
         }}
         onClick={onEditAddress}
         leftIcon={<Icon as={PencilSimpleLine} w="5" h="5" />}
+        _dark={{
+          color: 'yellow.400',
+          borderColor: 'yellow.400',
+          _hover: {
+            bg: 'gray.700',
+          },
+        }}
       >
         Editar
       </Button>
