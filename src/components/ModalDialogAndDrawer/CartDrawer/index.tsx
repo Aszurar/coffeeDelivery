@@ -79,21 +79,36 @@ export function CartDrawer({ isOpen, onClose }: Readonly<CartDrawerProps>) {
       colorScheme="gray"
     >
       <DrawerOverlay />
-      <DrawerContent>
-        <DrawerHeader borderBottomWidth="1px">
+      <DrawerContent
+        _dark={{
+          bg: 'gray.800',
+        }}
+      >
+        <DrawerHeader
+          borderBottomWidth="1px"
+          _dark={{
+            color: 'gray.100',
+          }}
+        >
           Cafés Selecionados
-          <DrawerCloseButton color="purple.500" />
+          <DrawerCloseButton color="purple.300" />
         </DrawerHeader>
         <DrawerBody display="flex" flexDir="column" gap="6">
           <Flex as="section" flexDir="column" ref={parent} gap="4">
             {coffeesSelected.map((coffee) => (
               <Flex key={coffee.id} flexDir="column" gap="4">
                 <CartCard coffee={coffee} />
-                <Divider h="1px" bg="purple.500" />
+                <Divider h="1px" bg="purple.400" />
               </Flex>
             ))}
             {cartIsEmpty && (
-              <Center color="gray.550" flexDir="column">
+              <Center
+                color="gray.550"
+                flexDir="column"
+                _dark={{
+                  color: 'gray.500',
+                }}
+              >
                 <Icon as={ShoppingCart} w="16" h="16" color="purple.300" />
                 <Text fontSize="lg" fontWeight="700">
                   Seu carrinho está vazio.
@@ -103,11 +118,21 @@ export function CartDrawer({ isOpen, onClose }: Readonly<CartDrawerProps>) {
           </Flex>
 
           <Flex flexDir="column" gap="3" opacity={footerOpacity}>
-            <Flex justifyContent="space-between">
+            <Flex
+              justifyContent="space-between"
+              _dark={{
+                color: 'gray.100',
+              }}
+            >
               <Text fontSize="sm">Total de itens</Text>
               <Text>{totalCoffeePriceFormatted}</Text>
             </Flex>
-            <Flex justifyContent="space-between">
+            <Flex
+              justifyContent="space-between"
+              _dark={{
+                color: 'gray.100',
+              }}
+            >
               <Text fontSize="sm">Entrega</Text>
               <Text>{deliveryPriceFormatted}</Text>
             </Flex>
@@ -116,6 +141,9 @@ export function CartDrawer({ isOpen, onClose }: Readonly<CartDrawerProps>) {
               color="gray.800"
               fontWeight="700"
               fontSize="xl"
+              _dark={{
+                color: 'gray.200',
+              }}
             >
               <Text>Total</Text>
               <Text>{totalPriceWithDeliveryFormatted}</Text>

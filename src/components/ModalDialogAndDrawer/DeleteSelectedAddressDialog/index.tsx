@@ -48,15 +48,26 @@ export function DeleteSelectedAddressDialog({
       <AlertDialogOverlay />
 
       <AlertDialogContent>
-        <AlertDialogHeader>
+        <AlertDialogHeader
+          _dark={{
+            color: 'gray.100',
+          }}
+        >
           Tem certeza que deseja excluir esse endereço?
         </AlertDialogHeader>
         <AlertDialogCloseButton />
-        <AlertDialogBody>
+        <AlertDialogBody
+          _dark={{
+            color: 'gray.300',
+          }}
+        >
           <Highlight
             query={['Esse', 'marcado', 'endereço de entrega']}
             styles={{
               fontWeight: '700',
+              _dark: {
+                color: 'white',
+              },
             }}
           >
             Esse endereço está marcado como o endereço de entrega.
@@ -67,6 +78,9 @@ export function DeleteSelectedAddressDialog({
             styles={{
               fontWeight: '700',
               color: 'red.600',
+              _dark: {
+                color: 'red.400',
+              },
             }}
           >
             Caso o exclua, se tiver outros endereços cadastrados, o mais recente

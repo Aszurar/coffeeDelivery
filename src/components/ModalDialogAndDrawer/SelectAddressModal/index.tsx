@@ -101,11 +101,24 @@ export function SelectAddressModal({
     >
       <ModalOverlay backdropFilter="blur(10px) hue-rotate(15deg)" />
       <ModalContent maxH="46rem">
-        <ModalHeader display="flex" justifyContent="space-between">
+        <ModalHeader
+          display="flex"
+          justifyContent="space-between"
+          _dark={{
+            color: 'white',
+          }}
+        >
           <Heading fontSize="x-large"> Selecione um endereço</Heading>
           <Flex fontSize="lg" mr="8">
             <Text>{totalAddresses}/</Text>
-            <Text color="purple.500">{maxAddresses}</Text>
+            <Text
+              color="purple.500"
+              _dark={{
+                color: 'purple.400',
+              }}
+            >
+              {maxAddresses}
+            </Text>
           </Flex>
         </ModalHeader>
         <ModalCloseButton />

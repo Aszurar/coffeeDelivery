@@ -55,23 +55,37 @@ export function DeleteAllItemsOnCartDialog({
       <AlertDialogOverlay />
 
       <AlertDialogContent>
-        <AlertDialogHeader>
+        <AlertDialogHeader
+          _dark={{
+            color: 'gray.100',
+          }}
+        >
           <Highlight
             query={['excluir todos os itens']}
             styles={{
               fontWeight: '700',
               color: 'red.600',
+              _dark: {
+                color: 'red.400',
+              },
             }}
           >
             Tem certeza que deseja excluir todos os itens do carrinho?
           </Highlight>
         </AlertDialogHeader>
         <AlertDialogCloseButton />
-        <AlertDialogBody>
+        <AlertDialogBody
+          _dark={{
+            color: 'gray.300',
+          }}
+        >
           <Highlight
             query={['não poderá desfazer']}
             styles={{
               fontWeight: '700',
+              _dark: {
+                color: 'white',
+              },
             }}
           >
             Ao excluir todos os itens do carrinho, você não poderá desfazer essa
