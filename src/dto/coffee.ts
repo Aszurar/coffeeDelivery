@@ -60,7 +60,7 @@ const COFFEE_TYPES: CoffeeTypesProps[] = [
   {
     id: '4',
     name: 'Expresso Gelado',
-    description: 'Bebida "p"reparada com café expresso e cubos de gelo',
+    description: 'Bebida preparada com café expresso e cubos de gelo',
     tag: ['TRADICIONAL', 'GELADO'],
     price: 2.5,
     image: IcedExpressPNG,
@@ -89,7 +89,7 @@ const COFFEE_TYPES: CoffeeTypesProps[] = [
     id: '7',
     name: 'Capuccino',
     description:
-      'Bebida "c"om canela feita de doses iguais de café, leite e espuma',
+      'Bebida com canela feita de doses iguais de café, leite e espuma',
     tag: ['TRADICIONAL', 'COM LEITE'],
     price: 4.5,
     image: CappuccinoPNG,
