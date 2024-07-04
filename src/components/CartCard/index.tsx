@@ -60,7 +60,15 @@ export function CartCard({ coffee }: Readonly<CartCardProps>) {
         />
       </CardHeader>
       <CardBody>
-        <Text as="h3" fontSize="md" fontFamily="body" color="gray.800">
+        <Text
+          as="h3"
+          fontSize="md"
+          fontFamily="body"
+          color="gray.800"
+          _dark={{
+            color: 'gray.200',
+          }}
+        >
           {coffee.name}
         </Text>
 

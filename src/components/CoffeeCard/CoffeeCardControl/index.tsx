@@ -34,7 +34,7 @@ export function CoffeeCardControl({ id }: Readonly<CoffeeCardControlProps>) {
     toast({
       title: 'Item adicionado ao carrinho.',
       status: 'success',
-      duration: 4000,
+      duration: 2000,
     })
   }
 

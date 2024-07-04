@@ -9,7 +9,7 @@ type CoffeeCardProps = {
   coffee: CoffeeTypesProps
 }
 
-export function CoffeeCard({ coffee }: CoffeeCardProps) {
+export function CoffeeCard({ coffee }: Readonly<CoffeeCardProps>) {
   const price = priceFormatter.format(coffee.price)
 
   return (
@@ -24,6 +24,9 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
       borderTopRightRadius="36px"
       borderBottomRightRadius="md"
       borderBottomLeftRadius="36px"
+      _dark={{
+        bg: 'gray.800',
+      }}
     >
       <Image
         src={coffee.image}
@@ -53,10 +56,23 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
         </Flex>
 
         <Center flexDir="column" mt="4" gap="2">
-          <Heading fontSize="xl" color="gray.800">
+          <Heading
+            fontSize="xl"
+            color="gray.800"
+            _dark={{
+              color: 'gray.200',
+            }}
+          >
             {coffee.name}
           </Heading>
-          <Text fontSize="sm" textAlign="center" color="gray.600">
+          <Text
+            fontSize="sm"
+            textAlign="center"
+            color="gray.600"
+            _dark={{
+              color: 'gray.500',
+            }}
+          >
             {coffee.description}
           </Text>
         </Center>
@@ -64,7 +80,14 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
         <Center mt="8">
           <Flex alignItems="flex-end" gap="1" mr="1.5rem">
             <Text fontSize="sm">R$</Text>
-            <Heading fontSize="2xl" fontWeight="800" color="gray.800">
+            <Heading
+              fontSize="2xl"
+              fontWeight="800"
+              color="gray.800"
+              _dark={{
+                color: 'gray.200',
+              }}
+            >
               {price}
             </Heading>
           </Flex>
