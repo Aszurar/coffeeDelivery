@@ -123,7 +123,13 @@ export function CheckoutSubmit() {
 
   return (
     <>
-      <Heading fontSize="lg" color="gray.800">
+      <Heading
+        fontSize="lg"
+        color="gray.800"
+        _dark={{
+          color: 'gray.200',
+        }}
+      >
         Cafés selecionados
       </Heading>
 
@@ -138,6 +144,9 @@ export function CheckoutSubmit() {
         flexDir="column"
         bg="gray.200"
         rounded="md"
+        _dark={{
+          bg: 'gray.800',
+        }}
       >
         <Flex
           ref={parent}
@@ -147,13 +156,19 @@ export function CheckoutSubmit() {
           opacity={cartOpacity}
         >
           {coffeesSelected.map((coffee) => (
-            <Flex key={coffee.id} flexDir="column">
+            <Flex key={coffee.id} flexDir="column" gap="4">
               <CartCard coffee={coffee} />
               <Divider h="1px" bg="gray.400" />
             </Flex>
           ))}
           {IsCartEmpty && (
-            <Center color="gray.550" flexDir="column">
+            <Center
+              color="gray.550"
+              flexDir="column"
+              _dark={{
+                color: 'gray.400',
+              }}
+            >
               <Icon as={ShoppingCart} w="16" h="16" color="purple.300" />
               <Text fontSize="lg" fontWeight="700">
                 Seu carrinho está vazio.
@@ -176,6 +191,9 @@ export function CheckoutSubmit() {
             color="gray.800"
             fontWeight="700"
             fontSize="xl"
+            _dark={{
+              color: 'gray.200',
+            }}
           >
             <Text>Total</Text>
             <Text>{totalPriceWithDeliveryFormatted}</Text>
@@ -223,6 +241,9 @@ export function CheckoutSubmit() {
             isDisabled={IsCartEmpty || isAddressesEmpty || isPaymentTypeEmpty}
             textTransform="uppercase"
             onClick={handleSubmitOrder}
+            _dark={{
+              color: 'gray.800',
+            }}
           >
             Fechar Pedido
           </Button>
@@ -237,6 +258,9 @@ export function CheckoutSubmit() {
             isDisabled={IsCartEmpty}
             onClick={onDeleteAllItemsOnCartDialogOpen}
             leftIcon={<Trash width={20} height={20} weight="fill" />}
+            _dark={{
+              color: 'gray.800',
+            }}
           >
             Limpar Carrinho
           </Button>

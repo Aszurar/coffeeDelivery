@@ -32,7 +32,13 @@ export function Checkout() {
         }}
       >
         <GridItem>
-          <Heading fontSize="lg" color="gray.800">
+          <Heading
+            fontSize="lg"
+            color="gray.800"
+            _dark={{
+              color: 'gray.200',
+            }}
+          >
             Complete seu pedido
           </Heading>
 
@@ -47,6 +53,9 @@ export function Checkout() {
             flexDir="column"
             bg="gray.200"
             rounded="md"
+            _dark={{
+              bg: 'gray.800',
+            }}
           >
             <Flex align="flex-start" gap="2">
               <Icon
@@ -54,9 +63,20 @@ export function Checkout() {
                 w="1.375rem"
                 h="1.375rem"
                 color="yellow.700"
+                _dark={{
+                  color: 'yellow.400',
+                }}
               />
               <Flex flexDir="column" gap="0.5">
-                <Text as="h3" fontSize="md" fontFamily="body" color="gray.800">
+                <Text
+                  as="h3"
+                  fontSize="md"
+                  fontFamily="body"
+                  color="gray.800"
+                  _dark={{
+                    color: 'gray.200',
+                  }}
+                >
                   Endereço de Entrega
                 </Text>
                 <Text fontSize="sm">
@@ -79,16 +99,27 @@ export function Checkout() {
             flexDir="column"
             bg="gray.200"
             rounded="md"
+            _dark={{
+              bg: 'gray.800',
+            }}
           >
             <Flex align="flex-start" gap="2">
               <Icon
                 as={MapPinLine}
                 w="1.375rem"
                 h="1.375rem"
-                color="yellow.700"
+                color="yellow.400"
               />
               <Flex flexDir="column" gap="0.5">
-                <Text as="h3" fontSize="md" fontFamily="body" color="gray.800">
+                <Text
+                  as="h3"
+                  fontSize="md"
+                  fontFamily="body"
+                  color="gray.800"
+                  _dark={{
+                    color: 'gray.200',
+                  }}
+                >
                   Pagamento
                 </Text>
                 <Text fontSize="sm">

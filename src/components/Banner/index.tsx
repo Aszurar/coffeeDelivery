@@ -18,10 +18,24 @@ export function Banner() {
     >
       <GridItem>
         <Flex flexDirection="column" gap="4">
-          <Heading as="h1" fontSize="5xl" color="gray.900" fontWeight="800">
+          <Heading
+            as="h1"
+            fontSize="5xl"
+            color="gray.900"
+            fontWeight="800"
+            _dark={{
+              color: 'gray.100',
+            }}
+          >
             Encontre o café perfeito para qualquer hora do dia
           </Heading>
-          <Text fontSize="xl" color="gray.800">
+          <Text
+            fontSize="xl"
+            color="gray.800"
+            _dark={{
+              color: 'gray.200',
+            }}
+          >
             Com o Coffee Delivery você recebe seu café onde estiver, a qualquer
             hora
           </Text>

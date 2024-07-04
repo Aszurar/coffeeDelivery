@@ -18,7 +18,14 @@ export default function Home() {
         gap="2.125rem"
         flexDir="column"
       >
-        <Heading fontSize="xx-large" fontWeight="800" color="gray.800">
+        <Heading
+          fontSize="xx-large"
+          fontWeight="800"
+          color="gray.800"
+          _dark={{
+            color: 'gray.200',
+          }}
+        >
           Nossos cafés
         </Heading>
         <Grid

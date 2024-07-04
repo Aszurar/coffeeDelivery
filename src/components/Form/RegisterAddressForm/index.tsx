@@ -306,15 +306,20 @@ export function RegisterAddressForm({
               borderColor: 'yellow.700',
               boxShadow: '0 0 0 1px yellow.700',
             }}
+            _dark={{
+              borderColor: 'gray.525',
+              _focusWithin: {
+                borderColor: 'yellow.400',
+                boxShadow: '0 0 0 1px yellow.400',
+              },
+            }}
           >
             <Input.Control
               w="100%"
               controlWidth="100%"
               placeholder="Complemento"
               {...register('complement')}
-              _focusVisible={{
-                borderWidth: '0',
-              }}
+              borderWidth={0}
             />
             {!complement && (
               <InputRightElement
@@ -328,6 +333,10 @@ export function RegisterAddressForm({
                 _focus={{ bg: 'yellow.300' }}
                 _focusVisible={{ bg: 'yellow.300' }}
                 _focusWithin={{ bg: 'yellow.300' }}
+                _dark={{
+                  bg: 'gray.700',
+                  color: 'gray.500',
+                }}
               >
                 Opcional
               </InputRightElement>
@@ -389,6 +398,14 @@ export function RegisterAddressForm({
               bg: 'purple.100',
             }}
             onClick={handleCloseEditAddress}
+            _dark={{
+              _hover: {
+                bg: 'purple.800',
+              },
+              _active: {
+                bg: 'purple.900',
+              },
+            }}
           >
             Cancelar
           </Button>
