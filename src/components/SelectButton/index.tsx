@@ -10,7 +10,7 @@ export function SelectButton({
   variant,
   ...rest
 }: SelectButtonProps) {
-  const [purple500] = useToken('colors', ['purple.500'])
+  const [purple400] = useToken('colors', ['purple.400'])
 
   return (
     <Button
@@ -32,8 +32,20 @@ export function SelectButton({
         bg: 'purple.200',
         borderColor: variant === 'outline' ? 'purple.500' : 'transparent',
       }}
-      leftIcon={<Icon color={purple500} width={16} height={16} />}
+      leftIcon={<Icon color={purple400} width={16} height={16} />}
       {...rest}
+      _dark={{
+        bg: 'gray.700',
+        color: 'gray.300',
+        _hover: {
+          bg: 'gray.700',
+          opacity: 0.75,
+        },
+        _active: {
+          bg: 'purple.900',
+          borderColor: variant === 'outline' ? 'purple.400' : 'transparent',
+        },
+      }}
     />
   )
 }

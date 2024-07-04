@@ -44,6 +44,21 @@ export const Control = forwardRef<HTMLInputElement, InputUIProps>(
               boxShadow: '0 0 0 1px yellow.700',
             }}
             _placeholder={{ color: 'gray.550' }}
+            _dark={{
+              bg: 'gray.700',
+              color: 'white',
+              borderColor: 'gray.525',
+              _placeholder: {
+                color: 'gray.500',
+              },
+              _active: {
+                borderColor: 'yellow.400',
+              },
+              _focusVisible: {
+                borderColor: 'yellow.400',
+                boxShadow: '0 0 0 1px yellow.400',
+              },
+            }}
             {...props}
           />
           <FormErrorMessage>{errorMessage}</FormErrorMessage>
