@@ -177,7 +177,14 @@ export function CartDrawer({ isOpen, onClose }: Readonly<CartDrawerProps>) {
             <Button
               h="2.875rem"
               w="100%"
+              color="white"
               colorScheme="red"
+              _dark={{
+                bg: 'red.500',
+                _hover: {
+                  bg: 'red.600',
+                },
+              }}
               fontSize="sm"
               fontWeight="700"
               textTransform="uppercase"

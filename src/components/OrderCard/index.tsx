@@ -52,7 +52,17 @@ export function OrderCard({ number, order }: OrderCardProps) {
   }
 
   return (
-    <Card maxW="md" borderColor="purple.200" borderWidth="1px">
+    <Card
+      w={{
+        base: 'xs',
+        lg: 'md',
+      }}
+      borderColor="purple.200"
+      borderWidth="1px"
+      _dark={{
+        borderColor: 'purple.900',
+      }}
+    >
       <CardHeader>
         <Flex gap="4">
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
@@ -61,20 +71,23 @@ export function OrderCard({ number, order }: OrderCardProps) {
               loop={true}
               style={{ width: '50px', height: '50px' }}
             />
-            <Box>
-              <Heading size="sm" color="gray.550">
-                Total: {totalPriceFormatted}
-              </Heading>
-              <Text fontSize="sm" fontWeight="700" color="gray.550">
+            <Box color="gray.550" _dark={{ color: 'gray.100' }}>
+              <Heading size="sm">Total: {totalPriceFormatted}</Heading>
+              <Text fontSize="sm" fontWeight="700">
                 {paymentTypeSelected}
               </Text>
-              <Text color="gray.550">Pedido concluído • Nº {orderNumber}</Text>
+              <Text>Pedido concluído • Nº {orderNumber}</Text>
             </Box>
           </Flex>
         </Flex>
       </CardHeader>
 
-      <Divider borderColor="purple.300" />
+      <Divider
+        borderColor="purple.300"
+        _dark={{
+          borderColor: 'purple.600',
+        }}
+      />
 
       <CardBody>
         <UnorderedList ref={parent} styleType="" flexDir="column">
@@ -117,7 +130,14 @@ export function OrderCard({ number, order }: OrderCardProps) {
                     <Text>
                       {coffee.quantity}x{coffeePriceFormatted} =
                     </Text>
-                    <Text color="purple.700">{totalCoffeePriceFormatted}</Text>
+                    <Text
+                      color="purple.700"
+                      _dark={{
+                        color: 'purple.200',
+                      }}
+                    >
+                      {totalCoffeePriceFormatted}
+                    </Text>
                   </Flex>
                 </Flex>
               </ListItem>
@@ -136,6 +156,12 @@ export function OrderCard({ number, order }: OrderCardProps) {
                 _active={{
                   color: 'purple.700',
                 }}
+                _dark={{
+                  color: 'purple.300',
+                  _active: {
+                    color: 'purple.400',
+                  },
+                }}
                 onClick={handleToggleShowAllItens}
                 rightIcon={showItensButtonInfo.icon}
               >
@@ -146,12 +172,24 @@ export function OrderCard({ number, order }: OrderCardProps) {
 
           <Flex gap="1" fontFamily="heading">
             <Text>+ Frete: </Text>
-            <Text color="purple.700">R$ 10,00</Text>
+            <Text
+              color="purple.700"
+              _dark={{
+                color: 'purple.200',
+              }}
+            >
+              R$ 10,00
+            </Text>
           </Flex>
         </UnorderedList>
       </CardBody>
 
-      <Divider borderColor="purple.300" />
+      <Divider
+        borderColor="purple.300"
+        _dark={{
+          borderColor: 'purple.600',
+        }}
+      />
 
       <CardFooter
         justify="space-between"
@@ -163,7 +201,7 @@ export function OrderCard({ number, order }: OrderCardProps) {
         }}
       >
         <Box>
-          <Text color="gray.550">
+          <Text color="gray.550" _dark={{ color: 'gray.400' }}>
             {order.address.street}, {order.address.number},{' '}
             {order.address.neighborhood}, {order.address.cep},{' '}
             {order.address.city}, {order.address.uf}.

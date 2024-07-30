@@ -23,10 +23,23 @@ export function OrderConfirmed() {
         mt={{ base: '8', md: '5.75rem' }}
         p={{ base: '2', md: '6', lg: '8', xl: '10' }}
       >
-        <Heading fontSize="4xl.5" color="yellow.700">
+        <Heading
+          fontSize="4xl.5"
+          color="yellow.700"
+          _dark={{
+            color: 'yellow.300',
+          }}
+        >
           Uhu! Pedido confirmado
         </Heading>
-        <Text mt="1" color="gray.800" fontSize="xl">
+        <Text
+          mt="1"
+          color="gray.800"
+          fontSize="xl"
+          _dark={{
+            color: 'gray.200',
+          }}
+        >
           Agora é só aguardar que logo o café chegará até você
         </Text>
       </Box>
@@ -58,14 +71,14 @@ export function OrderConfirmed() {
                   <Text>
                     Entrega em{' '}
                     <strong>
-                      {currentOrder?.address.street},{' '}
-                      {currentOrder?.address.number}
+                      {currentOrder?.address?.street},{' '}
+                      {currentOrder?.address?.number}
                     </strong>
                   </Text>
                 </Flex>
                 <Text>
-                  {currentOrder?.address.neighborhood} -{' '}
-                  {currentOrder?.address.city}, {currentOrder?.address.uf}
+                  {currentOrder?.address?.neighborhood} -{' '}
+                  {currentOrder?.address?.city}, {currentOrder?.address?.uf}
                 </Text>
               </Flex>
             </Flex>

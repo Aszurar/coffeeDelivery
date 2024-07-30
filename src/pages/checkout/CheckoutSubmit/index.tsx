@@ -235,15 +235,19 @@ export function CheckoutSubmit() {
             _active={{
               bg: 'yellow.500',
             }}
+            _dark={{
+              color: 'gray.800',
+              bg: 'yellow.400',
+              _hover: {
+                bg: 'yellow.500',
+              },
+            }}
             color="white"
             fontSize="sm"
             fontWeight="700"
             isDisabled={IsCartEmpty || isAddressesEmpty || isPaymentTypeEmpty}
             textTransform="uppercase"
             onClick={handleSubmitOrder}
-            _dark={{
-              color: 'gray.800',
-            }}
           >
             Fechar Pedido
           </Button>
@@ -252,15 +256,19 @@ export function CheckoutSubmit() {
             h="2.875rem"
             w="100%"
             colorScheme="red"
+            _dark={{
+              bg: 'red.500',
+              _hover: {
+                bg: 'red.600',
+              },
+            }}
+            color="white"
             fontSize="sm"
             fontWeight="700"
             textTransform="uppercase"
             isDisabled={IsCartEmpty}
             onClick={onDeleteAllItemsOnCartDialogOpen}
             leftIcon={<Trash width={20} height={20} weight="fill" />}
-            _dark={{
-              color: 'gray.800',
-            }}
           >
             Limpar Carrinho
           </Button>
