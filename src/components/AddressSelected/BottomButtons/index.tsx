@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Icon } from '@chakra-ui/react'
+import { Badge, Box, Button, Flex, Icon } from '@chakra-ui/react'
 import { AddressBook, PencilSimpleLine, Trash } from '@phosphor-icons/react'
 
 import { SelectButton } from '@/components/SelectButton'
@@ -84,7 +84,13 @@ export function BottomButtons({
   }
 
   return (
-    <>
+    <Flex
+      gap="3"
+      flexDirection={{
+        base: 'column',
+        sm: 'row',
+      }}
+    >
       <Box position="relative">
         <Button
           type="button"
@@ -134,46 +140,48 @@ export function BottomButtons({
         )}
       </Box>
 
-      <Button
-        type="button"
-        fontWeight="700"
-        h="9"
-        fontSize="sm"
-        variant="outline"
-        textTransform="uppercase"
-        colorScheme="yellow"
-        bg="transparent"
-        _hover={{
-          bg: 'gray.400',
-          _disabled: {
+      <Flex gap="3">
+        <Button
+          type="button"
+          fontWeight="700"
+          h="9"
+          fontSize="sm"
+          variant="outline"
+          textTransform="uppercase"
+          colorScheme="yellow"
+          bg="transparent"
+          _hover={{
+            bg: 'gray.400',
+            _disabled: {
+              bg: 'transparent',
+            },
+          }}
+          _active={{
             bg: 'transparent',
-          },
-        }}
-        _active={{
-          bg: 'transparent',
-        }}
-        onClick={onEditAddress}
-        leftIcon={<Icon as={PencilSimpleLine} w="5" h="5" />}
-        _dark={{
-          color: 'yellow.400',
-          borderColor: 'yellow.400',
-          _hover: {
-            bg: 'gray.700',
-          },
-        }}
-      >
-        Editar
-      </Button>
-      <SelectButton
-        h="9"
-        w="fit-content"
-        bg="transparent"
-        variant="outline"
-        icon={Trash}
-        onClick={onDeleteSelectedAddressDialogOpen}
-      >
-        Remover
-      </SelectButton>
-    </>
+          }}
+          onClick={onEditAddress}
+          leftIcon={<Icon as={PencilSimpleLine} w="5" h="5" />}
+          _dark={{
+            color: 'yellow.400',
+            borderColor: 'yellow.400',
+            _hover: {
+              bg: 'gray.700',
+            },
+          }}
+        >
+          Editar
+        </Button>
+        <SelectButton
+          h="9"
+          w="fit-content"
+          bg="transparent"
+          variant="outline"
+          icon={Trash}
+          onClick={onDeleteSelectedAddressDialogOpen}
+        >
+          Remover
+        </SelectButton>
+      </Flex>
+    </Flex>
   )
 }

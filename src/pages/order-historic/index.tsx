@@ -26,9 +26,12 @@ export function OrderHistoric() {
 
       <Grid
         ref={parent}
-        gap="8"
+        gap={{
+          base: '4',
+          lg: '6',
+        }}
         w="100%"
-        justifyContent="center"
+        justifyItems="center"
         templateColumns={{
           base: 'repeat(1, 1fr)',
           md: 'repeat(2, 1fr)',
@@ -36,12 +39,7 @@ export function OrderHistoric() {
         }}
       >
         {orders?.map((order, index) => (
-          <GridItem
-            key={order.id}
-            justifyContent="space-between"
-            alignItems="center"
-            w="fit-content"
-          >
+          <GridItem key={order.id} w="fit-content">
             <OrderCard number={index + 1} order={order} />
           </GridItem>
         ))}

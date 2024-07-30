@@ -84,12 +84,25 @@ export function Header() {
           p="2"
           h="fit-content"
           rounded="md"
-          fontSize="sm"
           fontWeight={400}
+          fontSize={{
+            base: '0',
+            sm: 'sm',
+            lg: 'sm',
+            xl: 'sm',
+          }}
+          iconSpacing={{
+            base: '0',
+            sm: '2',
+            lg: '2',
+            xl: '2',
+          }}
           colorScheme="purple"
           isActive={pathname === ROUTES.ORDER_HISTORIC}
           onClick={() => navigate(ROUTES.ORDER_HISTORIC)}
           leftIcon={<Receipt weight="fill" width={22} height={22} />}
+          alignItems="center"
+          justifyContent="center"
           _hover={{
             bg: 'purple.100',
           }}

@@ -31,6 +31,7 @@ export default function Home() {
         <Grid
           gap="8"
           w="100%"
+          justifyItems="center"
           templateColumns={{
             base: 'repeat(1, 1fr)',
             sm: 'repeat(2, 1fr)',
@@ -40,9 +41,7 @@ export default function Home() {
         >
           {COFFEE_TYPES.map((coffee) => (
             <GridItem key={coffee.id}>
-              <Flex alignItems="center" justifyContent="center">
-                <CoffeeCard coffee={coffee} />
-              </Flex>
+              <CoffeeCard coffee={coffee} />
             </GridItem>
           ))}
         </Grid>

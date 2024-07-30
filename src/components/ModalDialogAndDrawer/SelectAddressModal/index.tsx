@@ -100,7 +100,21 @@ export function SelectAddressModal({
       scrollBehavior="inside"
     >
       <ModalOverlay backdropFilter="blur(10px) hue-rotate(15deg)" />
-      <ModalContent maxH="46rem">
+      <ModalContent
+        maxH="46rem"
+        top={{
+          base: '0',
+          sm: '20',
+        }}
+        mt={{
+          base: 'auto',
+          sm: '0',
+        }}
+        mb={{
+          base: '4',
+          sm: 'auto',
+        }}
+      >
         <ModalHeader
           display="flex"
           justifyContent="space-between"
@@ -138,7 +152,23 @@ export function SelectAddressModal({
             />
           )}
         </ModalBody>
-        <ModalFooter gap="4">
+        <ModalFooter
+          gap="4"
+          flexDirection={{
+            base: 'column',
+            sm: 'row-reverse',
+          }}
+        >
+          <Flex gap="4">
+            <Button onClick={handleOnClose}>Cancelar</Button>
+            <Button
+              colorScheme="yellow"
+              isDisabled={isDisabled}
+              onClick={handleSubmitChangeAddress}
+            >
+              Confirmar
+            </Button>
+          </Flex>
           <Button
             leftIcon={<Icon as={WarningCircle} w="5" h="5" />}
             colorScheme="red"
@@ -146,14 +176,6 @@ export function SelectAddressModal({
             onClick={onDeleteAllAddressDialogOpen}
           >
             Excluir todos os endereços
-          </Button>
-          <Button onClick={handleOnClose}>Cancelar</Button>
-          <Button
-            colorScheme="yellow"
-            isDisabled={isDisabled}
-            onClick={handleSubmitChangeAddress}
-          >
-            Confirmar
           </Button>
         </ModalFooter>
       </ModalContent>

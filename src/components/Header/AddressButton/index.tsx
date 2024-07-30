@@ -176,7 +176,18 @@ export function AddressButton() {
           p="2"
           h="fit-content"
           rounded="md"
-          fontSize="sm"
+          fontSize={{
+            base: '0',
+            sm: 'sm',
+            lg: 'sm',
+            xl: 'sm',
+          }}
+          iconSpacing={{
+            base: '0',
+            sm: '2',
+            lg: '2',
+            xl: '2',
+          }}
           fontWeight={400}
           bg={localizationButtonLabel.bg}
           color={localizationButtonLabel.color}
