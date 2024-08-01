@@ -34,8 +34,13 @@ export function AddressesTabs() {
     onClose: onDeleteSelectedAddressDialogClose,
   } = useDisclosure()
 
-  const { totalAddresses, maxAddresses, selectedAddress, removeAddress } =
-    useAddressSelectors()
+  const {
+    totalAddresses,
+    incompleteAddress,
+    maxAddresses,
+    selectedAddress,
+    removeAddress,
+  } = useAddressSelectors()
 
   function handleRemoveAddress() {
     if (selectedAddress) {
@@ -84,6 +89,14 @@ export function AddressesTabs() {
     switchTabs()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalAddresses])
+
+  useEffect(() => {
+    // Switch to register address when the cep has been added
+    if (incompleteAddress) {
+      handleSelectSecondTab()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [incompleteAddress])
 
   return (
     <Tabs variant="unstyled" defaultIndex={tabActivated} index={currentTab}>

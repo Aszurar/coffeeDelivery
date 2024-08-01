@@ -45,7 +45,8 @@ export function CheckoutSubmit() {
 
   const { paymentType } = usePaymentSelectors()
   const { updateCurrentOrder } = useOrderSelectors()
-  const { selectedAddress, totalAddresses } = useAddressSelectors()
+  const { selectedAddress, totalAddresses, cleanIncompleteAddress } =
+    useAddressSelectors()
   const {
     cart,
     totalPriceOfItemsOnCart: totalCoffeePrice,
@@ -119,6 +120,7 @@ export function CheckoutSubmit() {
     updateCurrentOrder(order)
     navigate(ROUTES.ORDER_CONFIRMED)
     removeAllItemsFromCart()
+    cleanIncompleteAddress()
   }
 
   return (

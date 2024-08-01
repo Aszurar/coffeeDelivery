@@ -8,6 +8,8 @@ export type AddressProps = RegisterAddressFormProps & {
   id: string
 }
 
+type IncompleteAddressProps = Omit<AddressProps, 'number' | 'complement'>
+
 type IncompleteAddress = Omit<AddressProps, 'id' | 'complement' | 'number'>
 
 type AddressStoreProps = {
@@ -15,11 +17,13 @@ type AddressStoreProps = {
   totalAddresses: number
   maxAddresses: number
   selectedAddress: AddressProps | undefined
+  incompleteAddress: IncompleteAddressProps | undefined
   addNewAddress: (address: AddressProps) => void
   selectAddress: (id: string) => void
   updateAddress: (address: AddressProps) => void
   removeAddress: (id: string) => void
   addIncompleteAddressOnSelectedAddress: (address: IncompleteAddress) => void
+  cleanIncompleteAddress: () => void
   deleteAllAddresses: () => void
 }
 
@@ -28,6 +32,7 @@ const createAddressStore: StateCreator<AddressStoreProps> = (set, get) => ({
   totalAddresses: 0,
   maxAddresses: 10,
   selectedAddress: undefined,
+  incompleteAddress: undefined,
   addNewAddress: (address) => {
     const { addresses: currentAddresses, maxAddresses } = get()
 
@@ -60,9 +65,16 @@ const createAddressStore: StateCreator<AddressStoreProps> = (set, get) => ({
   addIncompleteAddressOnSelectedAddress: (address: IncompleteAddress) => {
     set(
       produce((state: AddressStoreProps) => {
-        state.selectedAddress = {
+        state.incompleteAddress = {
           ...address,
         } as AddressProps
+      }),
+    )
+  },
+  cleanIncompleteAddress: () => {
+    set(
+      produce((state: AddressStoreProps) => {
+        state.incompleteAddress = undefined
       }),
     )
   },

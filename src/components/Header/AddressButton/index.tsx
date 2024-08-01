@@ -62,10 +62,15 @@ const SEARCH_ADDRESS_FORM_DEFAULT = {
 export function AddressButton() {
   const toast = useToast()
   const [parent] = useAutoAnimate()
-  const { selectedAddress, addIncompleteAddressOnSelectedAddress } =
-    useAddressSelectors()
   const initialFocusRef = useRef<HTMLButtonElement>(null)
   const [purple500, gray600] = useToken('colors', ['purple.500', 'gray.600'])
+  const {
+    selectedAddress,
+    incompleteAddress,
+    addIncompleteAddressOnSelectedAddress,
+  } = useAddressSelectors()
+
+  const labelAddress = incompleteAddress || selectedAddress
 
   const localizationEmpty = {
     bg: 'gray.300',
@@ -89,10 +94,10 @@ export function AddressButton() {
       bg: 'purple.200',
     },
     iconColor: purple500,
-    label: `${selectedAddress?.city}, ${selectedAddress?.uf}`,
+    label: `${labelAddress?.city}, ${labelAddress?.uf}`,
   }
 
-  const localizationButtonLabel = selectedAddress
+  const localizationButtonLabel = labelAddress
     ? localizationFilled
     : localizationEmpty
 
@@ -111,7 +116,7 @@ export function AddressButton() {
   const cep = watch('cep')
 
   const hasSelectedAddress =
-    selectedAddress?.cep === getStringAndRemoveCharacters(cep)
+    labelAddress?.cep === getStringAndRemoveCharacters(cep)
 
   const { isPending, mutateAsync: getAddressByCepFn } = useMutation({
     mutationFn: getAddressByCep,
@@ -291,11 +296,20 @@ export function AddressButton() {
                     fontWeight: '700',
                     fontFamily: 'heading',
                     mr: 2,
+                    _dark: {
+                      color: 'gray.300',
+                    },
                   }}
                 >
                   Entrega Econômica:
                 </Highlight>
-                <Text fontWeight="bold" color="purple.500">
+                <Text
+                  fontWeight="bold"
+                  color="purple.500"
+                  _dark={{
+                    color: 'purple.200',
+                  }}
+                >
                   {deliveryPriceFormatted}
                 </Text>
               </Flex>

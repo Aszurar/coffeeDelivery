@@ -29,12 +29,14 @@ const useAddressSelectors = () =>
     maxAddresses: state.maxAddresses,
     addNewAddress: state.addNewAddress,
     selectedAddress: state.selectedAddress,
+    incompleteAddress: state.incompleteAddress,
     selectAddress: state.selectAddress,
     updateAddress: state.updateAddress,
     removeAddress: state.removeAddress,
     deleteAllAddresses: state.deleteAllAddresses,
     addIncompleteAddressOnSelectedAddress:
       state.addIncompleteAddressOnSelectedAddress,
+    cleanIncompleteAddress: state.cleanIncompleteAddress,
   }))
 
 const useCartSelectors = () =>

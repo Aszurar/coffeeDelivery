@@ -50,6 +50,8 @@ export function RegisterAddressForm({
     updateAddress,
     maxAddresses,
     selectedAddress,
+    incompleteAddress,
+    cleanIncompleteAddress,
   } = useAddressSelectors()
 
   const isNotPossibleAddNewAddress = totalAddresses === maxAddresses
@@ -143,6 +145,7 @@ export function RegisterAddressForm({
         ...REGISTER_ADDRESS_FORM_DEFAULT_VALUES,
         number: '' as unknown as number,
       })
+      cleanIncompleteAddress()
     } catch (error) {
       if (error instanceof AppError) {
         toast({
@@ -218,9 +221,9 @@ export function RegisterAddressForm({
           uf: selectedAddress.uf,
         })
       }
-    } else if (!!selectedAddress && !totalAddresses) {
+    } else if (incompleteAddress) {
       reset({
-        ...selectedAddress,
+        ...incompleteAddress,
       })
     } else {
       reset({
@@ -229,7 +232,7 @@ export function RegisterAddressForm({
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEditable, selectedAddress, totalAddresses])
+  }, [isEditable, selectedAddress, totalAddresses, incompleteAddress])
 
   return (
     <Flex
