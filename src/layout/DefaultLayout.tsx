@@ -6,7 +6,7 @@ import { Header } from '@/components/Header'
 export default function DefaultLayout() {
   return (
     <Flex
-      w="100vw"
+      // minW="100vw"
       minH="100vh"
       flexDir="column"
       bg="gray.100"
