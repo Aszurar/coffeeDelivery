@@ -92,7 +92,11 @@ export function CoffeeCard({ coffee }: Readonly<CoffeeCardProps>) {
             </Heading>
           </Flex>
 
-          <CoffeeCardControl id={coffee.id} />
+          <CoffeeCardControl
+            id={coffee.id}
+            name={coffee.name}
+            price={coffee.price}
+          />
         </Center>
       </Center>
     </Flex>

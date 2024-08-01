@@ -10,6 +10,8 @@ import {
 
 export type CartProps = {
   id: string
+  name: string
+  price: number
   quantity: number
 }
 
@@ -20,7 +22,7 @@ type CartStoreProps = {
   totalItemsOnCart: number
   totalPriceOfItemsOnCart: number
   getTotalCurrentItem: ({ id }: CartItemIdentifierProps) => number
-  addItemToCart: ({ id, quantity }: CartProps) => void
+  addItemToCart: ({ id, name, price, quantity }: CartProps) => void
   updateItemOnCart: ({ id, quantity }: CartProps) => void
   decrementQuantityItemOnCart: ({ id }: CartItemIdentifierProps) => void
   incrementQuantityItemOnCart: ({ id }: CartItemIdentifierProps) => void
@@ -38,7 +40,7 @@ const createCartStore: StateCreator<CartStoreProps> = (set, get) => ({
     const item = cart.find((item) => item.id === id)
     return item?.quantity ?? 0
   },
-  addItemToCart: ({ id, quantity }) => {
+  addItemToCart: ({ id, name, price, quantity }) => {
     // checked
     set(
       produce((state: CartStoreProps) => {
@@ -49,11 +51,11 @@ const createCartStore: StateCreator<CartStoreProps> = (set, get) => ({
           cartAfterAdded = state.cart.map((item) =>
             addQuantity({
               item,
-              newItem: { id, quantity },
+              newItem: { id, name, price, quantity },
             }),
           )
         } else {
-          cartAfterAdded.push({ id, quantity })
+          cartAfterAdded.push({ id, name, price, quantity })
         }
 
         const totalItems = updateTotalItemsOnCart({
@@ -69,11 +71,11 @@ const createCartStore: StateCreator<CartStoreProps> = (set, get) => ({
       }),
     )
   },
-  updateItemOnCart: ({ id, quantity }) => {
+  updateItemOnCart: ({ id, name, price, quantity }) => {
     set(
       produce((state: CartStoreProps) => {
         let cartAfterUpdate = state.cart
-        const newItem = { id, quantity }
+        const newItem = { id, name, price, quantity }
         const item = state.cart.find((item) => item.id === id)
 
         if (item) {
@@ -98,21 +100,42 @@ const createCartStore: StateCreator<CartStoreProps> = (set, get) => ({
     )
   },
   decrementQuantityItemOnCart: ({ id }: CartItemIdentifierProps) => {
-    const { getTotalCurrentItem, updateItemOnCart, removeItemFromCart } = get()
+    const { cart, getTotalCurrentItem, updateItemOnCart, removeItemFromCart } =
+      get()
     const totalCurrentItem = getTotalCurrentItem({ id })
 
-    if (totalCurrentItem > 1) {
-      updateItemOnCart({ id, quantity: totalCurrentItem - 1 })
+    const currentItem = cart.find((item) => item.id === id)
+
+    if (currentItem && totalCurrentItem > 1) {
+      updateItemOnCart({
+        id,
+        name: currentItem.name,
+        price: currentItem.price,
+        quantity: totalCurrentItem - 1,
+      })
     } else {
-      updateItemOnCart({ id, quantity: 0 })
+      updateItemOnCart({
+        id,
+        name: '',
+        price: 0,
+        quantity: 0,
+      })
       removeItemFromCart({ id })
     }
   },
   incrementQuantityItemOnCart: ({ id }: CartItemIdentifierProps) => {
-    const { getTotalCurrentItem, updateItemOnCart } = get()
+    const { cart, getTotalCurrentItem, updateItemOnCart } = get()
     const totalCurrentItem = getTotalCurrentItem({ id })
+    const currentItem = cart.find((item) => item.id === id)
 
-    updateItemOnCart({ id, quantity: totalCurrentItem + 1 })
+    if (!currentItem) return
+
+    updateItemOnCart({
+      id,
+      name: currentItem.name,
+      price: currentItem.price,
+      quantity: totalCurrentItem + 1,
+    })
   },
   removeItemFromCart: ({ id }) => {
     // checked

@@ -9,9 +9,15 @@ const COUNTER_INITIAL_VALUE = 1
 
 type CoffeeCardControlProps = {
   id: string
+  name: string
+  price: number
 }
 
-export function CoffeeCardControl({ id }: Readonly<CoffeeCardControlProps>) {
+export function CoffeeCardControl({
+  id,
+  name,
+  price,
+}: Readonly<CoffeeCardControlProps>) {
   const { addItemToCart } = useCartSelectors()
 
   const [counter, setCounter] = useState(COUNTER_INITIAL_VALUE)
@@ -29,7 +35,7 @@ export function CoffeeCardControl({ id }: Readonly<CoffeeCardControlProps>) {
   }
 
   function handleAddItem() {
-    addItemToCart({ id, quantity: counter })
+    addItemToCart({ id, name, price, quantity: counter })
     setCounter(COUNTER_INITIAL_VALUE)
     toast({
       title: 'Item adicionado ao carrinho.',

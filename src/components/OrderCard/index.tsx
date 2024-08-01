@@ -19,7 +19,6 @@ import Lottie from 'lottie-react'
 import { useState } from 'react'
 
 import coffeeAnimation from '@/assets/animations/coffee.json'
-import { COFFEE_TYPES } from '@/dto/coffee'
 import { IOrder } from '@/dto/order'
 import { PAYMENT_TYPE_VALUES } from '@/dto/payment'
 import { priceFormatter, priceFormatterWithCurrency } from '@/utils/number'
@@ -41,7 +40,7 @@ export function OrderCard({ number, order }: OrderCardProps) {
   const showItensButtonInfo = isShowAllItens
     ? { label: 'Ver menos itens', icon: <CaretUp weight="bold" /> }
     : {
-        label: `...Ver todos itens(mais ${order.cart?.length})`,
+        label: `...Ver todos itens(+ ${order.cart?.length})`,
         icon: <CaretDown weight="bold" />,
       }
 
@@ -55,7 +54,7 @@ export function OrderCard({ number, order }: OrderCardProps) {
     <Card
       w={{
         base: 'xs',
-        lg: 'md',
+        lg: 'sm',
       }}
       borderColor="purple.200"
       borderWidth="1px"
@@ -92,10 +91,7 @@ export function OrderCard({ number, order }: OrderCardProps) {
       <CardBody>
         <UnorderedList ref={parent} styleType="" flexDir="column">
           {order.cart?.map((coffee, index) => {
-            const coffeeData = COFFEE_TYPES.find(
-              (type) => type.id === coffee.id,
-            )
-            const coffeePrice = coffeeData?.price ?? 0
+            const coffeePrice = coffee.price ?? 0
             const coffeePriceFormatted = priceFormatter.format(coffeePrice)
             const totalCoffeePrice = coffee.quantity * coffeePrice
             const totalCoffeePriceFormatted =
@@ -125,7 +121,7 @@ export function OrderCard({ number, order }: OrderCardProps) {
                   {coffee.quantity}
                 </Badge>
                 <Flex flexDir="column">
-                  <Text fontSize="sm">{coffeeData?.name}</Text>
+                  <Text fontSize="sm">{coffee.name}</Text>
                   <Flex gap="1" fontFamily="heading">
                     <Text>
                       {coffee.quantity}x{coffeePriceFormatted} =
@@ -143,7 +139,6 @@ export function OrderCard({ number, order }: OrderCardProps) {
               </ListItem>
             )
           })}
-          {}
           {hasMoreThanOneItem && (
             <Flex flexDir="column">
               <Button
