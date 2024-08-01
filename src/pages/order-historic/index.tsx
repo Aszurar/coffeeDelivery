@@ -25,17 +25,17 @@ export function OrderHistoric() {
       <Text fontWeight="600">Histórico</Text>
 
       <Grid
+        w="100%"
         ref={parent}
         gap={{
           base: '4',
           lg: '6',
         }}
-        w="100%"
         justifyItems="center"
         templateColumns={{
           base: 'repeat(1, 1fr)',
           md: 'repeat(2, 1fr)',
-          xl: 'repeat(3, 1fr)',
+          '2xl': 'repeat(3, 1fr)',
         }}
       >
         {orders?.map((order, index) => (

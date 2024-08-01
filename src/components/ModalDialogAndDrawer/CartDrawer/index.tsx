@@ -98,7 +98,13 @@ export function CartDrawer({ isOpen, onClose }: Readonly<CartDrawerProps>) {
             {coffeesSelected.map((coffee) => (
               <Flex key={coffee.id} flexDir="column" gap="4">
                 <CartCard coffee={coffee} />
-                <Divider h="1px" bg="purple.400" />
+                <Divider
+                  h="1px"
+                  bg="purple.400"
+                  _dark={{
+                    bg: 'purple.800',
+                  }}
+                />
               </Flex>
             ))}
             {cartIsEmpty && (
