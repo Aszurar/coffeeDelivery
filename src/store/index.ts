@@ -56,6 +56,7 @@ const useCartSelectors = () =>
 export {
   useAddressSelectors,
   useCartSelectors,
+  useCartStore,
   useOrderSelectors,
   usePaymentSelectors,
 }
