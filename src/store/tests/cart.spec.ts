@@ -51,7 +51,6 @@ describe('Cart Store', () => {
     })
 
     const { cart } = cartStore.getState()
-    console.log(cart)
 
     expect(cart.length).toBe(1)
     expect(cart[0].id).toBe(someCoffee.id)
