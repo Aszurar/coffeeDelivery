@@ -1,11 +1,37 @@
-import { Flex, Grid, GridItem, Heading } from '@chakra-ui/react'
+import { Flex, Grid, GridItem, Heading, useToast } from '@chakra-ui/react'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { useQuery } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 
 import { Banner } from '@/components/Banner'
 import { CoffeeCard } from '@/components/CoffeeCard'
-import { COFFEE_TYPES } from '@/dto/coffee'
+import { HomeLoading } from '@/components/Skeleton/HomeLoading'
+import { getCoffees } from '@/services/api/get-coffees'
 
 export default function Home() {
+  const toast = useToast()
+  const [parent] = useAutoAnimate()
+
+  const {
+    data: coffees,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['coffees'],
+    queryFn: getCoffees,
+  })
+
+  if (isError) {
+    toast({
+      title: 'Erro ao carregar cafés',
+      description:
+        'Ocorreu um erro ao carregar os cafés, tente novamente mais tarde.',
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+    })
+  }
+
   return (
     <>
       <Helmet title="Home" />
@@ -29,6 +55,7 @@ export default function Home() {
           Nossos cafés
         </Heading>
         <Grid
+          ref={parent}
           gap="8"
           w="100%"
           justifyItems="center"
@@ -39,7 +66,9 @@ export default function Home() {
             xl: 'repeat(4, 1fr)',
           }}
         >
-          {COFFEE_TYPES.map((coffee) => (
+          {isLoading && <HomeLoading />}
+
+          {coffees?.map((coffee) => (
             <GridItem key={coffee.id}>
               <CoffeeCard coffee={coffee} />
             </GridItem>
