@@ -18,11 +18,12 @@ import { useNavigate } from 'react-router-dom'
 
 import { CartCard } from '@/components/CartCard'
 import { DeleteAllItemsOnCartDialog } from '@/components/ModalDialogAndDrawer/DeleteAllItemsOnCartDialog'
-import { COFFEE_TYPES } from '@/dto/coffee'
+import { CoffeeTypesProps } from '@/dto/coffee'
 import { DELIVERY_PRICE } from '@/dto/delivery'
 import { IOrder } from '@/dto/order'
 import { PAYMENT_TYPE } from '@/dto/payment'
 import { ROUTES } from '@/router/routes'
+import { queryClient } from '@/services/react-query'
 import { saveOrder } from '@/storage/orders/save-order'
 import {
   useAddressSelectors,
@@ -36,6 +37,7 @@ export function CheckoutSubmit() {
   const toast = useToast()
   const navigate = useNavigate()
   const [parent] = useAutoAnimate()
+  const coffees = queryClient.getQueryData<CoffeeTypesProps[]>(['coffees'])
   const deleteAllItemsOnCartDialogCancelRef = useRef<HTMLButtonElement>(null)
   const {
     isOpen: isDeleteAllItemsOnCartDialogOpen,
@@ -67,7 +69,7 @@ export function CheckoutSubmit() {
     totalPriceWithDelivery,
   )
 
-  const coffeesSelected = COFFEE_TYPES.filter((coffee) =>
+  const coffeesSelected = coffees?.filter((coffee) =>
     cart.some((item) => item.id === coffee.id),
   )
 
@@ -157,7 +159,7 @@ export function CheckoutSubmit() {
           gap="6"
           opacity={cartOpacity}
         >
-          {coffeesSelected.map((coffee) => (
+          {coffeesSelected?.map((coffee) => (
             <Flex key={coffee.id} flexDir="column" gap="4">
               <CartCard coffee={coffee} />
               <Divider h="1px" bg="gray.400" />

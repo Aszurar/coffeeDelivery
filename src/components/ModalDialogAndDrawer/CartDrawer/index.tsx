@@ -20,9 +20,10 @@ import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { CartCard } from '@/components/CartCard'
-import { COFFEE_TYPES } from '@/dto/coffee'
+import { CoffeeTypesProps } from '@/dto/coffee'
 import { DELIVERY_PRICE } from '@/dto/delivery'
 import { ROUTES } from '@/router/routes'
+import { queryClient } from '@/services/react-query'
 import { useCartSelectors } from '@/store'
 import { priceFormatterWithCurrency } from '@/utils/number'
 
@@ -36,6 +37,7 @@ type CartDrawerProps = {
 export function CartDrawer({ isOpen, onClose }: Readonly<CartDrawerProps>) {
   const navigate = useNavigate()
   const [parent] = useAutoAnimate()
+  const coffees = queryClient.getQueryData<CoffeeTypesProps[]>(['coffees'])
 
   const deleteAllItemsOnCartDialogCancelRef = useRef<HTMLButtonElement>(null)
   const {
@@ -58,7 +60,7 @@ export function CartDrawer({ isOpen, onClose }: Readonly<CartDrawerProps>) {
     totalPriceWithDelivery,
   )
 
-  const coffeesSelected = COFFEE_TYPES.filter((coffee) =>
+  const coffeesSelected = coffees?.filter((coffee) =>
     cart.some((item) => item.id === coffee.id),
   )
 
@@ -95,7 +97,7 @@ export function CartDrawer({ isOpen, onClose }: Readonly<CartDrawerProps>) {
         </DrawerHeader>
         <DrawerBody display="flex" flexDir="column" gap="6">
           <Flex as="section" flexDir="column" ref={parent} gap="4">
-            {coffeesSelected.map((coffee) => (
+            {coffeesSelected?.map((coffee) => (
               <Flex key={coffee.id} flexDir="column" gap="4">
                 <CartCard coffee={coffee} />
                 <Divider
