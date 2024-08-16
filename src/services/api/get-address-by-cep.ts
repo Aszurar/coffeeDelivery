@@ -3,7 +3,7 @@ import { AxiosError } from 'axios'
 import { ICepAddressBrasilAPI } from '@/dto/address'
 import { AppError } from '@/errors'
 
-import { cepApi } from '../cep-api'
+import { cepApi } from '../api'
 
 type GetAddressByCep = {
   cep: string
