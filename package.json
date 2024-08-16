@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:server": "json-server server.json -p 3333 -w -d 500",
     "build": "tsc && vite build",
     "lint": "eslint src --ext .ts,.tsx",
     "preview": "vite preview"
@@ -47,6 +48,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "eslint-plugin-simple-import-sort": "^12.1.0",
+    "json-server": "0.17.4",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   }
