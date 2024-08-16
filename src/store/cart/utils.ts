@@ -1,5 +1,3 @@
-import { COFFEE_TYPES } from '@/dto/coffee'
-
 import { CartProps } from '.'
 
 type AddQuantityProps = {
@@ -31,12 +29,8 @@ function updateTotalItemsOnCart({ updatedCart }: CartList) {
 }
 
 function calculateTotalPriceOfItemsOnCart({ updatedCart }: CartList) {
-  // checked
   const totalPrice = updatedCart.reduce((acc, item) => {
-    const coffee = COFFEE_TYPES.find((coffee) => coffee.id === item.id) ?? {
-      price: 0,
-    }
-    return acc + coffee.price * item.quantity
+    return acc + item.price * item.quantity
   }, 0)
   return totalPrice
 }
