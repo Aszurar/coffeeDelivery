@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { ShoppingCart, Trash } from '@phosphor-icons/react'
+import { useMutation } from '@tanstack/react-query'
 import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,8 +24,8 @@ import { DELIVERY_PRICE } from '@/dto/delivery'
 import { IOrder } from '@/dto/order'
 import { PAYMENT_TYPE } from '@/dto/payment'
 import { ROUTES } from '@/router/routes'
+import { registerOrder } from '@/services/api/register-order'
 import { queryClient } from '@/services/react-query'
-import { saveOrder } from '@/storage/orders/save-order'
 import {
   useAddressSelectors,
   useCartSelectors,
@@ -75,7 +76,36 @@ export function CheckoutSubmit() {
 
   const cartOpacity = IsCartEmpty ? 0.5 : 1
 
-  function handleSubmitOrder() {
+  const { mutateAsync: registerOrderFn, isPending } = useMutation({
+    mutationFn: registerOrder,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['orders'] })
+    },
+  })
+
+  async function handleRegisterOrder(order: IOrder) {
+    try {
+      await registerOrderFn({ order })
+
+      toast({
+        title: 'Pedido realizado com sucesso',
+        description: 'Seu pedido foi registrado com sucesso.',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+    } catch (error) {
+      toast({
+        title: 'Erro ao realizar pedido',
+        description: 'Ocorreu um erro ao realizar o pedido.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
+  }
+
+  async function handleSubmitOrder() {
     if (!selectedAddress || !selectedAddress.number) {
       toast({
         title: 'Endereço de entrega inválido',
@@ -118,7 +148,7 @@ export function CheckoutSubmit() {
       paymentType,
       cart,
     }
-    saveOrder(order)
+    await handleRegisterOrder(order)
     updateCurrentOrder(order)
     navigate(ROUTES.ORDER_CONFIRMED)
     removeAllItemsFromCart()
@@ -249,6 +279,7 @@ export function CheckoutSubmit() {
             color="white"
             fontSize="sm"
             fontWeight="700"
+            isLoading={isPending}
             isDisabled={IsCartEmpty || isAddressesEmpty || isPaymentTypeEmpty}
             textTransform="uppercase"
             onClick={handleSubmitOrder}
@@ -270,6 +301,7 @@ export function CheckoutSubmit() {
             fontSize="sm"
             fontWeight="700"
             textTransform="uppercase"
+            isLoading={isPending}
             isDisabled={IsCartEmpty}
             onClick={onDeleteAllItemsOnCartDialogOpen}
             leftIcon={<Trash width={20} height={20} weight="fill" />}
