@@ -59,7 +59,11 @@ const SEARCH_ADDRESS_FORM_DEFAULT = {
   cep: '',
 }
 
-export function AddressButton() {
+type AddressButtonProps = {
+  isAddressLoading: boolean
+}
+
+export function AddressButton({ isAddressLoading }: AddressButtonProps) {
   const toast = useToast()
   const [parent] = useAutoAnimate()
   const initialFocusRef = useRef<HTMLButtonElement>(null)
@@ -181,6 +185,7 @@ export function AddressButton() {
           p="2"
           h="fit-content"
           rounded="md"
+          isLoading={isAddressLoading}
           fontSize={{
             base: '0',
             sm: 'sm',
