@@ -10,8 +10,13 @@ import {
   Highlight,
   useToast,
 } from '@chakra-ui/react'
+import { useMutation } from '@tanstack/react-query'
 
+import { deleteAllAddress } from '@/services/api/delete-all-address'
+import { updateSelectedAddress } from '@/services/api/update-selected-address'
+import { queryClient } from '@/services/react-query'
 import { useAddressSelectors } from '@/store'
+import { AddressProps } from '@/store/address'
 
 type DeleteAllAddressDialogProps = {
   isOpen: boolean
@@ -26,20 +31,62 @@ export function DeleteAllAddressDialog({
   cancelRef,
   onCloseSelectAddressModal,
 }: Readonly<DeleteAllAddressDialogProps>) {
-  const { deleteAllAddresses } = useAddressSelectors()
-
   const toast = useToast()
 
-  function handleDeleteAllAddresses() {
-    deleteAllAddresses()
+  const { addresses } = useAddressSelectors()
+
+  const {
+    mutateAsync: deleteAllAddressFn,
+    isPending: isPendingDeleteAllAddress,
+  } = useMutation({
+    mutationFn: deleteAllAddress,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['selected-address'] })
+      queryClient.invalidateQueries({ queryKey: ['addresses'] })
+    },
+  })
+
+  const {
+    mutateAsync: updateSelectedAddressFn,
+    isPending: isPendingSelectedAddress,
+  } = useMutation({
+    mutationFn: updateSelectedAddress,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['selected-address'] })
+    },
+  })
+
+  const isLoading = isPendingDeleteAllAddress || isPendingSelectedAddress
+
+  async function onDeleteSelectedAddress() {
+    try {
+      await deleteAllAddressFn({
+        addresses,
+      })
+
+      await updateSelectedAddressFn({ address: {} as AddressProps })
+
+      toast({
+        title: 'Endereços excluídos!',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+    } catch (error) {
+      toast({
+        title: 'Erro ao excluir os endereços',
+        description: 'Tente novamente mais tarde.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
+  }
+
+  async function handleDeleteAllAddresses() {
+    await onDeleteSelectedAddress()
     onClose()
     onCloseSelectAddressModal()
-
-    toast({
-      title: 'Todos os endereços foram excluídos.',
-      status: 'info',
-      duration: 3000,
-    })
   }
 
   return (
@@ -89,10 +136,15 @@ export function DeleteAllAddressDialog({
           </Highlight>
         </AlertDialogBody>
         <AlertDialogFooter>
-          <Button ref={cancelRef} onClick={onClose}>
+          <Button ref={cancelRef} onClick={onClose} isLoading={isLoading}>
             Não
           </Button>
-          <Button colorScheme="red" ml={3} onClick={handleDeleteAllAddresses}>
+          <Button
+            colorScheme="red"
+            ml={3}
+            isLoading={isLoading}
+            onClick={handleDeleteAllAddresses}
+          >
             Sim
           </Button>
         </AlertDialogFooter>

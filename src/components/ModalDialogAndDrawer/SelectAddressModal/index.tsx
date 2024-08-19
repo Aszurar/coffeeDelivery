@@ -16,10 +16,14 @@ import {
 } from '@chakra-ui/react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { AddressBook, WarningCircle } from '@phosphor-icons/react'
+import { useMutation } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
 
 import { AddressCard } from '@/components/AddressSelected/AddressCard'
 import { AddressesEmptyCard } from '@/components/AddressSelected/AddressEmptyCard'
+import { SelectAddressModalLoading } from '@/components/Skeleton/SelectAddressModalLoading/inde'
+import { updateSelectedAddress } from '@/services/api/update-selected-address'
+import { queryClient } from '@/services/react-query'
 import { useAddressSelectors } from '@/store'
 
 import { DeleteAllAddressDialog } from '../DeleteAllAddressDialog'
@@ -27,11 +31,13 @@ import { DeleteAllAddressDialog } from '../DeleteAllAddressDialog'
 type SelectAddressModalProps = {
   isOpen: boolean
   onClose: () => void
+  isAddressLoading: boolean
 }
 
 export function SelectAddressModal({
   isOpen,
   onClose,
+  isAddressLoading,
 }: Readonly<SelectAddressModalProps>) {
   const toast = useToast()
   const [parent] = useAutoAnimate()
@@ -43,17 +49,44 @@ export function SelectAddressModal({
     onClose: onDeleteAllAddressDialogClose,
   } = useDisclosure()
 
-  const {
-    addresses,
-    maxAddresses,
-    selectAddress,
-    totalAddresses,
-    selectedAddress,
-  } = useAddressSelectors()
+  const { addresses, maxAddresses, totalAddresses, selectedAddress } =
+    useAddressSelectors()
 
   const [addressSelectedId, setAddressSelectedId] = useState('')
 
   const listOfAddressesIsEmpty = totalAddresses === 0
+
+  const {
+    mutateAsync: updateSelectedAddressFn,
+    isPending: isPendingSelectedAddress,
+  } = useMutation({
+    mutationFn: updateSelectedAddress,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['selected-address'] })
+    },
+  })
+
+  async function onUpdateSelectedAddress(addressId?: string) {
+    try {
+      const findSelectedAddress = addresses.find(
+        (address) => address.id === addressId,
+      )
+
+      if (!findSelectedAddress) {
+        return
+      }
+
+      await updateSelectedAddressFn({ address: findSelectedAddress })
+    } catch (error) {
+      toast({
+        title: 'Erro ao salvar endereço selecionado',
+        description: 'Tente novamente mais tarde.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
+  }
 
   const isDisabled =
     !addressSelectedId ||
@@ -71,9 +104,9 @@ export function SelectAddressModal({
     onClose()
   }
 
-  function handleSubmitChangeAddress() {
+  async function handleSubmitChangeAddress() {
     if (addressSelectedId) {
-      selectAddress(addressSelectedId)
+      await onUpdateSelectedAddress(addressSelectedId)
 
       toast({
         title: 'Endereço selecionado!',
@@ -137,14 +170,16 @@ export function SelectAddressModal({
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody ref={parent} display="flex" flexDir="column" gap="3">
-          {addresses.map((address) => (
-            <AddressCard
-              key={address.id}
-              address={address}
-              isChecked={addressSelectedId === address.id}
-              onCheck={() => handleChangeAddress(address.id)}
-            />
-          ))}
+          {isAddressLoading && <SelectAddressModalLoading />}
+          {!isAddressLoading &&
+            addresses.map((address) => (
+              <AddressCard
+                key={address.id}
+                address={address}
+                isChecked={addressSelectedId === address.id}
+                onCheck={() => handleChangeAddress(address.id)}
+              />
+            ))}
           {listOfAddressesIsEmpty && (
             <AddressesEmptyCard
               icon={AddressBook}
@@ -160,10 +195,16 @@ export function SelectAddressModal({
           }}
         >
           <Flex gap="4">
-            <Button onClick={handleOnClose}>Cancelar</Button>
+            <Button
+              onClick={handleOnClose}
+              isLoading={isPendingSelectedAddress}
+            >
+              Cancelar
+            </Button>
             <Button
               colorScheme="yellow"
               isDisabled={isDisabled}
+              isLoading={isPendingSelectedAddress}
               onClick={handleSubmitChangeAddress}
             >
               Confirmar
@@ -174,6 +215,7 @@ export function SelectAddressModal({
             colorScheme="red"
             isDisabled={listOfAddressesIsEmpty}
             onClick={onDeleteAllAddressDialogOpen}
+            isLoading={isPendingSelectedAddress}
           >
             Excluir todos os endereços
           </Button>
