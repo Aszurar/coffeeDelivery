@@ -7,14 +7,17 @@ import {
   Icon,
   Text,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { CheckCircle, Trash } from '@phosphor-icons/react'
+import { useMutation } from '@tanstack/react-query'
 import { useRef } from 'react'
 
 import { DeleteSelectedAddressDialog } from '@/components/ModalDialogAndDrawer/DeleteSelectedAddressDialog'
 import { SelectButton } from '@/components/SelectButton'
-import { useAddressSelectors } from '@/store'
+import { deleteAddressById } from '@/services/api/delete-address-by-id'
+import { queryClient } from '@/services/react-query'
 import { AddressProps } from '@/store/address'
 import { formatCEP } from '@/utils/string'
 
@@ -42,18 +45,42 @@ export function AddressCard({ address, isChecked, onCheck }: AddressCardProps) {
   const cepFormatted = formatCEP(address.cep)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const deleteAllAddressDialogCancelRef = useRef<HTMLButtonElement>(null)
+  const toast = useToast()
 
   const [parent] = useAutoAnimate()
-  const { removeAddress } = useAddressSelectors()
 
-  function handleRemoveAddress(id: string) {
+  async function handleRemoveAddress(id: string) {
     if (isChecked) {
       onOpen()
 
       return
     }
 
-    removeAddress(id)
+    await onDeleteSelectedAddress(id)
+  }
+
+  const {
+    mutateAsync: deleteAddressByIdFn,
+    isPending: isPendingDeleteAddressById,
+  } = useMutation({
+    mutationFn: deleteAddressById,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['addresses'] })
+    },
+  })
+
+  async function onDeleteSelectedAddress(addressId: string) {
+    try {
+      await deleteAddressByIdFn({ id: addressId })
+    } catch (error) {
+      toast({
+        title: 'Erro ao remover endereço',
+        description: 'Tente novamente mais tarde.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
   }
 
   const checkStyle = isChecked ? selectedStyle : unSelectedStyle
@@ -169,7 +196,8 @@ export function AddressCard({ address, isChecked, onCheck }: AddressCardProps) {
           bg="transparent"
           variant="outline"
           icon={Trash}
-          onClick={() => handleRemoveAddress(address.id)}
+          isLoading={isPendingDeleteAddressById}
+          onClick={async () => await handleRemoveAddress(address.id)}
         >
           Remover
         </SelectButton>
@@ -179,7 +207,9 @@ export function AddressCard({ address, isChecked, onCheck }: AddressCardProps) {
         cancelRef={deleteAllAddressDialogCancelRef}
         isOpen={isOpen}
         onClose={onClose}
-        onRemoveSelectedAddress={() => removeAddress(address.id)}
+        onRemoveSelectedAddress={async () =>
+          await onDeleteSelectedAddress(address.id)
+        }
       />
     </Box>
   )
