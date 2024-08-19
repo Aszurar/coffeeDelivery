@@ -2,7 +2,6 @@ import { produce } from 'immer'
 import { StateCreator } from 'zustand'
 
 import { RegisterAddressFormProps } from '@/components/Form/RegisterAddressForm/validation'
-import { AppError } from '@/errors'
 
 export type AddressProps = RegisterAddressFormProps & {
   id: string
@@ -18,8 +17,10 @@ type AddressStoreProps = {
   maxAddresses: number
   selectedAddress: AddressProps | undefined
   incompleteAddress: IncompleteAddressProps | undefined
-  addNewAddress: (address: AddressProps) => void
-  selectAddress: (id: string) => void
+  isAddressLoading: boolean
+  setAddressLoading: (isLoading: boolean) => void
+  loadAddresses: (addresses: AddressProps[]) => void
+  loadSelectedAddress: (address?: AddressProps) => void
   updateAddress: (address: AddressProps) => void
   removeAddress: (id: string) => void
   addIncompleteAddressOnSelectedAddress: (address: IncompleteAddress) => void
@@ -27,41 +28,37 @@ type AddressStoreProps = {
   deleteAllAddresses: () => void
 }
 
-const createAddressStore: StateCreator<AddressStoreProps> = (set, get) => ({
+const createAddressStore: StateCreator<AddressStoreProps> = (set) => ({
   addresses: [],
   totalAddresses: 0,
   maxAddresses: 10,
   selectedAddress: undefined,
   incompleteAddress: undefined,
-  addNewAddress: (address) => {
-    const { addresses: currentAddresses, maxAddresses } = get()
-
-    if (currentAddresses.length >= maxAddresses) {
-      throw new AppError(
-        `Você atingiu o limite de ${maxAddresses} endereços cadastrados.`,
-        'Para adicionar um novo endereço, remova um dos endereços já cadastrados.',
-      )
-    }
-
-    const addressesListWithNewAddress = [...currentAddresses, address]
-
+  isAddressLoading: false,
+  setAddressLoading: (isLoading: boolean) => {
+    console.log('isLoading salvando', isLoading)
+    set({ isAddressLoading: isLoading })
+  },
+  loadAddresses: (addresses: AddressProps[]) => {
     set({
-      addresses: addressesListWithNewAddress,
-      totalAddresses: addressesListWithNewAddress.length,
-      selectedAddress: address,
+      addresses,
+      totalAddresses: addresses.length,
     })
   },
-  selectAddress: (id) => {
-    set(
-      produce((state: AddressStoreProps) => {
-        const selectedAddress = state.addresses.find(
-          (address) => address.id === id,
-        )
+  loadSelectedAddress: (address?: AddressProps) => {
+    const isAddressEmpty = address ? Object.keys(address).length === 0 : true
 
-        state.selectedAddress = selectedAddress
-      }),
-    )
+    if (isAddressEmpty) {
+      set({
+        selectedAddress: undefined,
+      })
+    } else {
+      set({
+        selectedAddress: address,
+      })
+    }
   },
+
   addIncompleteAddressOnSelectedAddress: (address: IncompleteAddress) => {
     set(
       produce((state: AddressStoreProps) => {
