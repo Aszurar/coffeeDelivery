@@ -20,36 +20,61 @@ export function BottomButtons({
   onCancelEditAddress,
   onSelectAddressModalOpen,
   onDeleteSelectedAddressDialogOpen,
-}: BottomButtonsProps) {
+}: Readonly<BottomButtonsProps>) {
   const { totalAddresses } = useAddressSelectors()
   const hasOnlyOneAddress = totalAddresses === 1
   const badgeDisabledStyle = hasOnlyOneAddress ? '0.5' : '1'
 
   if (!selectedAddressId) {
     return (
-      <Button
-        type="button"
-        h="9"
-        fontSize="sm"
-        fontWeight="700"
-        textTransform="uppercase"
-        color="white"
-        bg="yellow.500"
-        _hover={{
-          bg: 'yellow.700',
-          _disabled: {
+      <Box position="relative">
+        <Button
+          type="button"
+          h="9"
+          fontSize="sm"
+          fontWeight="700"
+          textTransform="uppercase"
+          color="white"
+          bg="yellow.500"
+          _hover={{
+            bg: 'yellow.700',
+            _disabled: {
+              bg: 'yellow.500',
+            },
+          }}
+          _active={{
             bg: 'yellow.500',
-          },
-        }}
-        _active={{
-          bg: 'yellow.500',
-        }}
-        isDisabled={hasOnlyOneAddress}
-        onClick={onSelectAddressModalOpen}
-        leftIcon={<Icon as={AddressBook} w="5" h="5" />}
-      >
-        Selecionar outro endereço
-      </Button>
+          }}
+          isDisabled={hasOnlyOneAddress}
+          onClick={onSelectAddressModalOpen}
+          leftIcon={<Icon as={AddressBook} w="5" h="5" />}
+          _dark={{
+            color: 'gray.800',
+          }}
+        >
+          Selecionar outro endereço
+        </Button>
+
+        {!!totalAddresses && (
+          <Badge
+            variant="solid"
+            h="5"
+            w="5"
+            opacity={badgeDisabledStyle}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            rounded="full"
+            colorScheme="purple"
+            position="absolute"
+            top="-2"
+            right="-2"
+            shadow="md"
+          >
+            {totalAddresses}
+          </Badge>
+        )}
+      </Box>
     )
   }
 
