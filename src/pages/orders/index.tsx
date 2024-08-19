@@ -1,28 +1,42 @@
-import { Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react'
+import { Flex, Grid, GridItem, Heading, Text, useToast } from '@chakra-ui/react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { Helmet } from 'react-helmet-async'
 
 import { OrderCard } from '@/components/OrderCard'
-import { IOrder } from '@/dto/order'
-import { getOrders } from '@/storage/orders/get-orders'
+import { OrdersLoading } from '@/components/Skeleton/OrdersLoading'
+import { getOrders } from '@/services/api/get-orders'
 
 export function OrderHistoric() {
-  const [orders, setOrders] = useState<IOrder[]>()
   const [parent] = useAutoAnimate()
+  const toast = useToast()
 
-  function getOrderHistoric() {
-    const response = getOrders()
-    setOrders(response)
+  const {
+    data: orders,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['orders'],
+    queryFn: getOrders,
+  })
+
+  if (isError) {
+    toast({
+      title: 'Erro ao carregar  pedidos ',
+      description:
+        'Ocorreu um erro ao carregar os cafés, tente novamente mais tarde.',
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+    })
   }
-
-  useEffect(() => {
-    getOrderHistoric()
-  }, [])
 
   return (
     <Flex flexDir="column" gap="5">
       <Heading>Meus Pedidos</Heading>
       <Text fontWeight="600">Histórico</Text>
+
+      <Helmet title="Pedidos" />
 
       <Grid
         w="100%"
@@ -38,6 +52,8 @@ export function OrderHistoric() {
           '2xl': 'repeat(3, 1fr)',
         }}
       >
+        {isLoading && <OrdersLoading />}
+
         {orders?.map((order, index) => (
           <GridItem key={order.id} w="fit-content">
             <OrderCard number={index + 1} order={order} />

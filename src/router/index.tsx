@@ -5,7 +5,7 @@ import { Checkout } from '@/pages/checkout'
 import Home from '@/pages/home'
 import { NotFound } from '@/pages/not-found'
 import { OrderConfirmed } from '@/pages/order-confirmed'
-import { OrderHistoric } from '@/pages/order-historic'
+import { OrderHistoric } from '@/pages/orders'
 import { PageError } from '@/pages/page-error'
 
 import { ROUTES } from './routes'
