@@ -1,134 +1,267 @@
 {
-
   "coffees": [
     {
       "id": "1",
       "name": "Expresso Tradicional",
       "description": "O tradicional café feito com água quente e grãos moídos",
-      "tag": ["TRADICIONAL"],
+      "tag": [
+        "TRADICIONAL"
+      ],
       "price": 2.5,
       "image": "/images/coffees/expresso-tradicional.png"
     },
-  
     {
       "id": "2",
       "name": "Expresso Americano",
       "description": "Expresso diluído, menos intenso que o tradicional",
-      "tag": ["TRADICIONAL"],
-      "price": 2.0,
+      "tag": [
+        "TRADICIONAL"
+      ],
+      "price": 2,
       "image": "/images/coffees/expresso-americano.png"
     },
-  
     {
       "id": "3",
       "name": "Expresso Cremoso",
       "description": "Café expresso tradicional com espuma cremosa",
-      "tag": ["TRADICIONAL"],
+      "tag": [
+        "TRADICIONAL"
+      ],
       "price": 2.25,
       "image": "/images/coffees/expresso-cremoso.png"
     },
-  
     {
       "id": "4",
       "name": "Expresso Gelado",
       "description": "Bebida preparada com café expresso e cubos de gelo",
-      "tag": ["TRADICIONAL", "GELADO"],
+      "tag": [
+        "TRADICIONAL",
+        "GELADO"
+      ],
       "price": 2.5,
       "image": "/images/coffees/expresso-gelado.png"
     },
-  
     {
       "id": "5",
       "name": "Café com Leite",
       "description": "Meio a meio de expresso tradicional com leite vaporizado",
-      "tag": ["TRADICIONAL", "COM LEITE"],
-      "price": 3.0,
-      "image":  "/images/coffees/cafe-com-leite.png"
+      "tag": [
+        "TRADICIONAL",
+        "COM LEITE"
+      ],
+      "price": 3,
+      "image": "/images/coffees/cafe-com-leite.png"
     },
-  
     {
       "id": "6",
       "name": "Latte",
-      "description":
-        "Uma dose de café expresso com o dobro de leite e espuma cremosa",
-      "tag": ["TRADICIONAL", "COM LEITE"],
+      "description": "Uma dose de café expresso com o dobro de leite e espuma cremosa",
+      "tag": [
+        "TRADICIONAL",
+        "COM LEITE"
+      ],
       "price": 3.5,
       "image": "/images/coffees/latte.png"
     },
-  
     {
       "id": "7",
       "name": "Capuccino",
-      "description":
-        "Bebida com canela feita de doses iguais de café, leite e espuma",
-      "tag": ["TRADICIONAL", "COM LEITE"],
+      "description": "Bebida com canela feita de doses iguais de café, leite e espuma",
+      "tag": [
+        "TRADICIONAL",
+        "COM LEITE"
+      ],
       "price": 4.5,
       "image": "/images/coffees/capuccino.png"
     },
-  
     {
       "id": "8",
       "name": "Macchiato",
-      "description":
-        "Café expresso misturado com um pouco de leite quente e espuma",
-      "tag": ["TRADICIONAL", "ALCOÓLICO", "GELADO"],
+      "description": "Café expresso misturado com um pouco de leite quente e espuma",
+      "tag": [
+        "TRADICIONAL",
+        "ALCOÓLICO",
+        "GELADO"
+      ],
       "price": 4,
-      "image":  "/images/coffees/macchiato.png"
+      "image": "/images/coffees/macchiato.png"
     },
-  
     {
       "id": "9",
       "name": "Mocaccino",
       "description": "Café expresso com calda de chocolate, pouco leite e espuma",
-      "tag": ["TRADICIONAL", "COM LEITE"],
+      "tag": [
+        "TRADICIONAL",
+        "COM LEITE"
+      ],
       "price": 5,
       "image": "/images/coffees/mocaccino.png"
     },
-  
     {
       "id": "10",
       "name": "Chocolate Quente",
       "description": "Bebida feita com chocolate dissolvido no leite quente e café",
-      "tag": ["ESPECIAL", "COM LEITE"],
+      "tag": [
+        "ESPECIAL",
+        "COM LEITE"
+      ],
       "price": 7,
       "image": "/images/coffees/chocolate-quente.png"
     },
-  
     {
       "id": "11",
       "name": "Havaiano",
       "description": "Bebida adocicada preparada com café e leite de coco",
-      "tag": ["ESPECIAL"],
+      "tag": [
+        "ESPECIAL"
+      ],
       "price": 10,
       "image": "/images/coffees/havaiano.png"
     },
-  
     {
       "id": "12",
       "name": "Árabe",
       "description": "Bebida preparada com grãos de café árabe e especiarias",
-      "tag": ["ESPECIAL"],
+      "tag": [
+        "ESPECIAL"
+      ],
       "price": 11,
       "image": "/images/coffees/arabe.png"
     },
-  
     {
       "id": "13",
       "name": "Cubano",
-      "description":
-        "Drink gelado de café expresso com rum, creme de leite e hortelã",
-      "tag": ["ESPECIAL", "ALCOÓLICO", "GELADO"],
+      "description": "Drink gelado de café expresso com rum, creme de leite e hortelã",
+      "tag": [
+        "ESPECIAL",
+        "ALCOÓLICO",
+        "GELADO"
+      ],
       "price": 12,
       "image": "/images/coffees/cubano.png"
     },
-  
     {
       "id": "14",
       "name": "Irlandês",
       "description": "Bebida a base de café, uísque irlandês, açúcar e chantilly",
-      "tag": ["ESPECIAL", "ALCOÓLICO"],
+      "tag": [
+        "ESPECIAL",
+        "ALCOÓLICO"
+      ],
       "price": 15,
       "image": "/images/coffees/irlandes.png"
     }
-  ]
+  ],
+  "orders": [
+    {
+      "id": "ef7a3b8a-78c5-4356-b8b7-464f90dfc464",
+      "createdAt": "2024-08-16T15:36:42.400Z",
+      "price": 25,
+      "address": {
+        "cep": "58037535",
+        "street": "Rua Agente Fiscal Paulo de Assis",
+        "number": 57,
+        "complement": "Número 57, Apartamento 1001",
+        "neighborhood": "Jardim Oceania",
+        "city": "João Pessoa",
+        "uf": "PB",
+        "id": "2d0b3423-a430-4cd7-abba-8d43338dcaf7"
+      },
+      "paymentType": 3,
+      "cart": [
+        {
+          "id": "2",
+          "name": "Expresso Americano",
+          "price": 2,
+          "quantity": 1
+        },
+        {
+          "id": "7",
+          "name": "Capuccino",
+          "price": 4.5,
+          "quantity": 1
+        },
+        {
+          "id": "6",
+          "name": "Latte",
+          "price": 3.5,
+          "quantity": 1
+        },
+        {
+          "id": "9",
+          "name": "Mocaccino",
+          "price": 5,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "5e4ca61b-79ab-4a57-8e99-9cbc53276841",
+      "createdAt": "2024-08-16T15:37:38.634Z",
+      "price": 24.5,
+      "address": {
+        "cep": "58037535",
+        "street": "Rua Agente Fiscal Paulo de Assis",
+        "number": 57,
+        "complement": "Número 57, Apartamento 1001",
+        "neighborhood": "Jardim Oceania",
+        "city": "João Pessoa",
+        "uf": "PB",
+        "id": "2d0b3423-a430-4cd7-abba-8d43338dcaf7"
+      },
+      "paymentType": 3,
+      "cart": [
+        {
+          "id": "1",
+          "name": "Expresso Tradicional",
+          "price": 2.5,
+          "quantity": 1
+        },
+        {
+          "id": "6",
+          "name": "Latte",
+          "price": 3.5,
+          "quantity": 1
+        },
+        {
+          "id": "7",
+          "name": "Capuccino",
+          "price": 4.5,
+          "quantity": 1
+        },
+        {
+          "id": "8",
+          "name": "Macchiato",
+          "price": 4,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "a9fe9adf-9077-43d5-92fc-26421b2ddd54",
+      "createdAt": "2024-08-16T18:01:00.228Z",
+      "price": 12,
+      "address": {
+        "cep": "76767676",
+        "street": "Rua Manuel Figueredo",
+        "number": 878787,
+        "complement": "",
+        "neighborhood": "8787878",
+        "city": "98989",
+        "uf": "RS",
+        "id": "a9049540-9306-4032-bd2a-b7e90ed7149d"
+      },
+      "paymentType": 1,
+      "cart": [
+        {
+          "id": "2",
+          "name": "Expresso Americano",
+          "price": 2,
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "addresses": [],
+  "selected-address": {}
 }
