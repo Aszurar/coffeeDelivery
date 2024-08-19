@@ -20,6 +20,8 @@ import * as Toast from '@/components/Toast'
 import { REGISTER_ADDRESS_FORM_DEFAULT_VALUES } from '@/dto/address'
 import { AppError } from '@/errors'
 import { getAddressByCep } from '@/services/api/get-address-by-cep'
+import { registerAddress } from '@/services/api/register-address'
+import { updateSelectedAddress } from '@/services/api/update-selected-address'
 import { queryClient } from '@/services/react-query'
 import { useAddressSelectors } from '@/store'
 import { AddressProps } from '@/store/address'
@@ -45,7 +47,6 @@ export function RegisterAddressForm({
   const toast = useToast()
 
   const {
-    addNewAddress,
     totalAddresses,
     updateAddress,
     maxAddresses,
@@ -79,7 +80,45 @@ export function RegisterAddressForm({
     },
   })
 
-  const isLoading = isPending || isSubmitting
+  const {
+    mutateAsync: registerAddressFn,
+    isPending: isRegisterAddressLoading,
+  } = useMutation({
+    mutationFn: registerAddress,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['addresses'] })
+    },
+  })
+
+  const {
+    mutateAsync: updateSelectedAddressFn,
+    isPending: isPendingSelectedAddress,
+  } = useMutation({
+    mutationFn: updateSelectedAddress,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['selected-address'] })
+    },
+  })
+
+  async function onUpdateSelectedAddress(selectedAddress?: AddressProps) {
+    try {
+      await updateSelectedAddressFn({ address: selectedAddress })
+    } catch (error) {
+      toast({
+        title: 'Erro ao salvar endereço selecionado',
+        description: 'Tente novamente mais tarde.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
+  }
+
+  const isLoading =
+    isPending ||
+    isSubmitting ||
+    isRegisterAddressLoading ||
+    isPendingSelectedAddress
 
   async function handleSearchAddressByCep(cepValue: string) {
     clearErrors('cep')
@@ -125,14 +164,15 @@ export function RegisterAddressForm({
     }
   }
 
-  function handleRegisterNewAddress(data: RegisterAddressFormProps) {
+  async function handleRegisterNewAddress(data: RegisterAddressFormProps) {
     clearErrors('cep')
     const address: AddressProps = {
       ...data,
       id: crypto.randomUUID(),
     }
     try {
-      addNewAddress(address)
+      await registerAddressFn({ address })
+      await onUpdateSelectedAddress(address)
 
       toast({
         title: 'Endereço cadastrado com sucesso!',
