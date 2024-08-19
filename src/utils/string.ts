@@ -45,8 +45,8 @@ function getStringAndRemoveCharacters(value: string) {
  * formatCEP('12345678')
  *
  * **/
-function formatCEP(cep: string) {
-  return cep.replace(/(\d{5})(\d{3})/, '$1-$2')
+function formatCEP(cep?: string) {
+  return cep ? cep.replace(/(\d{5})(\d{3})/, '$1-$2') : ''
 }
 
 /**

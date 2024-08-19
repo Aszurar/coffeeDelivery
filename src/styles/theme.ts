@@ -23,6 +23,14 @@ export const theme = extendTheme({
   sizes: {
     '5xl.5': '70rem',
   },
+  height: {
+    '3': '0.75rem',
+    '3.5': '0.875rem',
+  },
+
+  margin: {
+    '3.5': '0.875rem',
+  },
 
   colors: {
     gray: {
