@@ -8,6 +8,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
+import { Helmet } from 'react-helmet-async'
 
 import DeliveryPNG from '@/assets/images/delivery.png'
 import { IconBadge } from '@/components/IconBadge'
@@ -19,6 +20,7 @@ export function OrderConfirmed() {
 
   return (
     <>
+      <Helmet title="Pedido confirmado" />
       <Box
         mt={{ base: '8', md: '5.75rem' }}
         p={{ base: '2', md: '6', lg: '8', xl: '10' }}
