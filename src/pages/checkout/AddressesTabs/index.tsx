@@ -4,6 +4,7 @@ import {
   AlertIcon,
   AlertTitle,
   Box,
+  Skeleton,
   Tab,
   TabList,
   TabPanel,
@@ -40,6 +41,7 @@ export function AddressesTabs() {
     maxAddresses,
     selectedAddress,
     removeAddress,
+    isAddressLoading,
   } = useAddressSelectors()
 
   function handleRemoveAddress() {
@@ -87,6 +89,7 @@ export function AddressesTabs() {
   useEffect(() => {
     // Switch to add address when the list of address is empty
     switchTabs()
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalAddresses])
 
@@ -97,6 +100,10 @@ export function AddressesTabs() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [incompleteAddress])
+
+  if (isAddressLoading) {
+    return <Skeleton height="200px" rounded="lg" />
+  }
 
   return (
     <Tabs variant="unstyled" defaultIndex={tabActivated} index={currentTab}>
@@ -157,7 +164,11 @@ export function AddressesTabs() {
           />
         </TabPanel>
       </TabPanels>
-      <SelectAddressModal isOpen={isOpen} onClose={onClose} />
+      <SelectAddressModal
+        isOpen={isOpen}
+        onClose={onClose}
+        isAddressLoading={isAddressLoading}
+      />
       <DeleteSelectedAddressDialog
         isOpen={isDeleteSelectedAddressDialog}
         onClose={onDeleteSelectedAddressDialogClose}
