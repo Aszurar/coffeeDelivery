@@ -30,7 +30,7 @@ type OrderCardProps = {
   number: number
 }
 
-export function OrderCard({ number, order }: OrderCardProps) {
+export function OrderCard({ number, order }: Readonly<OrderCardProps>) {
   const totalPriceFormatted = priceFormatterWithCurrency.format(order.price)
   const orderNumber = number
   const hasMoreThanOneItem = order.cart?.length > 1
