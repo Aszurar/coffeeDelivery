@@ -44,7 +44,7 @@ export function OrderHistoric() {
         status: 'success',
         isClosable: true,
         containerStyle: {
-          mt: '8rem',
+          mt: '8',
         },
       })
 
