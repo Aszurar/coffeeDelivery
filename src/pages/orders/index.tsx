@@ -3,14 +3,16 @@ import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { useQuery } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 
-import { OrderCard } from '@/components/OrderCard'
+import { OrderCardMemo } from '@/components/OrderCard'
 import { OrdersLoading } from '@/components/Skeleton/OrdersLoading'
 import { getOrders } from '@/services/api/get-orders'
+import { useCartSelectors } from '@/store'
+import { CartProps } from '@/store/cart'
 
 export function OrderHistoric() {
-  const [parent] = useAutoAnimate()
   const toast = useToast()
-
+  const [parent] = useAutoAnimate()
+  const { addItemToCart } = useCartSelectors()
   const {
     data: orders,
     isLoading,
@@ -27,6 +29,28 @@ export function OrderHistoric() {
         'Ocorreu um erro ao carregar os cafés, tente novamente mais tarde.',
       status: 'error',
       duration: 5000,
+      isClosable: true,
+    })
+  }
+
+  function handleAddOldOrderToCart(oldOrderCart: CartProps[]) {
+    if (oldOrderCart) {
+      oldOrderCart.forEach((coffee) => {
+        addItemToCart(coffee)
+      })
+
+      toast({
+        title: 'Pedido adicionado ao carrinho',
+        status: 'success',
+        isClosable: true,
+      })
+
+      return
+    }
+
+    toast({
+      title: 'Erro ao adicionar pedido ao carrinho',
+      status: 'error',
       isClosable: true,
     })
   }
@@ -56,7 +80,11 @@ export function OrderHistoric() {
 
         {orders?.map((order, index) => (
           <GridItem key={order.id} w="fit-content">
-            <OrderCard number={index + 1} order={order} />
+            <OrderCardMemo
+              number={index + 1}
+              order={order}
+              onAddOldOrderToCart={() => handleAddOldOrderToCart(order.cart)}
+            />
           </GridItem>
         ))}
       </Grid>

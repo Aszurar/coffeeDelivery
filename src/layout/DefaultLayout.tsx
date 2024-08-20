@@ -10,6 +10,7 @@ export default function DefaultLayout() {
       minH="100vh"
       flexDir="column"
       bg="gray.100"
+      py="8"
       _dark={{
         bg: 'gray.900',
         color: 'gray.300',

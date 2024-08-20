@@ -16,21 +16,26 @@ import {
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { CaretDown, CaretUp, ShoppingCart } from '@phosphor-icons/react'
 import Lottie from 'lottie-react'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
 import coffeeAnimation from '@/assets/animations/coffee.json'
 import { IOrder } from '@/dto/order'
 import { PAYMENT_TYPE_VALUES } from '@/dto/payment'
 import { priceFormatter, priceFormatterWithCurrency } from '@/utils/number'
 
-type OrderProps = Omit<IOrder, 'id'>
-
 type OrderCardProps = {
-  order: OrderProps
+  order: IOrder
   number: number
+  onAddOldOrderToCart: () => void
 }
 
-export function OrderCard({ number, order }: Readonly<OrderCardProps>) {
+const FIRST_ITEM = 1
+
+export function OrderCard({
+  number,
+  order,
+  onAddOldOrderToCart,
+}: Readonly<OrderCardProps>) {
   const totalPriceFormatted = priceFormatterWithCurrency.format(order.price)
   const orderNumber = number
   const hasMoreThanOneItem = order.cart?.length > 1
@@ -40,7 +45,7 @@ export function OrderCard({ number, order }: Readonly<OrderCardProps>) {
   const showItensButtonInfo = isShowAllItens
     ? { label: 'Ver menos itens', icon: <CaretUp weight="bold" /> }
     : {
-        label: `...Ver todos itens(+ ${order.cart?.length})`,
+        label: `...Ver todos itens(+ ${order.cart?.length - FIRST_ITEM})`,
         icon: <CaretDown weight="bold" />,
       }
 
@@ -205,9 +210,11 @@ export function OrderCard({ number, order }: Readonly<OrderCardProps>) {
         <Button
           flex="1"
           variant="ghost"
+          type-="button"
           colorScheme="purple"
           leftIcon={<ShoppingCart weight="fill" />}
           fontFamily="heading"
+          onClick={onAddOldOrderToCart}
         >
           Adicionar ao carrinho
         </Button>
@@ -215,3 +222,10 @@ export function OrderCard({ number, order }: Readonly<OrderCardProps>) {
     </Card>
   )
 }
+
+export const OrderCardMemo = memo(OrderCard, (prevProps, nextProps) => {
+  return (
+    prevProps.number === nextProps.number &&
+    prevProps.order.id === nextProps.order.id
+  )
+})

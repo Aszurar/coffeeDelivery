@@ -260,8 +260,158 @@
           "quantity": 1
         }
       ]
+    },
+    {
+      "id": "b9e8e076-b351-45ab-8cc7-cb48919d64da",
+      "createdAt": "2024-08-20T14:18:20.267Z",
+      "price": 17,
+      "address": {
+        "cep": "12122112",
+        "street": "Rua Luiz Caramelo",
+        "number": 1212,
+        "complement": "",
+        "neighborhood": "Guaratiba",
+        "city": "Teste",
+        "uf": "PR",
+        "id": "d7aceeb1-8868-4e6f-9154-587693b11a71"
+      },
+      "paymentType": 2,
+      "cart": [
+        {
+          "id": "2",
+          "name": "Expresso Americano",
+          "price": 2,
+          "quantity": 1
+        },
+        {
+          "id": "1",
+          "name": "Expresso Tradicional",
+          "price": 2.5,
+          "quantity": 1
+        },
+        {
+          "id": "4",
+          "name": "Expresso Gelado",
+          "price": 2.5,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "68c80211-8a4c-4830-a86e-b8f65e6f3ef8",
+      "createdAt": "2024-08-20T14:20:28.662Z",
+      "price": 33,
+      "address": {
+        "cep": "12122112",
+        "street": "Rua Luiz Caramelo",
+        "number": 1212,
+        "complement": "",
+        "neighborhood": "Guaratiba",
+        "city": "Teste",
+        "uf": "PR",
+        "id": "d7aceeb1-8868-4e6f-9154-587693b11a71"
+      },
+      "paymentType": 3,
+      "cart": [
+        {
+          "id": "1",
+          "name": "Expresso Tradicional",
+          "price": 2.5,
+          "quantity": 1
+        },
+        {
+          "id": "6",
+          "name": "Latte",
+          "price": 3.5,
+          "quantity": 1
+        },
+        {
+          "id": "7",
+          "name": "Capuccino",
+          "price": 4.5,
+          "quantity": 2
+        },
+        {
+          "id": "8",
+          "name": "Macchiato",
+          "price": 4,
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "id": "fde88863-dc45-48da-8f46-2ddd609a03e1",
+      "createdAt": "2024-08-20T14:20:58.429Z",
+      "price": 39,
+      "address": {
+        "cep": "58037535",
+        "street": "Rua Agente Fiscal Paulo de Assis",
+        "number": 57,
+        "complement": "",
+        "neighborhood": "Jardim Oceania",
+        "city": "João Pessoa",
+        "uf": "PB",
+        "id": "24a53e26-3d29-497d-abec-0c7c212cceaf"
+      },
+      "paymentType": 1,
+      "cart": [
+        {
+          "id": "1",
+          "name": "Expresso Tradicional",
+          "price": 2.5,
+          "quantity": 2
+        },
+        {
+          "id": "6",
+          "name": "Latte",
+          "price": 3.5,
+          "quantity": 2
+        },
+        {
+          "id": "7",
+          "name": "Capuccino",
+          "price": 4.5,
+          "quantity": 2
+        },
+        {
+          "id": "8",
+          "name": "Macchiato",
+          "price": 4,
+          "quantity": 2
+        }
+      ]
     }
   ],
-  "addresses": [],
-  "selected-address": {}
+  "addresses": [
+    {
+      "cep": "58037535",
+      "street": "Rua Agente Fiscal Paulo de Assis",
+      "number": 57,
+      "complement": "",
+      "neighborhood": "Jardim Oceania",
+      "city": "João Pessoa",
+      "uf": "PB",
+      "id": "24a53e26-3d29-497d-abec-0c7c212cceaf"
+    },
+    {
+      "cep": "12122112",
+      "street": "Rua Luiz Caramelo",
+      "number": 1212,
+      "complement": "",
+      "neighborhood": "Guaratiba",
+      "city": "Teste",
+      "uf": "PR",
+      "id": "d7aceeb1-8868-4e6f-9154-587693b11a71"
+    }
+  ],
+  "selected-address": {
+    "cep": "58037535",
+    "street": "Rua Agente Fiscal Paulo de Assis",
+    "number": 57,
+    "complement": "",
+    "neighborhood": "Jardim Oceania",
+    "city": "João Pessoa",
+    "uf": "PB",
+    "id": "24a53e26-3d29-497d-abec-0c7c212cceaf"
+  }
 }
