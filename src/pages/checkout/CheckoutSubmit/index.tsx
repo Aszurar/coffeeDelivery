@@ -128,6 +128,7 @@ export function CheckoutSubmit() {
       <Heading
         fontSize="lg"
         color="gray.800"
+        as="h2"
         _dark={{
           color: 'gray.200',
         }}

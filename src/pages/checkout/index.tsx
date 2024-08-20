@@ -26,6 +26,7 @@ export function Checkout() {
       <Grid
         gap="6"
         w="100%"
+        as="main"
         templateColumns={{
           base: '1fr',
           xl: '1fr 28rem',
@@ -33,6 +34,7 @@ export function Checkout() {
       >
         <GridItem>
           <Heading
+            as="h1"
             fontSize="lg"
             color="gray.800"
             _dark={{
@@ -69,7 +71,6 @@ export function Checkout() {
               />
               <Flex flexDir="column" gap="0.5">
                 <Text
-                  as="h3"
                   fontSize="md"
                   fontFamily="body"
                   color="gray.800"
@@ -112,7 +113,6 @@ export function Checkout() {
               />
               <Flex flexDir="column" gap="0.5">
                 <Text
-                  as="h3"
                   fontSize="md"
                   fontFamily="body"
                   color="gray.800"

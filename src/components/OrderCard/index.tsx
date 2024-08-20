@@ -147,44 +147,44 @@ export function OrderCard({
               </ListItem>
             )
           })}
-          {hasMoreThanOneItem && (
-            <Flex flexDir="column">
-              <Button
-                variant="ghost"
-                color="purple.500"
-                w="fit-content"
-                h="fit-content"
-                py="1"
-                px="2"
-                _active={{
-                  color: 'purple.700',
-                }}
-                _dark={{
-                  color: 'purple.300',
-                  _active: {
-                    color: 'purple.400',
-                  },
-                }}
-                onClick={handleToggleShowAllItens}
-                rightIcon={showItensButtonInfo.icon}
-              >
-                {showItensButtonInfo.label}
-              </Button>
-            </Flex>
-          )}
-
-          <Flex gap="1" fontFamily="heading">
-            <Text>+ Frete: </Text>
-            <Text
-              color="purple.700"
-              _dark={{
-                color: 'purple.200',
-              }}
-            >
-              R$ 10,00
-            </Text>
-          </Flex>
         </UnorderedList>
+        {hasMoreThanOneItem && (
+          <Flex flexDir="column">
+            <Button
+              variant="ghost"
+              color="purple.500"
+              w="fit-content"
+              h="fit-content"
+              py="1"
+              px="2"
+              _active={{
+                color: 'purple.700',
+              }}
+              _dark={{
+                color: 'purple.300',
+                _active: {
+                  color: 'purple.400',
+                },
+              }}
+              onClick={handleToggleShowAllItens}
+              rightIcon={showItensButtonInfo.icon}
+            >
+              {showItensButtonInfo.label}
+            </Button>
+          </Flex>
+        )}
+
+        <Flex gap="1" fontFamily="heading">
+          <Text>+ Frete: </Text>
+          <Text
+            color="purple.700"
+            _dark={{
+              color: 'purple.200',
+            }}
+          >
+            R$ 10,00
+          </Text>
+        </Flex>
       </CardBody>
 
       <Divider
