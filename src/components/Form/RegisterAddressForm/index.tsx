@@ -59,7 +59,7 @@ export function RegisterAddressForm({
   const {
     watch,
     control,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting: isSubmittingAddressToSave },
     setError,
     clearErrors,
     handleSubmit,
@@ -72,14 +72,17 @@ export function RegisterAddressForm({
   const cep = watch('cep')
   const complement = watch('complement')
 
-  const { isPending, mutateAsync: getAddressByCepFn } = useMutation({
+  const {
+    isPending: isGetAddressByCepLoading,
+    mutateAsync: getAddressByCepFn,
+  } = useMutation({
     mutationFn: getAddressByCep,
     onSuccess: (data) => {
       queryClient.setQueryData(['cepAddress', cep], data)
     },
   })
 
-  const isLoading = isPending || isSubmitting
+  const isLoading = isGetAddressByCepLoading || isSubmittingAddressToSave
 
   async function handleSearchAddressByCep(cepValue: string) {
     clearErrors('cep')
