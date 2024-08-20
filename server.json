@@ -402,16 +402,36 @@
       "city": "Teste",
       "uf": "PR",
       "id": "d7aceeb1-8868-4e6f-9154-587693b11a71"
+    },
+    {
+      "cep": "58037535",
+      "street": "Rua Agente Fiscal Paulo de Assis",
+      "number": 57,
+      "complement": "",
+      "neighborhood": "Jardim Oceania",
+      "city": "João Pessoa",
+      "uf": "PB",
+      "id": "149bbce5-a57d-47e3-8041-97747ba224e7"
+    },
+    {
+      "cep": "58037535",
+      "street": "Rua Agente Fiscal Paulo de Assis",
+      "number": 57,
+      "complement": "Número 57, Apartamento 1001",
+      "neighborhood": "Jardim Oceania",
+      "city": "João Pessoa",
+      "uf": "PB",
+      "id": "9863f1c8-e1c7-41db-9bb4-142f58080bf0"
     }
   ],
   "selected-address": {
     "cep": "58037535",
     "street": "Rua Agente Fiscal Paulo de Assis",
     "number": 57,
-    "complement": "",
+    "complement": "Número 57, Apartamento 1001",
     "neighborhood": "Jardim Oceania",
     "city": "João Pessoa",
     "uf": "PB",
-    "id": "24a53e26-3d29-497d-abec-0c7c212cceaf"
+    "id": "9863f1c8-e1c7-41db-9bb4-142f58080bf0"
   }
 }

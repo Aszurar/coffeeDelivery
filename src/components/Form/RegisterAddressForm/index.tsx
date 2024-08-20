@@ -331,6 +331,7 @@ export function RegisterAddressForm({
           controlWidth="12.5rem"
           minW="12.5rem"
           placeholder="Número"
+          isLoading={isLoading}
           type="number"
           {...register('number', { valueAsNumber: true })}
           errorMessage={errors.number?.message}
@@ -363,6 +364,7 @@ export function RegisterAddressForm({
               placeholder="Complemento"
               {...register('complement')}
               borderWidth={0}
+              isLoading={isLoading}
             />
             {!complement && (
               <InputRightElement
