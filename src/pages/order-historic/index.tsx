@@ -1,18 +1,44 @@
-import { Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react'
+import { Flex, Grid, GridItem, Heading, Text, useToast } from '@chakra-ui/react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { useEffect, useState } from 'react'
 
-import { OrderCard } from '@/components/OrderCard'
+import { OrderCardMemo } from '@/components/OrderCard'
 import { IOrder } from '@/dto/order'
 import { getOrders } from '@/storage/orders/get-orders'
+import { useCartSelectors } from '@/store'
+import { CartProps } from '@/store/cart'
 
 export function OrderHistoric() {
   const [orders, setOrders] = useState<IOrder[]>()
   const [parent] = useAutoAnimate()
+  const { addItemToCart } = useCartSelectors()
+  const toast = useToast()
 
   function getOrderHistoric() {
     const response = getOrders()
     setOrders(response)
+  }
+
+  function handleAddOldOrderToCart(oldOrderCart: CartProps[]) {
+    if (oldOrderCart) {
+      oldOrderCart.forEach((coffee) => {
+        addItemToCart(coffee)
+      })
+
+      toast({
+        title: 'Pedido adicionado ao carrinho',
+        status: 'success',
+        isClosable: true,
+      })
+
+      return
+    }
+
+    toast({
+      title: 'Erro ao adicionar pedido ao carrinho',
+      status: 'error',
+      isClosable: true,
+    })
   }
 
   useEffect(() => {
@@ -40,7 +66,11 @@ export function OrderHistoric() {
       >
         {orders?.map((order, index) => (
           <GridItem key={order.id} w="fit-content">
-            <OrderCard number={index + 1} order={order} />
+            <OrderCardMemo
+              number={index + 1}
+              order={order}
+              onAddOldOrderToCart={() => handleAddOldOrderToCart(order.cart)}
+            />
           </GridItem>
         ))}
       </Grid>
