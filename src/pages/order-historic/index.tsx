@@ -29,6 +29,9 @@ export function OrderHistoric() {
         title: 'Pedido adicionado ao carrinho',
         status: 'success',
         isClosable: true,
+        containerStyle: {
+          mt: '6rem',
+        },
       })
 
       return
