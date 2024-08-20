@@ -42,7 +42,7 @@ export function CoffeeCardControl({
       status: 'success',
       duration: 2000,
       containerStyle: {
-        mt: '6rem',
+        mt: '8',
       },
     })
   }
