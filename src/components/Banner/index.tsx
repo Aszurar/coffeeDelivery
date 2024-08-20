@@ -8,6 +8,7 @@ export function Banner() {
   return (
     <Grid
       as="section"
+      role="contentinfo"
       gap="14"
       w="100%"
       mt="5.75rem"

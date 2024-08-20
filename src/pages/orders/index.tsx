@@ -56,8 +56,8 @@ export function OrderHistoric() {
   }
 
   return (
-    <Flex flexDir="column" gap="5">
-      <Heading>Meus Pedidos</Heading>
+    <Flex flexDir="column" gap="5" as="main">
+      <Heading as="h1">Meus Pedidos</Heading>
       <Text fontWeight="600">Histórico</Text>
 
       <Helmet title="Pedidos" />

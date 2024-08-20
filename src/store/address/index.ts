@@ -36,7 +36,6 @@ const createAddressStore: StateCreator<AddressStoreProps> = (set) => ({
   incompleteAddress: undefined,
   isAddressLoading: false,
   setAddressLoading: (isLoading: boolean) => {
-    console.log('isLoading salvando', isLoading)
     set({ isAddressLoading: isLoading })
   },
   loadAddresses: (addresses: AddressProps[]) => {

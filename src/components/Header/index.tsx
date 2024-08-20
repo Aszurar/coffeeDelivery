@@ -95,7 +95,6 @@ export function Header() {
   }, [addresses])
 
   useEffect(() => {
-    console.log('selectedAddressesPersisted', selectedAddressesPersisted)
     if (selectedAddressesPersisted) {
       return loadSelectedAddress(selectedAddressesPersisted)
     }

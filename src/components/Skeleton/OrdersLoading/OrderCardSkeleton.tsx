@@ -82,9 +82,7 @@ export function OrderCardSkeleton() {
               João Pessoa, PB.
             </Text>
           </Skeleton>
-          <Skeleton mt="2" alignSelf="center">
-            Adicionar ao carrinho
-          </Skeleton>
+          <Skeleton mt="2" alignSelf="center" h="6" w="40" />
         </Flex>
       </CardFooter>
     </Card>
