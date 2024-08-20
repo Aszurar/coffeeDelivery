@@ -41,6 +41,9 @@ export function CoffeeCardControl({
       title: 'Item adicionado ao carrinho.',
       status: 'success',
       duration: 2000,
+      containerStyle: {
+        mt: '8rem',
+      },
     })
   }
 
