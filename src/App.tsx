@@ -6,8 +6,10 @@ import { RouterProvider } from 'react-router-dom'
 
 import { router } from './router'
 import { queryClient } from './services/react-query'
+import { axeAccessibilityReporter } from './utils/axeAccessibilityReporter'
 
 export function App() {
+  axeAccessibilityReporter()
   return (
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>

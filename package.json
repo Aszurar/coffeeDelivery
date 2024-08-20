@@ -37,6 +37,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@axe-core/react": "^4.10.0",
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.66",
