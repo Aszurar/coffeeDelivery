@@ -1,6 +1,7 @@
 import { Flex, Grid, GridItem, Heading, Text, useToast } from '@chakra-ui/react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet-async'
 
 import { OrderCardMemo } from '@/components/OrderCard'
 import { IOrder } from '@/dto/order'
@@ -50,6 +51,7 @@ export function OrderHistoric() {
 
   return (
     <Flex flexDir="column" gap="5" as="main">
+      <Helmet title="Meus Pedidos" />
       <Heading as="h1">Meus Pedidos</Heading>
       <Text fontWeight="600">Histórico</Text>
 
