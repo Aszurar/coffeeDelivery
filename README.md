@@ -1,6 +1,6 @@
 # #10 - React: **<https://coffe-delivery.netlify.app>**
 
-**OBS**: Essa é a branch main, **ela usa o com o localStorage para consumir e persistir os dados e é essa versão que foi publicada no Netlify**. Mas temos outra branch que se chama  **feature/json-server** em que simulamos uma **API REST com json-server e consumimos os dados a partir desse servidor**, para acessá-la, vá na branch **[feature/json-server](https://github.com/Aszurar/coffeeDelivery/tree/feature/json-server)**.
+**OBS**: Essa é a branch json-server, em que simulamos uma **API REST com json-server e consumimos os dados a partir desse servidor**. Mas temos outra branch chamada de  **main**, em que **usamos o localStorage para consumir e persistir os dados e é essa versão que foi publicada no Netlify**, para acessá-la, vá na branch **[main](https://github.com/Aszurar/coffeeDelivery/tree/main)**.
 
 <div align="center">
     <img src="https://i.imgur.com/40JzYfh.png" width="1000" alt="Banner">
@@ -67,8 +67,8 @@
 - **Tela inicial**
 
 <div align="center" >
-      <img src="https://i.imgur.com/vzBiuiY.png" width="425" alt="Tela Inicial">_<img src="https://i.imgur.com/nmAysLZ.png" width="425" alt="Tela Inicial">
-      <img src="https://i.imgur.com/Czzqs1d.png" width="425" alt="Tela Inicial">_<img src="https://i.imgur.com/W8gMbsU.png" width="425" alt="Tela Inicial">
+      <img src="https://i.imgur.com/vzBiuiY.png" width="400" alt="Tela Inicial">_<img src="https://i.imgur.com/nmAysLZ.png" width="400" alt="Tela Inicial">
+      <img src="https://i.imgur.com/Czzqs1d.png" width="400" alt="Tela Inicial">_<img src="https://i.imgur.com/W8gMbsU.png" width="400" alt="Tela Inicial">
 </div>
 
 ---
@@ -104,7 +104,7 @@
 - **Carrinho**
 
 <div align="center" >
-  <img src="https://i.imgur.com/KMeanVV.png" width="425" alt="Tela Inicial">_<img src="https://i.imgur.com/EmKxjQD.png" width="425" alt="Tela Inicial">
+  <img src="https://i.imgur.com/KMeanVV.png" width="400" alt="Tela Inicial">_<img src="https://i.imgur.com/EmKxjQD.png" width="400" alt="Tela Inicial">
 </div>
 
 ---
@@ -131,8 +131,8 @@
 - **Adição do endereço e método de pagamento**
 
 <div align="center" >
-      <img src="https://i.imgur.com/B3Nn4Wu.png" width="425" alt="Tela de Checkout - tema light">_<img src="https://i.imgur.com/9WjoF7S.png" width="425" alt="Tela de Checkout - tema light - preenchida">
-      <img src="https://i.imgur.com/xKeUTWy.png" width="425" alt="Tela de Checkout - tema dark">_<img src="https://i.imgur.com/nTd5VJR.png" width="425" alt="Tela Inicial">
+      <img src="https://i.imgur.com/B3Nn4Wu.png" width="400" alt="Tela de Checkout - tema light">_<img src="https://i.imgur.com/9WjoF7S.png" width="400" alt="Tela de Checkout - tema light - preenchida">
+      <img src="https://i.imgur.com/xKeUTWy.png" width="400" alt="Tela de Checkout - tema dark">_<img src="https://i.imgur.com/nTd5VJR.png" width="400" alt="Tela Inicial">
 </div>
 
 ---
@@ -162,7 +162,7 @@
 - **Tela de finalização**
 
 <div align="center" >
-      <img src="https://i.imgur.com/cSvJMRz.png" width="425" alt="Tela de finalização - tema claro">_<img src="https://i.imgur.com/eQMExzg.png" width="425" alt="tema escuro">
+      <img src="https://i.imgur.com/cSvJMRz.png" width="400" alt="Tela de finalização - tema claro">_<img src="https://i.imgur.com/eQMExzg.png" width="400" alt="tema escuro">
 </div>
 
 ---
@@ -182,8 +182,8 @@
 - **Meus Pedidos**
 
 <div align="center" >
-      <img src="https://i.imgur.com/ySTbbQs.png" width="425" alt="Tela de meus pedidos - tema claro">_<img src="https://i.imgur.com/6L1K8Uk.png" width="425" alt="Tela de meus pedidos - tema claro">
-      <img src="https://i.imgur.com/Jcp7EMF.png" width="425" alt="Tela de meus pedidos - tema claro">_<img src="https://i.imgur.com/iC56tCV.png" width="425" alt="Tela de meus pedidos - tema claro">
+      <img src="https://i.imgur.com/ySTbbQs.png" width="400" alt="Tela de meus pedidos - tema claro">_<img src="https://i.imgur.com/6L1K8Uk.png" width="400" alt="Tela de meus pedidos - tema claro">
+      <img src="https://i.imgur.com/Jcp7EMF.png" width="400" alt="Tela de meus pedidos - tema claro">_<img src="https://i.imgur.com/iC56tCV.png" width="400" alt="Tela de meus pedidos - tema claro">
 </div>
 
 ---
