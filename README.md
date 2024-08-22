@@ -1,4 +1,4 @@
-# #10 - React: **<https://coffe-delivery.netlify.app>**
+# #10 - React: **<https://coffee-delivery-aszurar.netlify.app>**
 
 **OBS**: Essa é a branch main, **ela usa o com o localStorage para consumir e persistir os dados e é essa versão que foi publicada no Netlify**. Mas temos outra branch que se chama  **feature/json-server** em que simulamos uma **API REST com json-server e consumimos os dados a partir desse servidor**, para acessá-la, vá na branch **[feature/json-server](https://github.com/Aszurar/coffeeDelivery/tree/feature/json-server)**.
 
@@ -13,10 +13,10 @@
 - Outro objetivo foi aprender a criar interfaces com **[Chakra UI](https://v2.chakra-ui.com/)** e consumir os dados via com **[React Query](https://tanstack.com/query/latest/docs/framework/react/overview)** e **[axios](https://axios-http.com/ptbr/)**.
 
 - O site foi publicado com CI/CD por meio da plataforma **[Netlify](https://www.netlify.com/)**.
-- Acesse e teste o projeto em: **<https://coffe-delivery.netlify.app>**
+- Acesse e teste o projeto em: **<https://coffee-delivery-aszurar.netlify.app>**
 
   <div align="center">
-    <h3><a href="https://coffe-delivery.netlify.app">Coffee Delivery</a></h3>
+    <h3><a href="https://coffee-delivery-aszurar.netlify.app">Coffee Delivery</a></h3>
 
   
 
@@ -173,7 +173,7 @@ https://github.com/user-attachments/assets/197e8a71-9685-4f71-99f5-fdc97d684bfa
 
 ## :truck: Entrega e distribuição continua
 
-**<https://coffe-delivery.netlify.app>**
+**<https://coffee-delivery-aszurar.netlify.app>**
 
 - Para a publicação da aplicação foi por meio da plataforma **[Netlify](https://www.netlify.com/)** onde é possível publicar de forma rápida, fácil e simples projetos React que estão hospedados no GitHub, GitLab, dentre outras plataformas de repositório remoto de graça.
 - Com isso, o CI/CD já é aplicado automaticamente por meio dessa plataforma definindo a branch de produção, sempre que houver uma atualização nela, será gerado uma nova versão do projeto e já publicado.
