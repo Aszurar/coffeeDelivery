@@ -1,4 +1,4 @@
-# #10 - React: **<https://coffe-delivery.netlify.app>**
+# #10 - React: **<https://coffee-delivery-aszurar.netlify.app>**
 
 **OBS**: Essa é a branch json-server, em que simulamos uma **API REST com json-server e consumimos os dados a partir desse servidor**. Mas temos outra branch chamada de  **main**, em que **usamos o localStorage para consumir e persistir os dados e é essa versão que foi publicada no Netlify**, para acessá-la, vá na branch **[main](https://github.com/Aszurar/coffeeDelivery/tree/main)**.
 
@@ -8,15 +8,15 @@
 
 ## Coffee Delivery
 
-- O projeto tem o intuito de simular um site de entrega de café, onde podemos escolher o tipo de café, a quantidade, adicionar no carrinho, adicionar e selecionar endereços e buscá-lo via CEP usando a api **brasilap**. Além disso, podemos ver o total da compra e finalizar o pedido.
+- O projeto tem o intuito de simular um site de entrega de café, onde podemos escolher o tipo de café, a quantidade, adicionar no carrinho, adicionar e selecionar endereços e buscá-lo via CEP usando a api **brasilapi**. Além disso, podemos ver o total da compra e finalizar o pedido.
 
 - Outro objetivo foi aprender a criar interfaces com **[Chakra UI](https://v2.chakra-ui.com/)** e consumir os dados via **[json-server](https://github.com/typicode/json-server)** com **[React Query](https://tanstack.com/query/latest/docs/framework/react/overview)** e **[axios](https://axios-http.com/ptbr/)**.
 
 - O site foi publicado com CI/CD por meio da plataforma **[Netlify](https://www.netlify.com/)**.
-- Acesse e teste o projeto em: **<https://coffe-delivery.netlify.app>**
+- Acesse e teste o projeto em: **<https://coffee-delivery-aszurar.netlify.app>**
 
   <div align="center">
-    <h3><a href="https://coffe-delivery.netlify.app">Coffee Delivery</a></h3>
+    <h3><a href="https://coffee-delivery-aszurar.netlify.app">Coffee Delivery</a></h3>
 
   
 
@@ -60,7 +60,7 @@ https://github.com/user-attachments/assets/8c3b8a97-2b4a-415f-9a50-ccaf8916bdf8
 
 ## :information_source: Sobre
 
-- O projeto tem o intuito de simular um marketplace de café, onde podemos escolher o tipo de café, a quantidade, adicionar no carrinho, adicionar e selecionar endereços e buscá-lo via CEP usando a api **brasilap**. Além disso, podemos ver o total da compra e finalizar o pedido.
+- O projeto tem o intuito de simular um marketplace de café, onde podemos escolher o tipo de café, a quantidade, adicionar no carrinho, adicionar e selecionar endereços e buscá-lo via CEP usando a api **brasilapi**. Além disso, podemos ver o total da compra e finalizar o pedido.
 
 - O objetivo desse projeto é praticar o **gerenciamento e manipulação de Estados** via **[Zustand](https://zustand-demo.pmnd.rs/)**, além de construir uma estrutura em que criamos 4 store simulando o que seriam 4 slices de um Redux, **cada um responsável por um recurso e suas funções de manipulação**, cada um com seu hook de seletor próprio. Assim conseguimos usar cada Estado em seu componente sem afetar outro recurso ou provocar a renderização desnecessária de outros componentes.
 
@@ -173,7 +173,7 @@ https://github.com/user-attachments/assets/8c3b8a97-2b4a-415f-9a50-ccaf8916bdf8
 
 ## :truck: Entrega e distribuição continua
 
-**<https://coffe-delivery.netlify.app>**
+**<https://coffee-delivery-aszurar.netlify.app>**
 
 - Para a publicação da aplicação foi por meio da plataforma **[Netlify](https://www.netlify.com/)** onde é possível publicar de forma rápida, fácil e simples projetos React que estão hospedados no GitHub, GitLab, dentre outras plataformas de repositório remoto de graça.
 - Com isso, o CI/CD já é aplicado automaticamente por meio dessa plataforma definindo a branch de produção, sempre que houver uma atualização nela, será gerado uma nova versão do projeto e já publicado.
