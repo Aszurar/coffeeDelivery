@@ -154,102 +154,72 @@
   ],
   "orders": [
     {
-      "id": "ef7a3b8a-78c5-4356-b8b7-464f90dfc464",
-      "createdAt": "2024-08-16T15:36:42.400Z",
-      "price": 25,
+      "id": "bb29ac12-5188-49f8-ba56-96ba21f0617e",
+      "createdAt": "2024-08-22T19:24:03.457Z",
+      "price": 60,
       "address": {
-        "cep": "58037535",
-        "street": "Rua Agente Fiscal Paulo de Assis",
-        "number": 57,
-        "complement": "Número 57, Apartamento 1001",
-        "neighborhood": "Jardim Oceania",
-        "city": "João Pessoa",
-        "uf": "PB",
-        "id": "2d0b3423-a430-4cd7-abba-8d43338dcaf7"
-      },
-      "paymentType": 3,
-      "cart": [
-        {
-          "id": "2",
-          "name": "Expresso Americano",
-          "price": 2,
-          "quantity": 1
-        },
-        {
-          "id": "7",
-          "name": "Capuccino",
-          "price": 4.5,
-          "quantity": 1
-        },
-        {
-          "id": "6",
-          "name": "Latte",
-          "price": 3.5,
-          "quantity": 1
-        },
-        {
-          "id": "9",
-          "name": "Mocaccino",
-          "price": 5,
-          "quantity": 1
-        }
-      ]
-    },
-    {
-      "id": "5e4ca61b-79ab-4a57-8e99-9cbc53276841",
-      "createdAt": "2024-08-16T15:37:38.634Z",
-      "price": 24.5,
-      "address": {
-        "cep": "58037535",
-        "street": "Rua Agente Fiscal Paulo de Assis",
-        "number": 57,
-        "complement": "Número 57, Apartamento 1001",
-        "neighborhood": "Jardim Oceania",
-        "city": "João Pessoa",
-        "uf": "PB",
-        "id": "2d0b3423-a430-4cd7-abba-8d43338dcaf7"
-      },
-      "paymentType": 3,
-      "cart": [
-        {
-          "id": "1",
-          "name": "Expresso Tradicional",
-          "price": 2.5,
-          "quantity": 1
-        },
-        {
-          "id": "6",
-          "name": "Latte",
-          "price": 3.5,
-          "quantity": 1
-        },
-        {
-          "id": "7",
-          "name": "Capuccino",
-          "price": 4.5,
-          "quantity": 1
-        },
-        {
-          "id": "8",
-          "name": "Macchiato",
-          "price": 4,
-          "quantity": 1
-        }
-      ]
-    },
-    {
-      "id": "a9fe9adf-9077-43d5-92fc-26421b2ddd54",
-      "createdAt": "2024-08-16T18:01:00.228Z",
-      "price": 12,
-      "address": {
-        "cep": "76767676",
-        "street": "Rua Manuel Figueredo",
-        "number": 878787,
+        "cep": "60165120",
+        "street": "Avenida Beira Mar",
+        "number": 10,
         "complement": "",
-        "neighborhood": "8787878",
-        "city": "98989",
-        "uf": "RS",
-        "id": "a9049540-9306-4032-bd2a-b7e90ed7149d"
+        "neighborhood": "Meireles",
+        "city": "Fortaleza",
+        "uf": "CE",
+        "id": "ba7efcde-3e60-4de8-b367-e6dc9c26bbef"
+      },
+      "paymentType": 2,
+      "cart": [
+        {
+          "id": "14",
+          "name": "Irlandês",
+          "price": 15,
+          "quantity": 2
+        },
+        {
+          "id": "11",
+          "name": "Havaiano",
+          "price": 10,
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "id": "99ae17b9-cd88-421d-b25f-a345a1d00596",
+      "createdAt": "2024-08-22T19:24:38.739Z",
+      "price": 30,
+      "address": {
+        "cep": "60165120",
+        "street": "Avenida Beira Mar",
+        "number": 10,
+        "complement": "",
+        "neighborhood": "Meireles",
+        "city": "Fortaleza",
+        "uf": "CE",
+        "id": "ba7efcde-3e60-4de8-b367-e6dc9c26bbef"
+      },
+      "paymentType": 3,
+      "cart": [
+        {
+          "id": "11",
+          "name": "Havaiano",
+          "price": 10,
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "id": "5d8a3889-5415-4bf5-8dc3-516f0c6bec5a",
+      "createdAt": "2024-08-22T19:27:19.290Z",
+      "price": 29,
+      "address": {
+        "cep": "58013120",
+        "street": "Avenida Almirante Barroso",
+        "number": 5,
+        "complement": "teste 2",
+        "neighborhood": "Centro",
+        "city": "João Pessoa",
+        "uf": "PB",
+        "id": "20b57f0a-42cc-4a02-9eda-7308f9fcfa14"
       },
       "paymentType": 1,
       "cart": [
@@ -257,181 +227,235 @@
           "id": "2",
           "name": "Expresso Americano",
           "price": 2,
-          "quantity": 1
-        }
-      ]
-    },
-    {
-      "id": "b9e8e076-b351-45ab-8cc7-cb48919d64da",
-      "createdAt": "2024-08-20T14:18:20.267Z",
-      "price": 17,
-      "address": {
-        "cep": "12122112",
-        "street": "Rua Luiz Caramelo",
-        "number": 1212,
-        "complement": "",
-        "neighborhood": "Guaratiba",
-        "city": "Teste",
-        "uf": "PR",
-        "id": "d7aceeb1-8868-4e6f-9154-587693b11a71"
-      },
-      "paymentType": 2,
-      "cart": [
-        {
-          "id": "2",
-          "name": "Expresso Americano",
-          "price": 2,
-          "quantity": 1
+          "quantity": 2
         },
         {
           "id": "1",
           "name": "Expresso Tradicional",
           "price": 2.5,
+          "quantity": 6
+        }
+      ]
+    },
+    {
+      "id": "c1b04edc-fbe3-4bf4-abf9-94b019099250",
+      "createdAt": "2024-08-22T19:35:27.878Z",
+      "price": 21.5,
+      "address": {
+        "cep": "58013120",
+        "street": "Avenida Almirante Barroso",
+        "number": 5,
+        "complement": "teste 2",
+        "neighborhood": "Centro",
+        "city": "João Pessoa",
+        "uf": "PB",
+        "id": "20b57f0a-42cc-4a02-9eda-7308f9fcfa14"
+      },
+      "paymentType": 2,
+      "cart": [
+        {
+          "id": "1",
+          "name": "Expresso Tradicional",
+          "price": 2.5,
+          "quantity": 1
+        },
+        {
+          "id": "2",
+          "name": "Expresso Americano",
+          "price": 2,
+          "quantity": 2
+        },
+        {
+          "id": "4",
+          "name": "Expresso Gelado",
+          "price": 2.5,
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "id": "53166758-2c62-4c20-bf41-8c5f6c89cab1",
+      "createdAt": "2024-08-22T19:36:15.195Z",
+      "price": 17,
+      "address": {
+        "cep": "60165120",
+        "street": "Avenida Beira Mar",
+        "number": 10,
+        "complement": "",
+        "neighborhood": "Meireles",
+        "city": "Fortaleza",
+        "uf": "CE",
+        "id": "ba7efcde-3e60-4de8-b367-e6dc9c26bbef"
+      },
+      "paymentType": 3,
+      "cart": [
+        {
+          "id": "2",
+          "name": "Expresso Americano",
+          "price": 2,
           "quantity": 1
         },
         {
           "id": "4",
           "name": "Expresso Gelado",
           "price": 2.5,
-          "quantity": 1
-        }
-      ]
-    },
-    {
-      "id": "68c80211-8a4c-4830-a86e-b8f65e6f3ef8",
-      "createdAt": "2024-08-20T14:20:28.662Z",
-      "price": 33,
-      "address": {
-        "cep": "12122112",
-        "street": "Rua Luiz Caramelo",
-        "number": 1212,
-        "complement": "",
-        "neighborhood": "Guaratiba",
-        "city": "Teste",
-        "uf": "PR",
-        "id": "d7aceeb1-8868-4e6f-9154-587693b11a71"
-      },
-      "paymentType": 3,
-      "cart": [
-        {
-          "id": "1",
-          "name": "Expresso Tradicional",
-          "price": 2.5,
-          "quantity": 1
-        },
-        {
-          "id": "6",
-          "name": "Latte",
-          "price": 3.5,
-          "quantity": 1
-        },
-        {
-          "id": "7",
-          "name": "Capuccino",
-          "price": 4.5,
-          "quantity": 2
-        },
-        {
-          "id": "8",
-          "name": "Macchiato",
-          "price": 4,
           "quantity": 2
         }
       ]
     },
     {
-      "id": "fde88863-dc45-48da-8f46-2ddd609a03e1",
-      "createdAt": "2024-08-20T14:20:58.429Z",
-      "price": 39,
+      "id": "1b913bc7-7fbe-43dd-a92e-509f8c1b9dc5",
+      "createdAt": "2024-08-22T19:37:14.094Z",
+      "price": 21,
       "address": {
-        "cep": "58037535",
-        "street": "Rua Agente Fiscal Paulo de Assis",
-        "number": 57,
+        "cep": "60165120",
+        "street": "Avenida Beira Mar",
+        "number": 22,
         "complement": "",
-        "neighborhood": "Jardim Oceania",
-        "city": "João Pessoa",
-        "uf": "PB",
-        "id": "24a53e26-3d29-497d-abec-0c7c212cceaf"
+        "neighborhood": "Meireles",
+        "city": "Fortaleza",
+        "uf": "CE",
+        "id": "1981b4bf-9a5e-4132-9a2d-50d5eb50bde3"
       },
       "paymentType": 1,
       "cart": [
         {
-          "id": "1",
-          "name": "Expresso Tradicional",
-          "price": 2.5,
-          "quantity": 2
+          "id": "5",
+          "name": "Café com Leite",
+          "price": 3,
+          "quantity": 1
         },
         {
           "id": "6",
           "name": "Latte",
           "price": 3.5,
-          "quantity": 2
+          "quantity": 1
         },
         {
           "id": "7",
           "name": "Capuccino",
           "price": 4.5,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "24e1d28f-4eaf-4a1d-b212-23010a5f9d21",
+      "createdAt": "2024-08-22T19:43:49.521Z",
+      "price": 17,
+      "address": {
+        "cep": "58010780",
+        "street": "Avenida General Osório",
+        "number": 20,
+        "complement": "",
+        "neighborhood": "Centro",
+        "city": "João Pessoa",
+        "uf": "PB",
+        "id": "eefaaef2-0fd8-4e8e-bec5-f8fa5022649f"
+      },
+      "paymentType": 1,
+      "cart": [
+        {
+          "id": "2",
+          "name": "Expresso Americano",
+          "price": 2,
+          "quantity": 1
+        },
+        {
+          "id": "4",
+          "name": "Expresso Gelado",
+          "price": 2.5,
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "id": "0d303e15-3884-46b9-a3f9-dbc51c169a66",
+      "createdAt": "2024-08-22T19:44:41.419Z",
+      "price": 27,
+      "address": {
+        "cep": "58010780",
+        "street": "Avenida General Osório",
+        "number": 20,
+        "complement": "",
+        "neighborhood": "Centro",
+        "city": "João Pessoa",
+        "uf": "PB",
+        "id": "eefaaef2-0fd8-4e8e-bec5-f8fa5022649f"
+      },
+      "paymentType": 3,
+      "cart": [
+        {
+          "id": "4",
+          "name": "Expresso Gelado",
+          "price": 2.5,
           "quantity": 2
         },
         {
-          "id": "8",
-          "name": "Macchiato",
-          "price": 4,
-          "quantity": 2
+          "id": "9",
+          "name": "Mocaccino",
+          "price": 5,
+          "quantity": 1
+        },
+        {
+          "id": "10",
+          "name": "Chocolate Quente",
+          "price": 7,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "54cabead-ccab-4642-a4a5-2ca929265559",
+      "createdAt": "2024-08-22T20:00:46.867Z",
+      "price": 31,
+      "address": {
+        "cep": "60150160",
+        "street": "Avenida Santos Dumont",
+        "number": 123,
+        "complement": "teste 3",
+        "neighborhood": "Centro",
+        "city": "Fortaleza",
+        "uf": "CE",
+        "id": "a4c3f6d9-46ac-4d5b-802e-3a1e1733c9d8"
+      },
+      "paymentType": 2,
+      "cart": [
+        {
+          "id": "11",
+          "name": "Havaiano",
+          "price": 10,
+          "quantity": 1
+        },
+        {
+          "id": "12",
+          "name": "Árabe",
+          "price": 11,
+          "quantity": 1
         }
       ]
     }
   ],
   "addresses": [
     {
-      "cep": "58037535",
-      "street": "Rua Agente Fiscal Paulo de Assis",
-      "number": 57,
-      "complement": "",
-      "neighborhood": "Jardim Oceania",
-      "city": "João Pessoa",
-      "uf": "PB",
-      "id": "24a53e26-3d29-497d-abec-0c7c212cceaf"
-    },
-    {
-      "cep": "12122112",
-      "street": "Rua Luiz Caramelo",
-      "number": 1212,
-      "complement": "",
-      "neighborhood": "Guaratiba",
-      "city": "Teste",
-      "uf": "PR",
-      "id": "d7aceeb1-8868-4e6f-9154-587693b11a71"
-    },
-    {
-      "cep": "58037535",
-      "street": "Rua Agente Fiscal Paulo de Assis",
-      "number": 57,
-      "complement": "",
-      "neighborhood": "Jardim Oceania",
-      "city": "João Pessoa",
-      "uf": "PB",
-      "id": "149bbce5-a57d-47e3-8041-97747ba224e7"
-    },
-    {
-      "cep": "58037535",
-      "street": "Rua Agente Fiscal Paulo de Assis",
-      "number": 57,
-      "complement": "Número 57, Apartamento 1001",
-      "neighborhood": "Jardim Oceania",
-      "city": "João Pessoa",
-      "uf": "PB",
-      "id": "9863f1c8-e1c7-41db-9bb4-142f58080bf0"
+      "cep": "60150160",
+      "street": "Avenida Santos Dumont",
+      "number": 123,
+      "complement": "teste 3",
+      "neighborhood": "Centro",
+      "city": "Fortaleza",
+      "uf": "CE",
+      "id": "a4c3f6d9-46ac-4d5b-802e-3a1e1733c9d8"
     }
   ],
   "selected-address": {
-    "cep": "58037535",
-    "street": "Rua Agente Fiscal Paulo de Assis",
-    "number": 57,
-    "complement": "Número 57, Apartamento 1001",
-    "neighborhood": "Jardim Oceania",
-    "city": "João Pessoa",
-    "uf": "PB",
-    "id": "9863f1c8-e1c7-41db-9bb4-142f58080bf0"
+    "cep": "60150160",
+    "street": "Avenida Santos Dumont",
+    "number": 123,
+    "complement": "teste 3",
+    "neighborhood": "Centro",
+    "city": "Fortaleza",
+    "uf": "CE",
+    "id": "a4c3f6d9-46ac-4d5b-802e-3a1e1733c9d8"
   }
 }
