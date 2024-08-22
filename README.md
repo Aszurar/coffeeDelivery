@@ -180,7 +180,7 @@ https://github.com/user-attachments/assets/197e8a71-9685-4f71-99f5-fdc97d684bfa
 - Além disso, podemos customizar o próprio endereço do site, adicionar ferramentas dentre outras funcionalidades facilmente.
 
 <div align="center">
-   <img src="" width="1000" alt="Projeto publicado no Netlify">
+   <img src="https://i.imgur.com/h3vBCtC.png" width="1000" alt="Projeto publicado no Netlify">
 </div>
 
 - **Meus Pedidos**
