@@ -18,7 +18,11 @@
   <div align="center">
     <h3><a href="https://coffe-delivery.netlify.app">Coffee Delivery</a></h3>
 
-  https://github.com/user-attachments/assets/d2a55c11-5caf-4120-b8e4-8b42ee9eebc0
+  
+
+https://github.com/user-attachments/assets/8c3b8a97-2b4a-415f-9a50-ccaf8916bdf8
+
+
 
   </div>
 
