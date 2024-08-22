@@ -10,7 +10,7 @@
 
 - O projeto tem o intuito de simular um site de entrega de café, onde podemos escolher o tipo de café, a quantidade, adicionar no carrinho, adicionar e selecionar endereços e buscá-lo via CEP usando a api **brasilap**. Além disso, podemos ver o total da compra e finalizar o pedido.
 
-- Outro objetivo foi aprender a criar interfaces com **Chakra UI** e consumir os dados via **json-server** com **[React Query](https://tanstack.com/query/latest/docs/framework/react/overview)** e **[axios](https://axios-http.com/ptbr/)**.
+- Outro objetivo foi aprender a criar interfaces com **[Chakra UI](https://v2.chakra-ui.com/)** e consumir os dados via com **[React Query](https://tanstack.com/query/latest/docs/framework/react/overview)** e **[axios](https://axios-http.com/ptbr/)**.
 
 - O site foi publicado com CI/CD por meio da plataforma **[Netlify](https://www.netlify.com/)**.
 - Acesse e teste o projeto em: **<https://coffe-delivery.netlify.app>**
