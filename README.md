@@ -8,7 +8,7 @@
 
 ## Coffee Delivery
 
-- O projeto tem o intuito de simular um site de entrega de café, onde podemos escolher o tipo de café, a quantidade, adicionar no carrinho, adicionar e selecionar endereços e buscá-lo via CEP usando a api **brasilap**. Além disso, podemos ver o total da compra e finalizar o pedido.
+- O projeto tem o intuito de simular um site de entrega de café, onde podemos escolher o tipo de café, a quantidade, adicionar no carrinho, adicionar e selecionar endereços e buscá-lo via CEP usando a api **brasilapi**. Além disso, podemos ver o total da compra e finalizar o pedido.
 
 - Outro objetivo foi aprender a criar interfaces com **[Chakra UI](https://v2.chakra-ui.com/)** e consumir os dados via com **[React Query](https://tanstack.com/query/latest/docs/framework/react/overview)** e **[axios](https://axios-http.com/ptbr/)**.
 
@@ -60,7 +60,7 @@ https://github.com/user-attachments/assets/197e8a71-9685-4f71-99f5-fdc97d684bfa
 
 ## :information_source: Sobre
 
-- O projeto tem o intuito de simular um marketplace de café, onde podemos escolher o tipo de café, a quantidade, adicionar no carrinho, adicionar e selecionar endereços e buscá-lo via CEP usando a api **brasilap**. Além disso, podemos ver o total da compra e finalizar o pedido.
+- O projeto tem o intuito de simular um marketplace de café, onde podemos escolher o tipo de café, a quantidade, adicionar no carrinho, adicionar e selecionar endereços e buscá-lo via CEP usando a api **brasilapi**. Além disso, podemos ver o total da compra e finalizar o pedido.
 
 - O objetivo desse projeto é praticar o **gerenciamento e manipulação de Estados** via **[Zustand](https://zustand-demo.pmnd.rs/)**, além de construir uma estrutura em que criamos 4 store simulando o que seriam 4 slices de um Redux, **cada um responsável por um recurso e suas funções de manipulação**, cada um com seu hook de seletor próprio. Assim conseguimos usar cada Estado em seu componente sem afetar outro recurso ou provocar a renderização desnecessária de outros componentes.
 
