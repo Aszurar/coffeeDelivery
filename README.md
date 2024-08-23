@@ -130,7 +130,7 @@ https://github.com/user-attachments/assets/197e8a71-9685-4f71-99f5-fdc97d684bfa
   1. NodeJS
   2. ReactJS
   3. Vite
-  4. Yarn(ou NPM)
+  4. PNPM
 
 - **Adição do endereço e método de pagamento**
 
@@ -216,7 +216,7 @@ https://github.com/user-attachments/assets/197e8a71-9685-4f71-99f5-fdc97d684bfa
 ### Execução
 
 - Caso tudo tenha sido instalado com sucesso, basta executar na raiz do projeto:
-- Caso esteja na branch **```main```**:
+- Caso esteja na branch **```feature/json-server```**:
   - Terminal 1: Executando front-end
     
     ```bash
@@ -229,7 +229,7 @@ https://github.com/user-attachments/assets/197e8a71-9685-4f71-99f5-fdc97d684bfa
       pnpm dev:server
     ```
 
-- Caso esteja na branch **```feature/json-server```**:
+- Caso esteja na branch **```main```**:
 
     ```bash
       pnpm dev
