@@ -45,7 +45,12 @@ export function Header() {
       justify="space-between"
     >
       <Link to="/">
-        <img src={themeMode.logo} alt="Coffee Delivery" />
+        <img
+          src={themeMode.logo}
+          alt="Coffee Delivery"
+          width={85}
+          height={40}
+        />
       </Link>
 
       <HStack spacing="3">

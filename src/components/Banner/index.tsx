@@ -1,7 +1,7 @@
 import { Flex, Grid, GridItem, Heading, Image, Text } from '@chakra-ui/react'
 import { Coffee, Package, ShoppingCart, Timer } from '@phosphor-icons/react'
 
-import BannerIMG from '@/assets/images/banner.png'
+import BannerIMG from '@/assets/images/banner.webp'
 import { Tag } from '@/components/Tag'
 
 export function Banner() {
